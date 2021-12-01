@@ -1,0 +1,27 @@
+# This is Git's per-user configuration file.
+[user]
+  # Please adapt and uncomment the following lines:
+  name = Daniel Pendolino
+  email = {{ .email }}
+[core]
+  editor = vim
+[merge]
+  tool = vimdiff
+  conflictstyle = diff3
+[diff]
+  tool = vimdiff2
+  conflictstyle = diff3
+  path = nvim
+[color]
+  ui = auto
+[submodule]
+  recurse = true
+[commit]
+  sig = 65BD25EB
+  gpgsign = true
+[alias]
+  root = !pwd
+[pull]
+  rebase = false
+[github]
+  user = {{ .chezmoi.group }}

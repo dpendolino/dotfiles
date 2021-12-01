@@ -1,0 +1,18 @@
+# Created by newuser for 5.4.2
+
+# Load Antigen
+source /usr/share/zsh/share/antigen.zsh
+
+# Load Antigen configurations
+antigen init .antigenrc
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# https://github.com/zsh-users/zsh-autosuggestions
+# For example, this would bind ctrl + space to accept the current suggestion.
+bindkey '^ ' autosuggest-execute
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
+export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
+
+# antigen bundle zsh-users/zsh-syntax-highlighting

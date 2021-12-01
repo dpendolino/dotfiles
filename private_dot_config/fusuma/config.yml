@@ -1,0 +1,21 @@
+---
+swipe:
+  3:
+    left:
+      command: "swaymsg workspace prev"
+    right:
+      command: "swaymsg workspace next"
+  4:
+    left:
+      command: "swaymsg move container to workspace prev"
+    right:
+      command: "swaymsg move container to workspace next"
+
+
+threshold:
+  swipe: 0.5
+  pinch: 0.2
+
+interval:
+  swipe: 0.2
+  pinch: 0.2

@@ -1,0 +1,120 @@
+bar {
+      font pango:DejaVu Sans Mono, FontAwesome 12
+      position bottom
+      status_command i3status-rs ~/.config/i3status-rust/reddwarf/config.toml
+      height 24
+      #tray_output none
+      colors {
+            separator #666666
+            background #222222
+            statusline #dddddd
+            focused_workspace #0088CC #0088CC #ffffff
+            active_workspace #333333 #333333 #ffffff
+            inactive_workspace #333333 #333333 #888888
+            urgent_workspace #2f343a #900000 #ffffff
+      }
+     # mode hide
+}
+
+set $locker swaylock-blur
+
+# exec  swayidle \
+# timeout 900 '$SWAYLOCK -c 000000' \
+# timeout 1200 'swaymsg "output * dpms off"' \
+# timeout 7200 'systemctl suspend' \
+# resume 'swaymsg "output * dpms on"' \
+# before-sleep '$SWAYLOCK -c 000000' \
+# after-resume 'swaymsg "output * dpms on"'
+
+# exec  swayidle \
+# timeout 900 '$SWAYLOCK' \
+# timeout 1200 'swaymsg "output * dpms off"' \
+# timeout 7200 'systemctl suspend' \
+# resume 'swaymsg "output * dpms on"' \
+# before-sleep '$SWAYLOCK' \
+# after-resume 'swaymsg "output * dpms on"'
+
+# exec  swayidle \
+# timeout 90 '$SWAYLOCK' \
+# timeout 720 'systemctl suspend' \
+# resume 'swaymsg "output * dpms on"' \
+# after-resume 'swaymsg "output * dpms on"'
+
+exec swayidle \
+  timeout 300 '$locker' \
+  timeout 600 'swaymsg "output * dpms off"' \
+  resume 'swaymsg "output * dpms on"' \
+  before-sleep '$locker' \
+  timeout 900 'systemctl suspend' \
+  after-resume 'swaymsg "output * dpms on"'
+
+exec  fusuma -c ~/.config/fusuma/config.yml -d
+
+for_window [class="angrysearch.py" instance="angrysearch"] floating enable
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="Zenity"] floating enable
+for_window [class="Question"] floating enable
+for_window [app_id="copyq"] floating enable
+# browser pop-ups
+for_window [window_role="pop-up"] floating enable
+
+for_window [class="^.*"] border pixel 0
+gaps inner 5
+gaps outer 3
+
+output eDP-1 scale 1.5
+# output 'Philips Consumer Electronics Company PHL 288P6L 0x000000F5' scale 1.5 pos 0,0 mode 3840x2160@59.997002Hz
+# output 'Philips Consumer Electronics Company PHL 288P6L 0x0000013D' scale 1.5 mode 3840x2160@59.997002Hz
+
+focus output eDP-1
+
+output "*" background ~/.config/sway/arch.png fill
+
+# configure input devices
+input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
+    tap enabled
+    natural_scroll disabled
+    events disabled_on_external_mouse
+}
+# input "1267:8400:ELAN_Touchscreen" events disabled
+
+input "1:1:AT_Translated_Set_2_keyboard" {
+    # Make caps lock work as escape: xkb_options caps:escape
+    # Swap escape and caps lock: xkb_options caps:swapescape
+    # Make caps lock work as control: xkb_options ctrl:nocaps
+    xkb_options caps:escape
+    xkb_layout us
+
+}
+
+# backlight
+# bindsym XF86MonBrightnessUp exec sudo brightnessctl set +10%
+# bindsym XF86MonBrightnessDown exec sudo brightnessctl set 10%-
+
+# mute
+# bindsym XF86AudioMute exec pactl set-sink-mute alsa_output.pci-0000_00_1f.3.analog-stereo toggle
+
+# volume
+# bindsym XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10%
+# bindsym XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%
+
+# bindsym $mod+p exec slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png') # Use a timestamped filename
+# bindsym $mod+Shift+P exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png') # Use a timestamped filename
+
+# bindsym XF86RFKill exec termite -e nmtui
+
+focus_follows_mouse no
+
+# clipman
+# bindsym $mod+c exec clipman pick -t rofi
+bindsym $mod+c exec copyq toggle
+
+# bwmenu
+# bindsym $mod+m exec bwmenu
+# rofi-lpass
+# bindsym $mod+m exec rofi -modi lpass:rofi-lpass -show lpass
+
+# laptop mode (clamshell)
+set $laptop 'eDP-1'
+bindswitch --reload lid:on output $laptop disable
+bindswitch --reload lid:off output $laptop enable

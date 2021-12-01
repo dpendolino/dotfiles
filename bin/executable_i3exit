@@ -1,0 +1,51 @@
+#!/bin/bash
+#I3exit based on https://faq.i3wm.org/question/2824/i3exit-script-doesnt-work/
+case "$1" in
+    lock)
+         zenity --question --text="Are you sure you want to lock?"
+         if [ "$?" -eq "0" ]
+         then
+            i3lock -d -c 000000 || swaylock-blur || swaylock -d -c 000000
+        fi
+        ;;
+    logout)
+        zenity --question --text="Are you sure you want to logout?"
+        if [ "$?" -eq "0" ]
+        then
+            i3-msg exit || swaymsg exit
+        fi
+        ;;
+    suspend)
+        zenity --question --text="Are you sure you want to suspend?"
+        if [ "$?" -eq "0" ]
+        then
+            sudo systemctl suspend
+        fi
+        ;;
+    hibernate)
+        zenity --question --text="Are you sure you want to hibernate?"
+        if [ "$?" -eq "0" ]
+        then
+            sudo systemctl hibernate
+        fi
+        ;;
+    reboot)
+        zenity --question --text="Are you sure you want to reboot?"
+        if [ "$?" -eq "0" ]
+        then
+            sudo reboot
+        fi
+        ;;
+    shutdown)
+        zenity --question --text="Are you sure you want to shutdown now?"
+        if [ "$?" -eq "0" ]
+        then
+            sudo poweroff
+        fi
+        ;;
+    *)
+        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        exit 2
+esac
+
+exit 0

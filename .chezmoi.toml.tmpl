@@ -1,0 +1,16 @@
+{{- $email := "" -}}
+{{- if (hasKey . "email") -}}
+{{-   $email = .email -}}
+{{- else -}}
+{{-   $email = promptString "email" -}}
+{{- end -}}
+
+[data]
+    email = {{ $email | quote }}
+    name = "Daniel Pendolino"
+    reddwarfborgpassphrase = {{ (index (lastpass "RedDwarf Borg Passphrase") 0).password | quote }}
+encryption = "age"
+[age]
+    identity = "/home/dpendolino/key.txt"
+    recipient = "age1h2fuyd6tgpfm44tke8h3jl8lxevmmz6elwv2nzdr04x8nxft2sqqn4vdtk"
+

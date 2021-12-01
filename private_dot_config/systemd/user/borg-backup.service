@@ -1,0 +1,5 @@
+[Unit]
+Description=borg backup
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c "env BORG_PASSPHRASE=$(secret-tool lookup bigdata password) /usr/bin/ionice -c 3 %h/bin/borg_backup.sh"

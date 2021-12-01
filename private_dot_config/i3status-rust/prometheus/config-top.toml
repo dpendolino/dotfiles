@@ -1,0 +1,86 @@
+theme = "solarized-dark"
+icons = "awesome"
+
+[[block]]
+block = "disk_space"
+path = "/"
+alias = "/"
+info_type = "available"
+unit = "GB"
+interval = 200
+warning = 20.0
+alert = 10.0
+format = "{icon} {path} {used}/{total} ({available} free)"
+
+[[block]]
+block = "disk_space"
+path = "/mnt/tank"
+alias = "tank"
+info_type = "available"
+unit = "GB"
+interval = 200
+warning = 20.0
+alert = 10.0
+format = "{icon} {path} {used}/{total} ({available} free)"
+
+[[block]]
+block = "memory"
+display_type = "memory"
+#format_mem = "{Mup}%"
+#format_swap = "{SUp}%"
+interval = 30
+
+[[block]]
+block = "cpu"
+interval = 10
+
+[[block]]
+block = "load"
+interval = 30
+format = "{1m}"
+
+[[block]]
+block = "temperature"
+collapsed = true
+interval = 30
+format = "{min}° min, {max}° max, {average}° avg"
+
+[[block]]
+block = "docker"
+interval = 2
+format = "{running}/{total}"
+
+[[block]]
+block = "net"
+device = "eth0"
+interval = 60
+
+[[block]]
+block = "net"
+device = "eth1"
+interval = 60
+
+[[block]]
+block = "sound"
+driver = "pulseaudio"
+step_width = 5
+on_click = "pactl set-sink-mute '@DEFAULT_SINK@' toggle"
+device_kind = "sink"
+#[block.mappings]
+#"alsa_output.pci-0000_10_00.4.analog-stereo" = "🔈"
+#"bluez_output.00_16_94_23_07_11.a2dp-sink" = "🎧"
+
+[[block]]
+block = "sound"
+driver = "pulseaudio"
+step_width = 5
+on_click = "pactl set-source-mute '@DEFAULT_SOURCE@' toggle"
+device_kind = "source"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"
+timezone = "US/Eastern"
+locale = "en_US"
+on_click = "date +%Y-%m-%d | wl-copy -p"

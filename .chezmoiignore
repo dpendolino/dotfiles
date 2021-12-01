@@ -1,0 +1,9 @@
+README.md
+
+{{- if ne .chezmoi.hostname "work-laptop" }}
+.work # only manage .work on work-laptop
+{{- end }}
+
+{{- if ne .chezmoi.hostname "RedDwarf" }}
+private_dot_config/fusuma/
+{{- end }}

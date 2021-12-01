@@ -1,0 +1,245 @@
+#! /bin/bash
+
+# PS4='+ $(date "+%s.%N")\011 '
+# exec 3>&2 2>/tmp/bashstart.$$.log
+# set -x
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Load profiles from /etc/profile.d
+if test -d /etc/profile.d/; then
+        for profile in /etc/profile.d/*.sh; do
+                test -r "$profile" && . "$profile"
+        done
+        for profile in /etc/profile.d/*.bash; do
+                test -r "$profile" && . "$profile"
+        done
+        unset profile
+fi
+
+# Set initial PS1
+PS1='[\u@\h \W]\$ '
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoredups:ignorespace
+#HISTCONTROL=ignoreboth:erasedups
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+#append timestamp to bash_history
+HISTTIMEFORMAT="%F %T "
+
+# aggregate all commands executed
+# PROMPT_COMMAND='history -n;history -a'
+PROMPT_COMMAND='history -a'
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=
+HISTFILESIZE=
+
+# Change the file location because certain bash sessions truncate .bash_history file upon close.
+# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+export HISTFILE=~/.bash_eternal_history
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  alias dir='dir --color=auto'
+  alias vdir='vdir --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias texToOdt='mk4ht oolatex'
+alias pgrep='pgrep -l'
+alias termsize='echo $COLUMNS x $LINES'
+alias t='todo.sh'
+alias dmesg='dmesg -T'
+alias rm='rm -I'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+if [ -f ~/.bash_aliases ]; then
+  . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+  . /etc/bash_completion
+fi
+
+# Tab complete ssh
+#if [ -f ~/.ssh/config ];then
+#    complete -o default -W "`grep -iE "\bhost\b" ~/.ssh/config | awk '{print $2 \" \" $3 \" \" $4 \" \" $5}'`" ssh scp sftp
+#fi
+
+#http://seejeffrun.blogspot.com/2008/08/error-handling-again.html
+warn() { printf "$* at line %s file %s: $msg\n" "$(caller)" 1>&2 ; }
+die() { printf "$* at line %s file %s: $msg\n" "$(caller)" 1>&2 ; exit -1; }
+
+export PATH=$PATH:/home/dpendolino/bin:/home/dpendolino/Dropbox/bin:/usr/local/games/trine:/usr/local/games:/home/dpendolino/Dropbox/todo/.todo.actions.d:/home/dpendolino/android-sdk-linux_86/platform-tools
+
+if [ -f /usr/bin/ruby ];then
+    export PATH=$PATH:$(ruby -r rubygems -e "puts Gem.user_dir")/bin
+fi
+
+export EDITOR=vim
+export VISUAL=vim
+
+if [ -f /usr/bin/archey3 ];then
+    timeout 1 archey3
+fi
+export $(gnome-keyring-daemon --daemonize --start)
+
+# eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+
+# gnome-keyring for ssh
+SSH_AUTH_SOCK=`ss -xl | grep -o '/run/user/1000/keyring/ssh'`
+[ -z "$SSH_AUTH_SOCK" ] || export SSH_AUTH_SOCK
+
+if [ -d $HOME/.bash-completion.d/ ];then
+    for i in $HOME/.bash-completion.d/*;do source $i;done
+fi
+
+
+#ccache
+export USE_CCACHE=1
+export PATH="/usr/lib/ccache/bin/:$PATH"
+
+#http://superuser.com/questions/249293/rename-tmux-window-name-to-prompt-command-ps1-or-remote-ssh-hostname
+settitle() {
+  printf "\033k$1\033\\"
+}
+ssh() {
+  settitle "$*"
+  command ssh "$@"
+  settitle "bash"
+}
+mosh() {
+  settitle "$*"
+  command mosh "$@"
+  settitle "bash"
+}
+
+. /usr/share/fzf/key-bindings.bash
+. /usr/share/fzf/completion.bash
+
+# Set terminal title to $PWD
+PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
+
+POWERLINE_BASH_CONFIG=$(find /usr/lib/python3*/site-packages/powerline/bindings/bash/ -name powerline.sh 2> /dev/null)
+
+if [ -f $(which starship)  ];then
+  eval "$(starship init bash)"
+elif [ -f  "$POWERLINE_BASH_CONFIG"  ];then
+    powerline-daemon -q
+    POWERLINE_BASH_CONTINUATION=1
+    POWERLINE_BASH_SELECT=1
+    . "$POWERLINE_BASH_CONFIG"
+else
+    export PS1="\u@\h:\w\\$ "
+fi
+
+export NODE_PATH="/usr/lib/node_modules"
+
+# https://github.com/dschep/ntfy
+if [ -f /usr/bin/ntfy ];then
+    eval "$(ntfy shell-integration)"
+    export AUTO_NTFY_DONE_IGNORE="vim screen meld"
+fi
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    xhost +si:localuser:root &> /dev/null
+fi
+
+if [ -f /usr/bin/kubectl ];then
+    source <(kubectl completion bash)
+fi
+
+# set +x
+# exec 2>&3 3>&-
+
+gc() {
+    REPO_URL="git@github.com:$1/$2"
+    if [ "${1,,}" == "counterhack" ] || [ "${1,,}" == "chc" ] || [ "${1,,}" == "ch" ]; then
+        pushd $HOME/CHC/git
+        REPO_URL="git@github.com:CounterHack/$2"
+    else
+        pushd $HOME/git
+    fi
+    if [ ! -d "$2" ]; then
+        echo "Cloning git@github.com:$1/$2"
+        git clone "$REPO_URL"
+    else
+        echo "Repo folder already exists!"
+    fi
+
+    if [ "$3" == 'no' ]; then
+        popd
+    else
+        cd "$2"
+    fi
+
+}
+
+# set default browser
+export BROWSER='google-chrome-stable'
+
+# add node_modules to path
+export PATH=$HOME/node_modules/.bin:$PATH
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Global Packer cache
+export PACKER_CACHE_DIR=/mnt/HeartOfGold/packer_cache
+
+eval $(thefuck --alias)
+
+# source FASD
+source <(fasd --init auto)
+_fasd_bash_hook_cmd_complete v m j o
+
+# Tab complete ssh
+complete -o default -W "`grep -iE "\bhost\b" ~/.ssh/config | awk '{print $2 \" \" $3 \" \" $4 \" \" $5}'`" ssh scp sftp
+
+# add user base to python path
+export PYTHONPATH=$(python -c "import site, os; print(os.path.join(site.USER_BASE, 'lib', 'python', 'site-packages'))"):$PYTHONPATH
+
+# add .local/bin to path
+export PATH=~/.local/bin:$PATH
+
+# rust
+. <(rustup completions bash cargo)
+. <(rustup completions bash rustup)
+export PATH=$HOME/.cargo/bin:$PATH
+
+{{ if eq .chezmoi.os "darwin" -}}
+# macOS .bashrc contents
+{{ else if eq .chezmoi.os "linux" -}}
+# Linux .bashrc contents
+{{ end -}}

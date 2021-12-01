@@ -1,0 +1,3 @@
+Region = "us-east-2"
+UsePrivateIp = true
+#Template = "{{index .Tags \"Name\"}}"
