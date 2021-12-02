@@ -2,13 +2,13 @@ README.md
 
 {{- if ne .chezmoi.hostname "MacBookPro-FVFFP1GS0KPF" }}
 .work # only manage .work on work-laptop
-./private_dot_config/fish/conf.d/iterm2.fish
-./private_dot_config/fish/conf.d/aptible.fish
-./private_dot_config/fish/conf.d/openssl.fish
-./private_dot_config/fish/conf.d/ssh-agent.fish
-./private_dot_config/fish/conf.d/onepassword.fish
+.config/fish/conf.d/iterm2.fish
+.config/fish/conf.d/aptible.fish
+.config/fish/conf.d/openssl.fish
+.config/fish/conf.d/ssh-agent.fish
+.config/fish/conf.d/onepassword.fish
 {{- end }}
 
 {{- if ne .chezmoi.hostname "RedDwarf" }}
-private_dot_config/fusuma/
+.config/fusuma/
 {{- end }}

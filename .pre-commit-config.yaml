@@ -1,0 +1,15 @@
+repos:
+  - hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+    repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+  - hooks:
+      - entry: 'bash -c "detect-secrets audit .secrets.baseline" && exit'
+        id: secrets-detect
+        language: system
+        name: secrets-detect
+        pass_filenames: false
+    repo: local
