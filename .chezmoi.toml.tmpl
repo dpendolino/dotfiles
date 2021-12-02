@@ -8,9 +8,14 @@
 [data]
     email = {{ $email | quote }}
     name = "Daniel Pendolino"
+    {{- if eq .chezmoi.hostname "RedDwarf" }}
     reddwarfborgpassphrase = {{ (index (lastpass "RedDwarf Borg Passphrase") 0).password | quote }}
+    {{- end }}
 encryption = "age"
 [age]
-    identity = "/home/dpendolino/key.txt"
-    recipient = "age1h2fuyd6tgpfm44tke8h3jl8lxevmmz6elwv2nzdr04x8nxft2sqqn4vdtk"
+identity = "{{- .chezmoi.homeDir }}/key.txt"
+    recipients = [
+        "age1h2fuyd6tgpfm44tke8h3jl8lxevmmz6elwv2nzdr04x8nxft2sqqn4vdtk", # RedDwarf
+        "age1zns7sll4evgwrcfzvukdcly93awckkgxp27mtygf4dufzfsx5q4q7mdr8g" # MacBook
+    ]
 

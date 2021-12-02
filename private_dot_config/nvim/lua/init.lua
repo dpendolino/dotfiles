@@ -96,114 +96,10 @@ end
 --dump(require'nvim-web-devicons'.get_icons())
 --dump(require'nvim-web-devicons'.get_icon('/home/dpendolino/.adobe', '', { default = false }))
 
--- LSP settings
-local nvim_lsp = require('lspconfig')
-local on_attach = function(_client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  local opts = { noremap=true, silent=true }
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-end
-
--- Enable the following language servers
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
-end
-require'lspconfig'.gopls.setup{ on_attach = on_attach }
-require'lspconfig'.bashls.setup{ on_attach = on_attach }
-require'lspconfig'.yamlls.setup{ on_attach = on_attach }
-require'lspconfig'.jsonls.setup{ on_attach = on_attach }
-require'lspconfig'.html.setup{ on_attach = on_attach }
-require'lspconfig'.terraformls.setup{ on_attach = on_attach }
-require'lspconfig'.tflint.setup{ on_attach = on_attach }
-require'lspconfig'.cssls.setup{
-  cmd = { "/home/dpendolino/.npm-packages/bin/css-languageserver", "--stdio"},
-  on_attach = on_attach
-}
-require'lspconfig'.dockerls.setup{
-  cmd = { "/home/dpendolino/.npm-packages/bin/docker-langserver", "--stdio" },
-  on_attach = on_attach
-}
-
---[[ local sumneko_root_path = vim.fn.getenv("HOME").."/.local/bin/sumneko_lua" -- Change to your sumneko root installation
-local sumneko_binary_path = "/usr/bin/lua-language-server" -- Change to your OS specific output folder ]]
-nvim_lsp.sumneko_lua.setup {
-  -- cmd = {sumneko_root_path .. sumneko_binary_path, "-E", sumneko_root_path.."/main.lua" };
-  cmd = {"/usr/bin/lua-language-server","-E","/usr/share/lua-language-server/main.lua"};
-  on_attach = on_attach,
-  settings = {
-      Lua = {
-          runtime = {
-              version = 'LuaJIT',
-              path = vim.split(package.path, ';'),
-          },
-          diagnostics = {
-              globals = {'vim'},
-          },
-          workspace = {
-              library = {
-                  [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                  [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-              },
-          },
-      },
-  },
-}
-
--- Map :Format to vim.lsp.buf.formatting()
-vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
-
 -- Set completeopt to have a better completion experience
 vim.o.completeopt="menuone,noinsert,noselect"
 
--- Compe setup
---[[ require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = true;
-
-  source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    vsnip = false;
-    nvim_lsp = true;
-    nvim_lua = true;
-    spell = true;
-    tags = true;
-    snippets_nvim = true;
-    treesitter = true;
-    ultisnips = true;
-  };
-}
- ]]
-
-  -- Setup nvim-cmp.
+-- Setup nvim-cmp.
 local cmp = require'cmp'
 
 cmp.setup({
@@ -340,6 +236,35 @@ require('telescope').setup {
       override_file_sorter = true,     -- override the file sorter
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
                                        -- the default case_mode is "smart_case"
+    },
+    dash = {
+      -- configure path to Dash.app if installed somewhere other than /Applications/Dash.app
+      dash_app_path = '/Applications/Dash.app',
+      -- search engine to fall back to when Dash has no results, must be one of: 'ddg', 'duckduckgo', 'startpage', 'google'
+      search_engine = 'ddg',
+      -- debounce while typing, in milliseconds
+      debounce = 0,
+      -- map filetype strings to the keywords you've configured for docsets in Dash
+      -- setting to false will disable filtering by filetype for that filetype
+      -- filetypes not included in this table will not filter the query by filetype
+      -- check lua/dash.config.lua to see all defaults
+      -- the values you pass for file_type_keywords are merged with the defaults
+      -- to disable filtering for all filetypes,
+      -- set file_type_keywords = false
+      file_type_keywords = {
+        dashboard = false,
+        NvimTree = false,
+        TelescopePrompt = false,
+        terminal = false,
+        packer = false,
+        -- a table of strings will search on multiple keywords
+        javascript = { 'javascript', 'nodejs' },
+        typescript = { 'typescript', 'javascript', 'nodejs' },
+        typescriptreact = { 'typescript', 'javascript', 'react' },
+        javascriptreact = { 'javascript', 'react' },
+        -- you can also do a string, for example,
+        -- bash = 'sh'
+      },
     }
   }
 }
