@@ -1,9 +1,15 @@
 README.md
 
-{{- if ne .chezmoi.hostname "work-laptop" }}
+{{- if ne .chezmoi.hostname "MacBookPro-FVFFP1GS0KPF" }}
 .work # only manage .work on work-laptop
+.config/fish/conf.d/iterm2.fish
+.config/fish/conf.d/aptible.fish
+.config/fish/conf.d/openssl.fish
+.config/fish/conf.d/ssh-agent.fish
+.config/fish/conf.d/onepassword.fish
+.iterm2_shell_integration.fish
 {{- end }}
 
 {{- if ne .chezmoi.hostname "RedDwarf" }}
-private_dot_config/fusuma/
+.config/fusuma/
 {{- end }}

@@ -1,8 +1,10 @@
 scriptencoding utf-8
 
-" let g:python_host_prog = '/usr/bin/python2'
+{{ if eq .chezmoi.os "darwin" -}}
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
+{{ else if eq .chezmoi.os "linux" -}}
 let g:python3_host_prog = '/usr/bin/python'
-
+{{- end }}
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
 	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -11,55 +13,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-
-" vim-sensible
-" Plug 'https://github.com/tpope/vim-sensible'
-
-" Line up a certain character in each line
-" Plug 'https://github.com/junegunn/vim-easy-align.git'
-
-" A git UI plugin
-" Plug 'https://github.com/tpope/vim-fugitive.git'
-
-" Pop-up file manager
-" Plug 'https://github.com/scrooloose/nerdtree.git'
-" Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin.git'
-
-" Map F2 to NERDTreeToggle
-" map <F2> :NERDTreeToggle<CR>
-
-" let g:NERDTreeGitStatusIndicatorMapCustom = {
-"     \ "Modified"  : "*",
-"     \ "Staged"    : "+",
-"     \ "Untracked" : "-",
-"     \ "Renamed"   : "/",
-"     \ "Unmerged"  : "=",
-"     \ "Deleted"   : "x",
-"     \ "Dirty"     : "*",
-"     \ "Clean"     : "`",
-"     \ "Unknown"   : "?"
-"     \ }
-
-" let g:NERDTreeIgnore = ['\.pyc$', '\.o$', '\.lib$', '\.a$', '\.dll$', '\.so$', '\.so\.', '\.dylib$', '\.exe$', '\.out$', '\.app$', '\.stackdump$']
-
-" Colour scheme
-"Plug 'https://github.com/altercation/vim-colors-solarized.git'
-" Plug 'https://github.com/frankier/neovim-colors-solarized-truecolor-only.git'
-
-" Add quotes, html tags, etc. around something
-" Plug 'https://github.com/tpope/vim-surround.git'
-
-" Commenting/uncommenting stuff
-" Plug 'https://github.com/tpope/vim-commentary.git'
-
-" Consistent editing styles (indent, etc)
-" Plug 'https://github.com/editorconfig/editorconfig-vim.git'
-
-" Lets you refactor multiple things with ctrl-n
-" Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-
-" Open a file to a specific line with 'vim file:line'
-" Plug 'bogado/file-line'
 
 " Fast fuzzy searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -85,14 +38,6 @@ function! s:fzf_preview_settings() abort
   let g:fzf_preview_grep_preview_cmd = 'COLORTERM=truecolor ' . g:fzf_preview_grep_preview_cmd
 endfunction
 
-" devicons
-" Plug 'ryanoasis/vim-devicons'
-
-" track mru files
-" Plug 'Shougo/neomru.vim'
-
-" Start Screen
-" Plug 'mhinz/vim-startify'
 
 " Deal with trailing whitespace
 Plug 'ntpeters/vim-better-whitespace'
@@ -102,55 +47,9 @@ map <leader>s :StripWhitespace<CR>
 Plug 'nathanaelkane/vim-indent-guides'
 map <C-I> :IndentGuidesToggle<cr>
 
-" Let the '.' command work with other plugins
-" Plug 'tpope/vim-repeat'
-
-" Colour scheme
-" Plug 'chriskempson/base16-vim'
 
 " Asynchronous support
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-
-" Asynchronous auto-complete
-" See: https://github.com/Shougo/deoplete.nvim/blob/master/doc%2Fdeoplete.txt
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'zchee/deoplete-jedi'
-" " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-" let g:deoplete#enable_at_startup = 1
-" let g:airline#extensions#tabline#enabled = 1
-" let g:deoplete#enable_ignore_case = 1
-" let g:deoplete#auto_complete_start_length = 0
-" set completeopt+=preview,
-" let g:auto_complete_start_length = 0
-" let g:deoplete#enable_refresh_always = 1
-" let g:deoplete#enable_debug = 0
-" let g:deoplete#enable_profile = 0
-
-
-" Fancy status bar
-" I *think* this causes serious slowdown, so I'm disabling for now
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-
-" Another elegant statusline for vim, extracted from space-vim.
-" Plug 'liuchengxu/eleline.vim'
-" set laststatus=2
-" let g:eleline_powerline_fonts = 1
-" let g:eleline_slim = 1
-
-
-" Syntax checking
-" Plug 'scrooloose/syntastic'
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_rust_checkers = ['cargo']
-" let g:syntastic_python_checkers = ['flake8']
 
 Plug 'neomake/neomake'
 let g:neomake_javascript_enabled_makers = ['eslint']
@@ -158,9 +57,6 @@ let g:neomake_python_enabled_makers = ['pylint']
 let g:neomake_sh_enabled_makers = ['shellcheck']
 " let g:neomake_open_list = 2
 
-" Lint
-" Plug 'ynkdir/vim-vimlparser'
-" Plug 'syngan/vim-vimlint'
 
 " Fuzzy finder in neovim floating window
 " The do hook is highly recommended.
@@ -172,34 +68,24 @@ Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 map <C-P> :Clap <cr>
 
 " snippets
-" Plug 'honza/vim-snippets'
-" Plug 'SirVer/ultisnips'
 
 " vertically split ultisnips edit window
 let g:UltiSnipsEditSplit="vertical"
 
-" smart highlight
-" Plug 'romainl/vim-cool'
-
 " Gist
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
+{{ if eq .chezmoi.os "darwin" -}}
+let g:gist_clip_command = 'pbcopy'
+{{ else if eq .chezmoi.os "linux" -}}
 let g:gist_clip_command = 'xclip -selection clipboard'
+{{- end }}
 let g:gist_post_private = 1
 
 
 " Narrow Region
 Plug 'chrisbra/NrrwRgn'
 map <leader>r :NarrowRegion<CR>
-
-" Jump to a specific character
-" Plug 'easymotion/vim-easymotion'
-
-" TUI
-" Plug 'skywind3000/vim-quickui'
-
-" Set up Gundo.vim -- vim-mundo, fork with neovim support
-" Plug 'simnalamburt/vim-mundo'
 
 " Enable persistent undo so that undo history persists across vim sessions
 set undofile
@@ -218,44 +104,7 @@ let g:split_term_vertical = 1
 Plug 'vim-ruby/vim-ruby'
 let g:ruby_no_expensive=1
 
-" Syntax highlighting
-" Plug 'mustache/vim-mustache-handlebars'
-" Plug 'dag/vim-fish'
-" Plug 'rust-lang/rust.vim'
-" Plug 'cespare/vim-toml'
-" " Plug 'sheerun/vim-polyglot'
 let g:mustache_abbreviations = 1
-
-" Rust Completion
-" Plug 'racer-rust/vim-racer'
-
-" Indent object
-" Plug 'michaeljsmith/vim-indent-object'
-
-" LSP
-" Plug 'neovim/nvim-lsp'
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
-
-" " Required for operations modifying multiple buffers like rename.
-" set hidden
-
-" let g:LanguageClient_serverCommands = {
-"     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-"     \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-"     \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-"     \ 'python': ['/usr/bin/pyls'],
-"     \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
-"     \ }
-
-" nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" " Or map each action separately
-" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
 " Code Formatting
 Plug 'sbdchd/neoformat'
 let g:neoformat_enabled_python = ['yapf', 'autopep8']
@@ -283,195 +132,11 @@ Plug 'jkramer/vim-checkbox'
 let g:insert_checkbox_prefix = '- '
 let g:insert_checkbox = '\<'
 
-" Smooth scrolling - totally optional
-" Plug 'psliwka/vim-smoothie'
-
 " ansible
 Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
 
 " Testing
 
-" REPL
-" Plug 'mtikekar/nvim-send-to-term'
-
-" Jupyter
-" Plug 'bfredl/nvim-ipy'
-" command! -nargs=0 RunQtConsole call jobstart("jupyter qtconsole --JupyterWidget.include_other_output=True")
-
-" let g:ipy_celldef = '^##' " regex for cell start and end
-
-" nmap <silent> <leader>jqt :RunQtConsole<Enter>
-" nmap <silent> <leader>jk :IPython<Space>--existing<Space>--no-window<Enter>
-" nmap <silent> <leader>jc <Plug>(IPy-RunCell)
-" nmap <silent> <leader>ja <Plug>(IPy-RunAll)
-
-" Highlight current word in buffer after delay
-" Plug 'dominikduda/vim_current_word'
-
-" Vim plugin for "jump to defitinition" and "find usages" feature through nice popup ui
-" Plug 'pechorin/any-jump.nvim'
-
-" A Vim Automatic Window Resizing Plugin
-" Plug 'camspiers/animate.vim'
-" Plug 'camspiers/lens.vim'
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" Begin CoC Setting
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" " Use release branch (Recommend)
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" " TextEdit might fail if hidden is not set.
-" set hidden
-
-" " Some servers have issues with backup files, see #649.
-" set nobackup
-" set nowritebackup
-
-" " Give more space for displaying messages.
-" set cmdheight=2
-
-" " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" " delays and poor user experience.
-" set updatetime=300
-
-" " Don't pass messages to |ins-completion-menu|.
-" set shortmess+=c
-
-" " Always show the signcolumn, otherwise it would shift the text each time
-" " diagnostics appear/become resolved.
-" set signcolumn=yes
-
-" " Use tab for trigger completion with characters ahead and navigate.
-" " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" " other plugin before putting this into your config.
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
-
-" " Use <c-space> to trigger completion.
-" inoremap <silent><expr> <c-space> coc#refresh()
-
-" " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" " position. Coc only does snippet and additional edit on confirm.
-" if has('patch8.1.1068')
-"   " Use `complete_info` if your (Neo)Vim version supports it.
-"   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-" else
-"   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" endif
-
-" " Use `[g` and `]g` to navigate diagnostics
-" nmap <silent> [g <Plug>(coc-diagnostic-prev)
-" nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" " GoTo code navigation.
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
-
-" " Use K to show documentation in preview window.
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   else
-"     call CocAction('doHover')
-"   endif
-" endfunction
-
-" " Highlight the symbol and its references when holding the cursor.
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" " Symbol renaming.
-" nmap <leader>rn <Plug>(coc-rename)
-
-" " Formatting selected code.
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
-
-" augroup mygroup
-"   autocmd!
-"   " Setup formatexpr specified filetype(s).
-"   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-"   " Update signature help on jump placeholder.
-"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-" augroup end
-
-" " Applying codeAction to the selected region.
-" " Example: `<leader>aap` for current paragraph
-" xmap <leader>a  <Plug>(coc-codeaction-selected)
-" nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" " Remap keys for applying codeAction to the current line.
-" nmap <leader>ac  <Plug>(coc-codeaction)
-" " Apply AutoFix to problem on the current line.
-" nmap <leader>qf  <Plug>(coc-fix-current)
-
-" " Introduce function text object
-" " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-" xmap if <Plug>(coc-funcobj-i)
-" xmap af <Plug>(coc-funcobj-a)
-" omap if <Plug>(coc-funcobj-i)
-" omap af <Plug>(coc-funcobj-a)
-
-" " Use <TAB> for selections ranges.
-" " NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" " coc-tsserver, coc-python are the examples of servers that support it.
-" nmap <silent> <TAB> <Plug>(coc-range-select)
-" xmap <silent> <TAB> <Plug>(coc-range-select)
-
-" " Add `:Format` command to format current buffer.
-" command! -nargs=0 Format :call CocAction('format')
-
-" " Add `:Fold` command to fold current buffer.
-" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" " Add `:OR` command for organize imports of the current buffer.
-" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" " Add (Neo)Vim's native statusline support.
-" " NOTE: Please see `:h coc-status` for integrations with external plugins that
-" " provide custom statusline: lightline.vim, vim-airline.
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" " Mappings using CoCList:
-" " Show all diagnostics.
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" " Manage extensions.
-" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" " Show commands.
-" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" " Find symbol of current document.
-" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" " Search workspace symbols.
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" " Do default action for next item.
-" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" " Do default action for previous item.
-" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" " Resume latest coc list.
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-" autocmd FileType json syntax match Comment +\/\/.\+$+
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" End CoC Setting
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " adds a floating terminal window
 Plug 'voldikss/vim-floaterm'
@@ -502,11 +167,6 @@ Plug 'jeetsukumaran/vim-pythonsense'
 " Abolish: change case
 Plug 'tpope/vim-abolish'
 
-" figure out keybindings
-" Plug 'liuchengxu/vim-which-key'
-" nnoremap <silent> <leader> :WhichKey '<leader>'<CR>
-" nnoremap <silent> <localleader> :WhichKey '<localleader>'<CR>
-
 " Sort Motion.vim
 Plug 'christoomey/vim-sort-motion'
 
@@ -532,35 +192,9 @@ omap <buffer> if <plug>(textobj-markdown-chunk-i)
 omap <buffer> aF <plug>(textobj-markdown-Bchunk-a)
 omap <buffer> iF <plug>(textobj-markdown-Bchunk-i)
 
-" Calendar
-" Plug 'itchyny/calendar.vim'
-
-" Wiki
-" Plug 'vimwiki/vimwiki'
-
-" Wiki compatible calendar
-" Plug 'mattn/calendar-vim'
-
-" custom header/footer
-" Plug 'johannesthyssen/vim-signit'
-" let g:signit_initials	= 'DJP'
-" let g:signit_name	= 'Daniel Pendolino'
-" let g:signit_extra_1	= 'https://github.com/dpendolino'
-
-" foldout is an outline-based folding plugin
-" Plug 'msuperdock/vim-foldout'
-" let g:foldout_save = 1
-" noremap <silent> <tab> :call foldout#toggle_fold()<cr>
-
 " Vimspector
 Plug 'puremourning/vimspector'
 let g:vimspector_enable_mappings = 'HUMAN'
-
-" Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
-" nnoremap <leader>v <cmd>CHADopen<cr>
-" lua vim.api.nvim_set_var("chadtree_settings", { use_icons = "emoji" })
-" lua vim.api.nvim_set_var("chadtree_ignores", { name = {".*", ".git"} })
-" nnoremap <leader>l <cmd>call setqflist([])<cr>
 
 " visually select increasingly larger regions of text using the same key combination
 Plug 'terryma/vim-expand-region'
@@ -662,8 +296,6 @@ let g:vista#renderer#icons = {
 \   "variable": "\uf71b",
 \  }
 
-" test runner
-Plug 'vim-test/vim-test'
 
 " tpope/vim-projectionist
 Plug 'tpope/vim-projectionist'
@@ -673,11 +305,6 @@ Plug 'kevinhwang91/nvim-bqf'
 
 " auto mkdir
 Plug 'DataWraith/auto_mkdir'
-
-" Plug 'mkotha/conflict3'
-
-" Lua based commenting
-" Plug 'b3nj5m1n/kommentary'
 
 " End Testing
 call plug#end()
@@ -830,10 +457,6 @@ set viminfo='1000
 " terminal stuff
 tnoremap <Esc> <C-\><C-n>
 
-" coc-spell-checker
-" vmap <leader>a <Plug>(coc-codeaction-selected)
-" nmap <leader>a <Plug>(coc-codeaction-selected)
-
 " float term key bindings
 """ Configuration example
 let g:floaterm_keymap_new    = '<F7>'
@@ -848,18 +471,6 @@ let g:floaterm_keymap_toggle = '<F10>'
 " insert date
 map <leader>D :put =strftime('# %Y-%m-%d %H:%M %a')<CR>
 map <leader>d :put =strftime('%Y-%m-%d')<CR>
-
-" vimwiki
-let g:vimwiki_list = [{'path': '~/Sync/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
-" Add a convenient Diary command
-" https://mkaz.blog/working-with-vim/vimwiki/
-command! Diary VimwikiDiaryIndex
-augroup vimwikigroup
-    autocmd!
-    " automatically update links on read diary
-    autocmd BufRead,BufNewFile diary.wiki VimwikiDiaryGenerateLinks
-augroup end
 
 " Temporary workaround for: https://github.com/neovim/neovim/issues/1716
 if has("nvim")
@@ -1004,7 +615,11 @@ autocmd Filetype markdown LanguageToolSetUp
 " https://github.com/iamcco/markdown-preview.nvim/issues/19#issuecomment-464344382
 function! g:Open_browser(url)
     " One of the following two lines:
+{{ if eq .chezmoi.os "darwin" -}}
+    exec "Start!  \"/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome\" --app=" . a:url
+{{ else if eq .chezmoi.os "linux" -}}
     exec "Start! google-chrome-stable --app=" . a:url
+{{- end }}
     " silent exec "google-chrome-stable --app=" . a:url . " &"
 endfunction
 let g:mkdp_browserfunc = 'g:Open_browser'

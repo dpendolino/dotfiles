@@ -59,6 +59,31 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities
 }
 end
+{{ if eq .chezmoi.os "darwin" -}}
+require'lspconfig'.jsonls.setup{
+  cmd = { "/Users/danielpendolino/node_modules/.bin/vscode-json-languageserver", "--stdio" }
+}
+require'lspconfig'.html.setup{
+  cmd = { "/Users/danielpendolino/node_modules/.bin/html-languageserver", "--stdio" }
+}
+require'lspconfig'.cssls.setup{
+  cmd = { "/Users/danielpendolino/node_modules/.bin/css-language-server", "--stdio"}
+}
+require'lspconfig'.dockerls.setup{
+  cmd = { "/Users/danielpendolino/node_modules/.bin/docker-langserver", "--stdio" }
+}
+require'lspconfig'.pyright.setup{
+  cmd = { "/Users/danielpendolino/node_modules/.bin/pyright-langserver", "--stdio" }
+}
+require'lspconfig'.solargraph.setup{
+  cmd = { "solargraph", "stdio" },
+  settings = {
+    solargraph = {
+        diagnostics = true
+    }
+  }
+}
+{{ else if eq .chezmoi.os "linux" -}}
 require'lspconfig'.cssls.setup{
   cmd = { "/home/dpendolino/.npm-packages/bin/css-languageserver", "--stdio"},
   on_attach = on_attach,
@@ -70,7 +95,11 @@ require'lspconfig'.dockerls.setup{
   capabilities = capabilities
 }
 nvim_lsp.sumneko_lua.setup {
+  {{ if eq .chezmoi.os "darwin" -}}
+  cmd = {"/Users/danielpendolino/git/lua-language-server/bin/macOS/lua-language-server","-E","/Users/danielpendolino/git/lua-language-server/main.lua"};
+  {{ else if eq .chezmoi.os "linux" -}}
   cmd = {"/usr/bin/lua-language-server","-E","/usr/share/lua-language-server/main.lua"};
+  {{- end }}
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -91,6 +120,6 @@ nvim_lsp.sumneko_lua.setup {
       },
   },
 }
-
+{{- end }}
 -- Map :Format to vim.lsp.buf.formatting()
 vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])

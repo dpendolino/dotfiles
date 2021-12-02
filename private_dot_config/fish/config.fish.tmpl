@@ -1,0 +1,71 @@
+{{ if eq .chezmoi.os "darwin" -}}
+# set homebrew path
+/opt/homebrew/bin/brew shellenv | source
+
+set -U fish_user_paths /usr/local/bin $fish_user_paths
+
+source ("/opt/homebrew/bin/starship" init fish --print-full-init | psub)
+
+rvm default
+
+fish_add_path /opt/homebrew/opt/cython/bin
+
+set -x AWS_PROFILE 'autoawsume-springhealth'
+{{ else if eq .chezmoi.os "linux" -}}
+bass source /etc/profile
+
+starship init fish | source
+
+# Set SSH to use Gnome keyring
+set -gx SSH_AUTH_SOCK (gnome-keyring-daemon --start | grep "^SSH_AUTH_SOCK" | awk -F "=" '{print $2}')
+
+function fish_greeting
+  archey3
+end
+
+# https://gitlab.gnome.org/GNOME/gnome-keyring/-/issues/28
+set -x XDG_RUNTIME_DIR /run/user/(id -u $USER)
+
+# gem path
+set -x GEM_HOME "(ruby -e 'puts Gem.user_dir')"
+set -x PATH $PATH "$GEM_HOME/bin"
+{{- end }}
+
+set -x PATH $PATH $HOME/.cargo/bin/
+
+thefuck --alias oops | source
+
+# set the workspace path
+set -x GOPATH $HOME/go
+
+# add the go bin path to be able to execute our programs
+set -x PATH $PATH /usr/local/go/bin $GOPATH/bin
+
+# add ~/bin to path
+set -x PATH $PATH $HOME/.local/bin
+set -x PATH $PATH $HOME/bin
+set -x PATH $PATH $HOME/.cargo/bin/
+
+alias sshf="ssh (rg -i 'Host ' $HOME/.ssh/config | awk '{print $2}' | fzf)"
+
+alias cat="bat"
+alias ccat="bat"
+
+# Global Packer cache
+set -x PACKER_CACHE_DIR $HOME/packer_cache
+
+set -x LANG en_US.UTF-8
+
+# npm bin path
+set -x PATH $PATH $HOME/node_modules/.bin
+
+# ripgrep config file
+set -x RIPGREP_CONFIG_PATH $HOME/.ripgreprc
+
+{{- if eq .chezmoi.hostname "prometheus" }}
+# pick correct vulkan driver
+set -x VK_ICD_FILENAMES /usr/share/vulkan/icd.d/amd_icd64.json:/usr/share/vulkan/icd.d/amd_icd32.json
+{{- end }}
+
+set -x EDITOR nvim
+set -x VISUAL nvim
