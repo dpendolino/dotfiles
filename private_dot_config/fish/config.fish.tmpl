@@ -6,11 +6,17 @@ set -U fish_user_paths /usr/local/bin $fish_user_paths
 
 source ("/opt/homebrew/bin/starship" init fish --print-full-init | psub)
 
-rvm default
+# rvm default
 
 fish_add_path /opt/homebrew/opt/cython/bin
 
 set -x AWS_PROFILE 'autoawsume-springhealth'
+
+# Use GCC
+set -x CC /opt/homebrew/bin/gcc-11
+
+# alias python to python3
+alias python='python3'
 {{ else if eq .chezmoi.os "linux" -}}
 bass source /etc/profile
 
@@ -69,3 +75,9 @@ set -x VK_ICD_FILENAMES /usr/share/vulkan/icd.d/amd_icd64.json:/usr/share/vulkan
 
 set -x EDITOR nvim
 set -x VISUAL nvim
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+set -x PATH $PATH $HOME/.rvm/bin
+
+# disable welcome
+set fish_greeting

@@ -8,8 +8,10 @@ README.md
 .config/fish/conf.d/ssh-agent.fish
 .config/fish/conf.d/onepassword.fish
 .iterm2_shell_integration.fish
+ssh/config_darwin
 {{- end }}
 
 {{- if ne .chezmoi.hostname "RedDwarf" }}
 .config/fusuma/
+ssh/config_linux
 {{- end }}
