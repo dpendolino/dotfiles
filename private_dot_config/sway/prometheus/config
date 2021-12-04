@@ -4,8 +4,8 @@ font xft:Dosis 10
 titlebar_padding 10 10
 
 # start a terminal
-bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+Return exec alacritty --working-directory $(swaycwd)
+# bindsym $mod+Return exec alacritty
+# bindsym $mod+Shift+Return exec alacritty --working-directory $(swaycwd)
 
 # file manager
 # bindsym $mod+t exec nautilus
