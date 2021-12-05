@@ -68,10 +68,10 @@ return require('packer').startup(function(use)
   use {"kdav5758/HighStr.nvim"}      -- Highlight visual selection in any given pre-defined color
   use {'tpope/vim-dispatch'}         -- run async commands
   use {'hashivim/vim-terraform'}     -- terraform integration
-  use {'github/copilot.vim'}         -- github copilot integration
   use {'chrisbra/Colorizer'}         -- colorize hex codes
   use {'dstein64/vim-startuptime'}   -- startup profiler
   use {'tpope/vim-surround'}
+  use {'kevinhwang91/nvim-bqf', ft = 'qf'}  -- better quickfix
   use {'kristijanhusak/orgmode.nvim', config = function()
         require('orgmode').setup{}
       end
