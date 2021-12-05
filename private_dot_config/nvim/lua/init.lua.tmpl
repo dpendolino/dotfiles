@@ -237,6 +237,7 @@ require('telescope').setup {
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
                                        -- the default case_mode is "smart_case"
     },
+    {{ if eq .chezmoi.os "darwin" -}}
     dash = {
       -- configure path to Dash.app if installed somewhere other than /Applications/Dash.app
       dash_app_path = '/Applications/Dash.app',
@@ -266,6 +267,7 @@ require('telescope').setup {
         -- bash = 'sh'
       },
     }
+    {{- end }}
   }
 }
 -- To get fzf loaded and working with telescope, you need to call
