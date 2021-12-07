@@ -16,7 +16,6 @@ emscripten: LLVM bytecode to JavaScript compiler
 exa: Modern replacement for 'ls'
 fasd: CLI tool for quick access to files and directories
 fd: Simple, fast and user-friendly alternative to find
-espanso: Cross-platform Text Expander written in Rust
 fish: User-friendly command-line shell for UNIX-like operating systems
 fzf: Command-line fuzzy finder written in Go
 gawk: GNU awk utility
@@ -46,6 +45,7 @@ netcat: Utility for managing network connections
 nghttp2: HTTP/2 C Library
 ninja: Small build system for use with gyp or CMake
 nmap: Port scanning utility for large networks
+nvm: Manage multiple Node.js versions
 openssh: OpenBSD freely-licensed SSH connectivity tools
 postgresql: Object-relational database system
 pre-commit: Framework for managing multi-language pre-commit hooks
