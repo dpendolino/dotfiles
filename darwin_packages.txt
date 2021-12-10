@@ -1,15 +1,10 @@
 age: Simple, modern, secure file encryption
 ansible: Automate deployment, configuration, and upgrading
-automake: Tool for generating GNU Standards-compliant Makefiles
 awscli: Official Amazon AWS command-line interface
 awsume: Utility for easily assuming AWS IAM roles from the command-line
 bat: Clone of cat(1) with syntax highlighting and Git integration
 chezmoi: Manage your dotfiles across multiple diverse machines, securely
-cmake: Cross-platform make
 coreutils: GNU File, Shell, and Text utilities
-cython: Compiler for writing C extensions for the Python language
-deno: Secure runtime for JavaScript and TypeScript
-autoraise: Focus-follows-mouse for MacOS
 dive: Tool for exploring each layer in a docker image
 docker-ls: Tools for browsing and manipulating docker registries
 emscripten: LLVM bytecode to JavaScript compiler
@@ -58,8 +53,6 @@ rust: Safe, concurrent, practical language
 rust-analyzer: Experimental Rust compiler front-end for IDEs
 rustup-init: Rust toolchain installer
 shellcheck: Static analysis and lint tool, for (ba)sh scripts
-podman-apple-silicon: Tool for managing OCI containers and pods
-snyk: Find & fix known vulnerabilities in open-source dependencies
 ssllabs-scan: This tool is a command-line client for the SSL Labs APIs
 starship: Cross-shell prompt for astronauts
 subversion: Version control system designed to be a better CVS
