@@ -72,10 +72,6 @@ return require('packer').startup(function(use)
   use {'dstein64/vim-startuptime'}   -- startup profiler
   use {'tpope/vim-surround'}
   use {'kevinhwang91/nvim-bqf', ft = 'qf'}  -- better quickfix
-  use {'kristijanhusak/orgmode.nvim', config = function()
-        require('orgmode').setup{}
-      end
-  }
   use {
     'romgrk/barbar.nvim',
     requires = {'kyazdani42/nvim-web-devicons'}

@@ -297,17 +297,6 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = {'org'}, -- Or run :TSUpdate org
 }
 
-require('orgmode').setup({
-  org_agenda_files = {'~/Dropbox/org/*', '~/my-orgs/**/*', "~/Sync/org"},
-  org_default_notes_file = '~/Dropbox/org/refile.org', "~/Sync/org/refile.org",
-})
-
---[[ require'compe'.setup({
-  source = {
-    orgmode = true
-  }
-}) ]]
-
 -- following options are the default
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 require'nvim-tree'.setup {
