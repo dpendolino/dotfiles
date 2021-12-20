@@ -2,13 +2,12 @@
 # set homebrew path
 /opt/homebrew/bin/brew shellenv | source
 
-set -U fish_user_paths /usr/local/bin $fish_user_paths
+fish_add_path /usr/local/bin
+fish_add_path --path /opt/homebrew/bin
 
 source ("/opt/homebrew/bin/starship" init fish --print-full-init | psub)
 
 # rvm default
-
-fish_add_path /opt/homebrew/opt/cython/bin
 
 set -x AWS_PROFILE 'autoawsume-springhealth'
 
@@ -20,6 +19,8 @@ alias python='python3'
 
 # alias vim to nvim
 alias vim='nvim'
+
+thefuck --alias oops | source
 {{ else if eq .chezmoi.os "linux" -}}
 bass source /etc/profile
 
