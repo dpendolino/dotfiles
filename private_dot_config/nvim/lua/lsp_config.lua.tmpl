@@ -75,6 +75,9 @@ require'lspconfig'.dockerls.setup{
 require'lspconfig'.pyright.setup{
   cmd = { "/Users/danielpendolino/node_modules/.bin/pyright-langserver", "--stdio" }
 }
+require'lspconfig'.yamlls.setup{
+  cmd = { "/Users/danielpendolino/node_modules/.bin/yaml-language-server", "--stdio" }
+}
 require'lspconfig'.solargraph.setup{
   cmd = { "solargraph", "stdio" },
   settings = {
