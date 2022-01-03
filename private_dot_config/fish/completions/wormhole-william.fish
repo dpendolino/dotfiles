@@ -161,4 +161,3 @@ complete -c wormhole-william -n 'set --query __wormhole_william_comp_do_file_com
 # The call to __wormhole_william_prepare_completions will setup both __wormhole_william_comp_results and __wormhole_william_comp_do_file_comp.
 # It provides the program's completion choices.
 complete -c wormhole-william -n '__wormhole_william_prepare_completions' -f -a '$__wormhole_william_comp_results'
-
