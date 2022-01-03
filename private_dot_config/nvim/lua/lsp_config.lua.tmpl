@@ -8,7 +8,7 @@ local nvim_lsp = require('lspconfig')
 local on_attach = function(_client, bufnr)
   print("LSP started.");
   require'completion'.on_attach(_client)
-  require('calltree').setup({})
+  require('litee').setup({})
 
 	-- map('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>')
 	-- map('n','gd','<cmd>lua vim.lsp.buf.definition()<CR>')
