@@ -160,6 +160,7 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 
 # window assigments
+for_window [app_id="copyq"] floating enable
 # for_window [class="Keepassx" instance="keepassx"] floating enable
 # for_window [class="angrysearch.py" instance="angrysearch"] floating enable
 # for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
@@ -246,6 +247,7 @@ bindsym $mod+Shift+P exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S
 
 # clipman
 # bindsym $mod+c exec clipman pick -t rofi
+bindsym $mod+c exec copyq toggle
 
 # bwmenu
 # bindsym $mod+m exec bwmenu

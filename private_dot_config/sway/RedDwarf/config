@@ -54,7 +54,6 @@ for_window [class="angrysearch.py" instance="angrysearch"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="Zenity"] floating enable
 for_window [class="Question"] floating enable
-for_window [app_id="copyq"] floating enable
 # browser pop-ups
 for_window [window_role="pop-up"] floating enable
 
@@ -104,10 +103,6 @@ input "1:1:AT_Translated_Set_2_keyboard" {
 # bindsym XF86RFKill exec termite -e nmtui
 
 focus_follows_mouse no
-
-# clipman
-# bindsym $mod+c exec clipman pick -t rofi
-bindsym $mod+c exec copyq toggle
 
 # bwmenu
 # bindsym $mod+m exec bwmenu
