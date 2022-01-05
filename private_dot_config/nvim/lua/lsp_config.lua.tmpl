@@ -92,6 +92,11 @@ require'lspconfig'.cssls.setup{
   on_attach = on_attach,
   capabilities = capabilities
 }
+require'lspconfig'.jsonls.setup{
+  cmd = { "/usr/bin/vscode-json-languageserver", "--stdio" },
+  on_attach = on_attach,
+  capabilities = capabilities
+}
 require'lspconfig'.dockerls.setup{
   cmd = { "/home/dpendolino/.npm-packages/bin/docker-langserver", "--stdio" },
   on_attach = on_attach,
