@@ -40,13 +40,17 @@ set $locker swaylock-blur
 # resume 'swaymsg "output * dpms on"' \
 # after-resume 'swaymsg "output * dpms on"'
 
+# exec swayidle \
+#   timeout 300 '$locker' \
+#   timeout 600 'swaymsg "output * dpms off"' \
+#   resume 'swaymsg "output * dpms on"' \
+#   before-sleep '$locker' \
+#   timeout 900 'systemctl suspend' \
+#   after-resume 'swaymsg "output * dpms on"'
+
 exec swayidle \
   timeout 300 '$locker' \
-  timeout 600 'swaymsg "output * dpms off"' \
-  resume 'swaymsg "output * dpms on"' \
-  before-sleep '$locker' \
   timeout 900 'systemctl suspend' \
-  after-resume 'swaymsg "output * dpms on"'
 
 exec  fusuma -c ~/.config/fusuma/config.yml -d
 
