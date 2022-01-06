@@ -15,6 +15,10 @@ vim.cmd [[packadd packer.nvim]]
 -- Only if your version of Neovim doesn't have https://github.com/neovim/neovim/pull/12632 merged
 -- vim._update_package_paths()
 
+require('packer').init({
+  max_jobs = 20, -- Limit the number of simultaneous jobs. nil means no limit
+})
+
 return require('packer').startup(function(use)
   use {'wbthomason/packer.nvim', opt = true} -- Packer can manage itself as an optional plugin
   use 'b3nj5m1n/kommentary' -- Simple plugins can be specified as strings
@@ -244,7 +248,6 @@ require("focus").setup({enable = true, cursorline = true, signcolumn = true, hyb
       }
     end
   }
-
     -- vim-sensible
   use 'https://github.com/tpope/vim-sensible'
 
