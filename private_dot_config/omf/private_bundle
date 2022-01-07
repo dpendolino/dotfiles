@@ -4,6 +4,6 @@ package fasd
 package foreign-env
 package https://github.com/dracula/fish
 package https://github.com/jethrokuan/fzf
-package nvm
 package thefuck
+package brew
 theme default
