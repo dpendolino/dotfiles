@@ -85,3 +85,6 @@ set -x PATH $PATH $HOME/.rvm/bin
 
 # disable welcome
 set fish_greeting
+
+# You must call it on initialization or listening to directory switching won't work
+load_nvm
