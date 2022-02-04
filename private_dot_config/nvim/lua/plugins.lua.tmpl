@@ -251,7 +251,13 @@ require("focus").setup({enable = true, cursorline = true, signcolumn = true, hyb
   }
 
   -- autoclose and autorename html tags
-  use { 'windwp/nvim-ts-autotag', opt = true }
+  use {
+    'windwp/nvim-ts-autotag',
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end
+  }
+
   require'nvim-treesitter.configs'.setup {
     autotag = {
       enable = true,
@@ -428,4 +434,20 @@ use {
 
 
 use {'rlane/pounce.nvim'}
+
+use {
+  'windwp/nvim-autopairs',
+  config = function()
+    require('nvim-autopairs').setup{}
+    -- If you want insert `(` after select function or method item
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local cmp = require('cmp')
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+
+
+-- add a lisp filetype (wrap my-function), FYI: Hardcoded = { "clojure", "clojurescript", "fennel", "janet" }
+cmp_autopairs.lisp[#cmp_autopairs.lisp+1] = "racket"
+  end
+}
+
 end)
