@@ -58,7 +58,10 @@ return require('packer').startup(function(use)
   use "hrsh7th/cmp-emoji"
   use "hrsh7th/cmp-calc"
 
-  use 'neovim/nvim-lspconfig'        -- Collection of configurations for built-in LSP client
+  use {
+    'neovim/nvim-lspconfig',            -- Collection of configurations for built-in LSP client
+    'williamboman/nvim-lsp-installer',  -- Helper installer
+  }
   use 'nvim-lua/completion-nvim'
   use 'tpope/vim-rhubarb'            -- Fugitive-companion to interact with github
   use 'tpope/vim-fugitive'           -- Git commands in nvim
@@ -105,7 +108,7 @@ return require('packer').startup(function(use)
   -- easymotion replacement
   use {
     'phaazon/hop.nvim',
-    branch = 'v1', -- optional but strongly recommended
+    branch = 'v1.2', -- optional but strongly recommended
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
       require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
@@ -369,4 +372,6 @@ use {
   -- tag = 'release' -- To use the latest release
 }
 
+
+use {'rlane/pounce.nvim'}
 end)

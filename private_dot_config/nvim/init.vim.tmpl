@@ -21,8 +21,8 @@ set rtp+=~/.fzf
 " map <C-F> :FZF +c -m -x<cr>
 " map <C-F> :CocCommand fzf-preview.MruFiles <cr>
 Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release/rpc', 'do': ':UpdateRemotePlugins' }
-set shell=/bin/bash
-let $SHELL = "/bin/bash"
+set shell=/opt/homebrew/bin/fish
+let $SHELL = "/opt/homebrew/bin/fish"
 let g:fzf_preview_command = 'ccat --color=always {-1}' " Installed ccat
 let g:fzf_preview_use_dev_icons = 1
 let g:fzf_preview_filelist_postprocess_command = 'xargs -d "\n" exa --color=always'
@@ -460,6 +460,8 @@ let g:floaterm_keymap_new    = '<F7>'
 let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F10>'
+let g:floaterm_shell         = '/opt/homebrew/bin/fish'
+let g:floaterm_autoclose     = 2
 
 " vim pasta
 " https://github.com/sickill/vim-pasta
