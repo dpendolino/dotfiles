@@ -1,6 +1,6 @@
 README.md
 
-{{- if ne .chezmoi.hostname "MacBookPro-FVFFP1GS0KPF" }}
+{{- if ne .chezmoi.hostname "Daniels-MacBook-Pro.local" }}
 .work # only manage .work on work-laptop
 .config/fish/conf.d/iterm2.fish
 .config/fish/conf.d/aptible.fish
