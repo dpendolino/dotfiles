@@ -20,6 +20,11 @@ require('packer').init({
 })
 
 return require('packer').startup(function(use)
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    branch =  'master',
+  }
   use {'wbthomason/packer.nvim', opt = true} -- Packer can manage itself as an optional plugin
   use 'b3nj5m1n/kommentary' -- Simple plugins can be specified as strings
   use 'ekickx/clipboard-image.nvim' -- paste images into neovim
