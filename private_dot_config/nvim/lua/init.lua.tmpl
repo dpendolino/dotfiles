@@ -6,9 +6,10 @@ local cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
 local fn = vim.fn    -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g      -- a table to access global variables
 local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
+local vimp = require('vimp')
 
 -- Settings
-vim.o.shell = '/bin/bash'
+vim.o.shell = 'fish'
 cmd("colorscheme darcula-solid")
 -- End Settings
 
@@ -24,6 +25,9 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 -- End local helper functions
+
+-- maps
+map('n', '<Leader><Leader>j', ':%!jq')
 
 -- https://github.com/ekickx/clipboard-image.nvimhttps://github.com/ekickx/clipboard-image.nvim
 require'clipboard-image'.setup {
@@ -285,6 +289,22 @@ require("null-ls").setup({
         require("null-ls").builtins.code_actions.gitsigns
     },
 })
+
+-- autocmds
+cmd([[
+autocmd BufRead * autocmd FileType <buffer> ++once
+  \ if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif
+]])
+
+-- URL handling
+-- https://sbulav.github.io/vim/neovim-opening-urls/
+if vim.fn.has("mac") == 1 then
+  map("n", "gx", ':<Cmd>call jobstart(["open", expand("<cfile>")], {"detach": v:true})<CR>')
+elseif vim.fn.has("unix") == 1 then
+  map("n", "gx", '<Cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<CR>')
+else
+  map("n", "gx", '<Cmd>lua print("Error: gx is not supported on this OS!")<CR>')
+end
 
 require('settings')
 require('lsp_config')
