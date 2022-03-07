@@ -8,8 +8,8 @@
 [data]
     email = {{ $email | quote }}
     name = "Daniel Pendolino"
-    {{- if eq .chezmoi.hostname "RedDwarf" }}
-    reddwarfborgpassphrase = {{ (index (lastpass "RedDwarf Borg Passphrase") 0).password | quote }}
+    {{- if eq .chezmoi.hostname "RedDwarfDEBUG" }}
+    reddwarfborgpassphrase = {{ (bitwarden "item" "RedDwarf Borg Passphrase").password | quote }}
     {{- end }}
 encryption = "age"
 [age]
