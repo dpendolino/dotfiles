@@ -6,11 +6,11 @@ local M = {}
 -- example of changing theme:
 
 M.ui = {
-   theme = "chadracula",
+  theme = "chadracula",
 }
 
 -- Install plugins
-local userPlugins = require "custom.plugins" -- path to table
+local userPlugins = require("custom.plugins") -- path to table
 
 M.plugins = {
   install = userPlugins,
@@ -18,7 +18,7 @@ M.plugins = {
     alpha = true,
     colorizer = true,
     cmp = true,
-    blankline = true
+    blankline = true,
   },
   default_plugin_config_replace = {
     nvim_treesitter = {

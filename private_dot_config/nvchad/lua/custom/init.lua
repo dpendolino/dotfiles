@@ -16,7 +16,7 @@ map("n", "<leader>`", ":lua require('FTerm').toggle()<CR>")
 vim.g.did_load_filetypes = 1
 
 --groups of letters with dashes as words
-vim.opt.iskeyword:append({'-', '+', '='})
+vim.opt.iskeyword:append({ "-", "+", "=" })
 -- print(vim.inspect(vim.opt.iskeyword))
 vim.opt.binary = true
 
