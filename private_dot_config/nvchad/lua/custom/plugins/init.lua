@@ -79,4 +79,5 @@ return {
       require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
     end,
   },
+  { "tpope/vim-fugitive" },
 }
