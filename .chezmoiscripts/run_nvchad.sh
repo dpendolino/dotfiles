@@ -5,5 +5,6 @@ if [ -d ~/.config/nvim ] && [ -d ~/.config/nvchad ]; then
 	fi
 fi
 
-nvim +'hi NormalFloat guibg=#1e222a' +PackerCompile
-nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
+nvim --headless +'hi NormalFloat guibg=#1e222a' +PackerCompile +qa
+nvim --headless +'hi NormalFloat guibg=#1e222a' +PackerSync +qa
+nvim --headless +'hi NormalFloat guibg=#1e222a' +PackerInstall +qa
