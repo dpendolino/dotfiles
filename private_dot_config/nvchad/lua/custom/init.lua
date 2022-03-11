@@ -10,6 +10,7 @@ map("n", "<leader>q", ":q <CR>")
 map("n", "<leader>o", ":MarkdownPreview<CR>") -- TODO: set mapping on markdown files only
 map("t", "<Esc>", [[<C-\><C-n>]])
 map("n", "<leader>`", ":lua require('FTerm').toggle()<CR>")
+map("n", "gx", [[:execute '!open ' . shellescape(expand('<cfile>'), 1)<CR>]])
 -- NOTE: the 4th argument in the map function is be a table i.e options but its most likely un-needed so dont worry about it
 
 -- Stop sourcing filetype.vim
