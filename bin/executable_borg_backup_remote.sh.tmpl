@@ -1,5 +1,6 @@
 #!/bin/sh
 export REPOSITORY=rsyncdotnet:RedDwarf
+export BORG_PASSPHRASE={{ .reddwarfborgpassphrase | quote}}
 
 # Backup all of /home and /var/www except a few
 # excluded directories
