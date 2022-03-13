@@ -68,6 +68,9 @@ return {
   {
     "mattn/gist-vim", -- native gist support
     requires = { "mattn/webapi-vim" },
+    config = function()
+      vim.g.gist_detect_filetype = true
+    end,
   },
   { "stevearc/dressing.nvim" }, -- UI pretty
   { "numToStr/FTerm.nvim" }, -- floating term
@@ -79,5 +82,74 @@ return {
       require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
     end,
   },
-  { "tpope/vim-fugitive" },
+  { "tpope/vim-fugitive" }, -- git ops
+  {
+    "nvim-neorg/neorg",
+    config = function()
+      require("neorg").setup({
+        load = {
+          ["core.defaults"] = {},
+          ["core.gtd.base"] = {
+            config = { -- Note that this table is optional and doesn't need to be provided
+              -- Configuration here
+              workspace = "home",
+            },
+          },
+          ["core.norg.journal"] = {
+            config = { -- Note that this table is optional and doesn't need to be provided
+              -- Configuration here
+            },
+          },
+          ["core.norg.dirman"] = {
+            config = {
+              workspaces = {
+                work = "/home/dpendolino/notes/work",
+                home = "/home/dpendolino/notes/home",
+              },
+              autochdir = true, -- Automatically change the directory to the current workspace's root every time
+              index = "index.norg", -- The name of the main (root) .norg file
+            },
+          },
+          ["core.norg.concealer"] = {
+            config = { -- Note that this table is optional and doesn't need to be provided
+              -- Configuration here
+            },
+          },
+          ["core.norg.qol.toc"] = {
+            config = { -- Note that this table is optional and doesn't need to be provided
+              -- Configuration here
+            },
+          },
+          ["core.norg.completion"] = {
+            config = { -- Note that this table is optional and doesn't need to be provided
+              -- Configuration here
+            },
+          },
+        },
+      })
+    end,
+    requires = "nvim-lua/plenary.nvim",
+  },
+  {
+    "chip/telescope-software-licenses.nvim", -- easily insert FOSS licenses
+    requires = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension("software-licenses")
+    end,
+  },
+  {
+    "nvim-telescope/telescope-symbols.nvim", -- easily insert FOSS licenses
+    requires = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    after = "telescope.nvim",
+    config = function()
+      require("telescope.builtin").symbols({ sources = { "emoji", "kaomoji", "gitmoji" } })
+    end,
+  },
 }
