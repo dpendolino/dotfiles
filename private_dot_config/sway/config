@@ -157,6 +157,7 @@ exec redshift -l 40.5242:-74.3119 -t 5700:3000
 exec vorta --daemonize
 exec /usr/bin/nextcloud
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec copyq --start-server
 
 
 # window assigments

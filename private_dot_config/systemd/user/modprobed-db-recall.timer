@@ -1,9 +1,0 @@
-[Unit]
-Description=Run modprobed-db recall on boot
-
-[Timer]
-OnBootSec=15min
-OnUnitActiveSec=1d
-
-[Install]
-WantedBy=timers.target

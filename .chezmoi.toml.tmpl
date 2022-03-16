@@ -6,16 +6,16 @@
 {{- end -}}
 
 [data]
-    email = {{ $email | quote }}
-    name = "Daniel Pendolino"
-    {{- if eq .chezmoi.hostname "RedDwarf" }}
-    reddwarfborgpassphrase = {{ (index (lastpass "RedDwarf Borg Passphrase") 0).password | quote }}
-    {{- end }}
+  email = {{ $email | quote }}
+  name = "Daniel Pendolino"
+  {{- if eq .chezmoi.hostname "RedDwarf" }}
+  reddwarfborgpassphrase = {{ (bitwarden "item" "RedDwarf Borg Passphrase").login.password | quote }}
+  {{- end }}
 encryption = "age"
 [age]
-identity = "{{- .chezmoi.homeDir }}/key.txt"
-    recipients = [
-        "age1h2fuyd6tgpfm44tke8h3jl8lxevmmz6elwv2nzdr04x8nxft2sqqn4vdtk", # RedDwarf
-        "age1zns7sll4evgwrcfzvukdcly93awckkgxp27mtygf4dufzfsx5q4q7mdr8g", # MacBook
-        "age1tky7auntxlxkeqcvj6d35w4hw696dq3ma444t3rmppc5ax5uqf2q3q5tx3", # Prometheus
-    ]
+  identity = "{{- .chezmoi.homeDir }}/key.txt"
+  recipients = [
+    "age1h2fuyd6tgpfm44tke8h3jl8lxevmmz6elwv2nzdr04x8nxft2sqqn4vdtk", # RedDwarf
+    "age1zns7sll4evgwrcfzvukdcly93awckkgxp27mtygf4dufzfsx5q4q7mdr8g", # MacBook
+    "age1tky7auntxlxkeqcvj6d35w4hw696dq3ma444t3rmppc5ax5uqf2q3q5tx3", # Prometheus
+  ]
