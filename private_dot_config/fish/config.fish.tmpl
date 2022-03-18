@@ -39,6 +39,10 @@ set -x XDG_RUNTIME_DIR /run/user/(id -u $USER)
 # gem path
 set -x GEM_HOME "(ruby -e 'puts Gem.user_dir')"
 set -x PATH $PATH "$GEM_HOME/bin"
+fish_add_path /opt/homebrew/lib/ruby/gems/3.0.0/bin
+
+# netskope
+set -x REQUESTS_CA_BUNDLE '/Library/Application Support/Netskope/STAgent/download/nscacert.pem'
 {{- end }}
 
 set -x PATH $PATH $HOME/.cargo/bin/
