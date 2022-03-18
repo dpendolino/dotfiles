@@ -152,4 +152,33 @@ return {
       require("telescope.builtin").symbols({ sources = { "emoji", "kaomoji", "gitmoji" } })
     end,
   },
+  {
+    "mfussenegger/nvim-dap", -- debug adapters support
+    config = function()
+      local dap = require("dap")
+      dap.adapters.ruby = {
+        type = "executable",
+        command = "bundle",
+        args = { "exec", "readapt", "stdio" },
+      }
+      dap.configurations.ruby = {
+        {
+          type = "ruby",
+          request = "launch",
+          name = "Rails",
+          program = "bundle",
+          programArgs = { "exec", "rails", "s" },
+          useBundler = true,
+        },
+      }
+    end,
+  },
+  {
+    "chrisbra/csv.vim", -- way better CSV experience
+    ft = "csv",
+    config = function()
+      vim.g.csv_delim_test = ",;|"
+      vim.g.csv_default_delim = ","
+    end,
+  },
 }
