@@ -25,9 +25,10 @@ titlebar_padding 10 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+Return exec alacritty --working-directory $(swaycwd)
-# bindsym $mod+Shift+Return exec kitty -d $(swaycwd)
+# bindsym $mod+Return exec alacritty
+# bindsym $mod+Shift+Return exec alacritty --working-directory $(swaycwd)
+bindsym $mod+Return exec kitty
+bindsym $mod+Shift+Return exec kitty -d $(swaycwd)
 
 # file manager
 bindsym $mod+t exec nautilus
