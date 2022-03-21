@@ -7,8 +7,6 @@ fish_add_path --path /opt/homebrew/bin
 
 source ("/opt/homebrew/bin/starship" init fish --print-full-init | psub)
 
-# rvm default
-
 set -x AWS_PROFILE 'autoawsume-springhealth'
 
 # Use GCC
@@ -20,8 +18,11 @@ alias python='python3'
 # alias vim to nvim
 alias vim='nvim'
 
-thefuck --alias oops | source
+# netskope
+set -x REQUESTS_CA_BUNDLE '/Library/Application Support/Netskope/STAgent/download/nscacert.pem'
+
 {{ else if eq .chezmoi.os "linux" -}}
+
 bass source /etc/profile
 
 starship init fish | source
@@ -41,8 +42,6 @@ set -x GEM_HOME "(ruby -e 'puts Gem.user_dir')"
 set -x PATH $PATH "$GEM_HOME/bin"
 fish_add_path /opt/homebrew/lib/ruby/gems/3.0.0/bin
 
-# netskope
-set -x REQUESTS_CA_BUNDLE '/Library/Application Support/Netskope/STAgent/download/nscacert.pem'
 {{- end }}
 
 set -x PATH $PATH $HOME/.cargo/bin/
