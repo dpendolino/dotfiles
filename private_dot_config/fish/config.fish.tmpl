@@ -4,6 +4,7 @@
 
 fish_add_path /usr/local/bin
 fish_add_path --path /opt/homebrew/bin
+fish_add_path /opt/homebrew/lib/ruby/gems/3.0.0/bin
 
 source ("/opt/homebrew/bin/starship" init fish --print-full-init | psub)
 
@@ -20,6 +21,7 @@ alias vim='nvim'
 
 # netskope
 set -x REQUESTS_CA_BUNDLE '/Library/Application Support/Netskope/STAgent/download/nscacert.pem'
+set -x AWS_CA_BUNDLE "/opt/homebrew/etc/ca-certificates/cert.pem"
 
 {{ else if eq .chezmoi.os "linux" -}}
 
