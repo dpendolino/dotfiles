@@ -16,6 +16,9 @@ local sources = {
 
   -- Python
   b.formatting.autopep8,
+
+  -- Ruby
+  b.formatting.rufo,
 }
 
 local M = {}
