@@ -52,12 +52,24 @@ exec swayidle \
   timeout 900 '$locker' \
   timeout 1200 'systemctl suspend' \
 
+# autostart
 exec  fusuma -c ~/.config/fusuma/config.yml -d
+# exec steam-runtime
+exec discord
+exec obsidian
+exec google-chrome-beta
+exec signal-desktop
+workspace 1
+exec kitty
 
-for_window [class="angrysearch.py" instance="angrysearch"] floating enable
-for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
-for_window [class="Zenity"] floating enable
-for_window [class="Question"] floating enable
+# window assigments
+assign [class="Signal"] 2
+assign [class="google-chrome-beta"] 3
+assign [class="Google-chrome-beta"] 3
+assign [class="obsidian"] 4
+assign [class="discord"] 5
+assign [class="Steam"] 7
+
 # browser pop-ups
 for_window [window_role="pop-up"] floating enable
 

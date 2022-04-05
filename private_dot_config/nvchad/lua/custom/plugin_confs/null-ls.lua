@@ -16,6 +16,10 @@ local sources = {
 
   -- Python
   b.formatting.autopep8,
+
+  -- Go
+  b.diagnostics.golangci_lint,
+  b.formatting.gofmt,
 }
 
 local M = {}

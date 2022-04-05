@@ -153,6 +153,18 @@ return {
     end,
   },
   {
+    "nvim-telescope/telescope-dap.nvim",
+    requires = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension("dap")
+    end,
+  },
+
+  {
     "mfussenegger/nvim-dap", -- debug adapters support
     config = function()
       local dap = require("dap")
@@ -171,6 +183,21 @@ return {
           useBundler = true,
         },
       }
+      dap.adapters.go = {
+        type = "executable",
+        command = "node",
+        args = { os.getenv("HOME") .. "/vscode-go/dist/debugAdapter.js" },
+      }
+      dap.configurations.go = {
+        {
+          type = "go",
+          name = "Debug",
+          request = "launch",
+          showLog = false,
+          program = "${file}",
+          dlvToolPath = vim.fn.exepath("dlv"), -- Adjust to where delve is installed
+        },
+      }
     end,
   },
   {
@@ -181,4 +208,13 @@ return {
       vim.g.csv_default_delim = ","
     end,
   },
+  { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } },
+  { "leoluz/nvim-dap-go" },
+  {
+    "mfussenegger/nvim-dap-python",
+    config = function()
+      require("dap-python").setup("python3")
+    end,
+  },
+  { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } },
 }
