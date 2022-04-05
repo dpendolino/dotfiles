@@ -54,17 +54,15 @@ return {
   },
   { "lukas-reineke/cmp-rg" },
   { "lukas-reineke/cmp-under-comparator" },
-  { "hrsh7th/cmp-nvim-lsp-document-symbol" },
+  -- { "hrsh7th/cmp-nvim-lsp-document-symbol" },
   { "ray-x/cmp-treesitter" },
   { "hrsh7th/cmp-emoji" },
   { "hrsh7th/cmp-calc" },
-  { "hrsh7th/cmp-nvim-lsp" },
   {
     "iamcco/markdown-preview.nvim",
     run = ":call mkdp#util#install()",
     ft = "markdown",
   },
-  -- { "nathanaelkane/vim-indent-guides" }, -- Highlight indent levels
   {
     "mattn/gist-vim", -- native gist support
     requires = { "mattn/webapi-vim" },
@@ -153,6 +151,17 @@ return {
     end,
   },
   {
+    "nvim-telescope/telescope-dap.nvim", -- dap
+    requires = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension("dap")
+    end,
+  },
+  {
     "mfussenegger/nvim-dap", -- debug adapters support
     config = function()
       local dap = require("dap")
@@ -179,6 +188,48 @@ return {
     config = function()
       vim.g.csv_delim_test = ",;|"
       vim.g.csv_default_delim = ","
+    end,
+  },
+  {
+    "mfussenegger/nvim-dap-python",
+    config = function()
+      require("dap-python").setup("python3")
+    end,
+  },
+  {
+    "suketa/nvim-dap-ruby",
+    config = function()
+      require("dap-ruby").setup()
+    end,
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    requires = { "mfussenegger/nvim-dap" },
+    config = function()
+      require("dapui").setup()
+    end,
+  },
+  { "powerman/vim-plugin-AnsiEsc" }, -- read ansi color escapes
+  {
+    "mrjones2014/smart-splits.nvim",
+    config = function()
+      require("smart-splits").ignored_buftypes = { "NvimTree" }
+      require("smart-splits").ignored_filetypes = {
+        "nofile",
+        "quickfix",
+        "prompt",
+      }
+      -- recommended mappings
+      -- resizing splits
+      vim.keymap.set("n", "<A-h>", require("smart-splits").resize_left)
+      vim.keymap.set("n", "<A-j>", require("smart-splits").resize_down)
+      vim.keymap.set("n", "<A-k>", require("smart-splits").resize_up)
+      vim.keymap.set("n", "<A-l>", require("smart-splits").resize_right)
+      -- moving between splits
+      vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
+      vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
+      vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
+      vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
     end,
   },
 }

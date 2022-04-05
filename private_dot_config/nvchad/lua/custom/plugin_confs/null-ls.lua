@@ -18,7 +18,8 @@ local sources = {
   b.formatting.autopep8,
 
   -- Ruby
-  b.formatting.rufo,
+  b.diagnostics.rubocop,
+  -- b.formatting.rufo,
 }
 
 local M = {}
