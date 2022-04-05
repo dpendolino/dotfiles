@@ -20,6 +20,10 @@ local sources = {
   -- Go
   b.diagnostics.golangci_lint,
   b.formatting.gofmt,
+
+  -- Ruby
+  b.diagnostics.rubocop,
+  -- b.formatting.rufo,
 }
 
 local M = {}
