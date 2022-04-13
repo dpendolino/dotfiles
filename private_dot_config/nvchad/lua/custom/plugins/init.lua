@@ -263,4 +263,7 @@ return {
       end)
     end,
   },
+  {
+    "dhruvasagar/vim-table-mode",
+  }, -- great Markdown table support
 }
