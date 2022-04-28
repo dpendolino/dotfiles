@@ -12,6 +12,7 @@ map("t", "<Esc>", [[<C-\><C-n>]])
 map("n", "<leader>`", ":lua require('FTerm').toggle()<CR>")
 map("n", "<leader><leader>", ":lua require('FTerm').toggle()<CR>")
 map("n", "gx", [[:execute '!open ' . shellescape(expand('<cfile>'), 1)<CR>]])
+map("n", "<leader>up", ":PackerUpdate <CR>")
 
 map("n", "<leader>dct", '<cmd>lua require"dap".continue()<CR>')
 map("n", "<leader>dsv", '<cmd>lua require"dap".step_over()<CR>')
