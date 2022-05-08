@@ -4,14 +4,16 @@
   name = Daniel Pendolino
   email = {{ .email }}
 [core]
-  editor = vim
+  editor = nvim
 [merge]
-  tool = vimdiff
+  tool = nvimdiff
   conflictstyle = diff3
 [diff]
-  tool = vimdiff2
+  tool = nvimdiff
   conflictstyle = diff3
-  path = nvim
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+  prompt = true
 [color]
   ui = auto
 [submodule]
@@ -25,3 +27,6 @@
   rebase = false
 [github]
   user = {{ .chezmoi.group }}
+[url "git@github.com:"]
+  pushInsteadOf = https://github.com/
+  pushInsteadOf = git://github.com/
