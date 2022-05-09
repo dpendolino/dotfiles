@@ -266,4 +266,5 @@ return {
   {
     "dhruvasagar/vim-table-mode",
   }, -- great Markdown table support
+  { "fatih/vim-go" }, -- go support
 }
