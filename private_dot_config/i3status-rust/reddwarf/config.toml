@@ -52,7 +52,7 @@ block = "custom"
 command = "curl ifconfig.me"
 json = false
 interval = 1000
-on_click = "curl ifconfig.me | wl-copy -p"
+on_click = "curl ifconfig.me || echo Unknown | wl-copy -p"
 
 # [[block]]
 # block = "custom"
