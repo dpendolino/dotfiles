@@ -23,7 +23,6 @@ local sources = {
 
   -- Ruby
   b.diagnostics.rubocop,
-  -- b.formatting.rufo,
 }
 
 local M = {}

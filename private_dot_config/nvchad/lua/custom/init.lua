@@ -3,7 +3,7 @@
 -- this init.lua can load stuffs etc too so treat it like your ~/.config/nvim/
 
 -- MAPPINGS
-local map = require("core.utils").map
+local map = nvchad.map
 
 map("n", "<leader>cc", ":Telescope <CR>")
 map("n", "<leader>q", ":q <CR>")
@@ -111,7 +111,8 @@ vim.opt.smartcase = true
 vim.opt.scrolloff = 4
 
 -- includes
-pcall(require, "custom.autocmds")
+-- pcall(require, "custom.autocmds")
+require("custom.autocmds")
 
 vim.cmd([[
 function! Redir(cmd, rng, start, end)

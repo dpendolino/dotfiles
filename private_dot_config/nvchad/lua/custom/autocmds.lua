@@ -1,4 +1,4 @@
-local settings = require("core.utils").load_config().options.nvChad
+local settings = nvchad.load_config().options.nvChad
 -- uncomment this if you want to open nvim with a dir
 vim.cmd([[ autocmd BufEnter * if &buftype != "terminal" | lcd %:p:h | endif ]])
 
@@ -12,7 +12,7 @@ if not settings.terminal_numbers then
 end
 
 -- Don't show status line on certain windows
-vim.cmd([[ autocmd BufEnter,BufRead,BufWinEnter,FileType,WinEnter * lua require("core.utils").hide_statusline() ]])
+-- vim.cmd([[ autocmd BufEnter,BufRead,BufWinEnter,FileType,WinEnter * lua require("core.utils").hide_statusline() ]])
 
 -- Open a file from its last left off position
 vim.cmd([[ au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif ]])
