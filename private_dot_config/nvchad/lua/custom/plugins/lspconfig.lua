@@ -38,6 +38,7 @@ M.setup_lsp = function(attach, capabilities)
     "sumneko_lua",
     "dockerls",
     "ansiblels",
+    "solargraph",
   }
 
   -- lsp installers
