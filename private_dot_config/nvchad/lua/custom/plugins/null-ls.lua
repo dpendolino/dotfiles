@@ -3,7 +3,7 @@ local b = null_ls.builtins
 
 local sources = {
 
-  b.formatting.prettierd.with({ filetypes = { "html", "markdown", "css" } }),
+  b.formatting.prettierd.with({ filetypes = { "html", "markdown", "css", "yaml" } }),
   b.formatting.deno_fmt,
 
   -- Lua
@@ -23,6 +23,9 @@ local sources = {
 
   -- Ruby
   b.diagnostics.rubocop,
+
+  -- Yaml
+  b.diagnostics.yamllint,
 }
 
 local M = {}
@@ -30,15 +33,15 @@ local M = {}
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local lsp_formatting = function(bufnr)
-    vim.lsp.buf.format({
-        filter = function(clients)
-            -- filter out clients that you don't want to use
-            return vim.tbl_filter(function(client)
-                return client.name ~= "tsserver"
-            end, clients)
-        end,
-        bufnr = bufnr,
-    })
+  vim.lsp.buf.format({
+    filter = function(clients)
+      -- filter out clients that you don't want to use
+      return vim.tbl_filter(function(client)
+        return client.name ~= "tsserver"
+      end, clients)
+    end,
+    bufnr = bufnr,
+  })
 end
 
 M.setup = function()
