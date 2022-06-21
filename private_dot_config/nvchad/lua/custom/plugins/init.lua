@@ -61,12 +61,27 @@ return {
       require("stabilize").setup()
     end,
   },
-  ["lukas-reineke/cmp-rg"] = {},
-  ["lukas-reineke/cmp-under-comparator"] = {},
+  ["lukas-reineke/cmp-rg"] = {
+    after = { "nvim-cmp" },
+    requires = { "nvim-cmp" },
+  },
+  ["lukas-reineke/cmp-under-comparator"] = {
+    after = { "nvim-cmp" },
+    requires = { "nvim-cmp" },
+  },
   -- [ "hrsh7th/cmp-nvim-lsp-document-symbol" ],
-  ["ray-x/cmp-treesitter"] = {},
-  ["hrsh7th/cmp-emoji"] = {},
-  ["hrsh7th/cmp-calc"] = {},
+  ["ray-x/cmp-treesitter"] = {
+    after = { "nvim-cmp" },
+    requires = { "nvim-cmp" },
+  },
+  ["hrsh7th/cmp-emoji"] = {
+    after = { "nvim-cmp" },
+    requires = { "nvim-cmp" },
+  },
+  ["hrsh7th/cmp-calc"] = {
+    after = { "nvim-cmp" },
+    requires = { "nvim-cmp" },
+  },
   ["iamcco/markdown-preview.nvim"] = {
     run = ":call mkdp#util#install()",
     ft = "markdown",
@@ -259,7 +274,9 @@ return {
     end,
   },
   ["dhruvasagar/vim-table-mode"] = {}, -- great Markdown table support
-  ["fatih/vim-go"] = {}, -- go support
+  ["fatih/vim-go"] = {
+    ft = "go",
+  }, -- go support
   ["earthly/earthly.vim"] = {}, -- syntax highlighting for earthly cicd
   ["nvim-treesitter/nvim-treesitter-context"] = {},
 }
