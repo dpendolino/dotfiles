@@ -40,7 +40,7 @@ end
 set -x XDG_RUNTIME_DIR /run/user/(id -u $USER)
 
 # gem path
-set -x GEM_HOME "(ruby -e 'puts Gem.user_dir')"
+set -x GEM_HOME (ruby -e 'puts Gem.user_dir')
 set -x PATH $PATH "$GEM_HOME/bin"
 fish_add_path /opt/homebrew/lib/ruby/gems/3.0.0/bin
 

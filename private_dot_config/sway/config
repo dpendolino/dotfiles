@@ -155,7 +155,6 @@ bindsym $mod+r mode "resize"
 # startup
 exec mako -c $HOME/.config/mako/config >/tmp/mako.log 2>&1
 exec redshift -l 40.5242:-74.3119 -t 5700:3000
-exec vorta --daemonize
 exec /usr/bin/nextcloud
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec copyq --start-server
