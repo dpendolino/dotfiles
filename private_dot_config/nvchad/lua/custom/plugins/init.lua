@@ -279,4 +279,20 @@ return {
   }, -- go support
   ["earthly/earthly.vim"] = {}, -- syntax highlighting for earthly cicd
   ["nvim-treesitter/nvim-treesitter-context"] = {},
+  ["miversen33/netman.nvim"] = {
+    config = function()
+      require("netman")
+    end,
+  },
+  ["nvim-telescope/telescope-file-browser.nvim"] = {
+    requires = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension("file_browser")
+    end,
+
+  },
 }
