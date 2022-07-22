@@ -158,16 +158,6 @@ return {
       require("telescope").load_extension("software-licenses")
     end,
   },
-  ["nvim-telescope/telescope-symbols.nvim"] = { -- easily insert FOSS licenses
-    requires = {
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim",
-    },
-    after = "telescope.nvim",
-    config = function()
-      require("telescope.builtin").symbols({ sources = { "emoji", "kaomoji", "gitmoji" } })
-    end,
-  },
   ["nvim-telescope/telescope-dap.nvim"] = { -- dap
     requires = {
       "nvim-telescope/telescope.nvim",
