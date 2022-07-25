@@ -28,7 +28,7 @@ local sources = {
   b.diagnostics.yamllint,
 
   -- Vale
-  b.diagnostics.vale,
+  b.diagnostics.vale.with({filetypes = { "md", "markdown", "tex", "asciidoc" }}),
 }
 
 local M = {}

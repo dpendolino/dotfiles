@@ -6,7 +6,8 @@ local M = {}
 -- example of changing theme:
 
 M.ui = {
-  theme = "chadracula",
+   theme = "chadracula",
+   theme_toggle = {"chadracula", "gruvchad"}
 }
 
 --[[ M.options = {
