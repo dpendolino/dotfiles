@@ -65,6 +65,7 @@ M.plugins = {
     },
   },
   override = {
+    ["folke/which-key.nvim"] = { disable = false },
     ["nvim-treesitter/nvim-treesitter"] = {
       ensure_installed = {
         "html",

@@ -47,9 +47,7 @@ return {
     end,
   }, -- formatting
   ["folke/which-key.nvim"] = {
-    config = function()
-      require("custom.plugins.which-key").setup()
-    end,
+    disable = false,
   },
   ["nathom/filetype.nvim"] = {
     config = function()
@@ -283,6 +281,5 @@ return {
     config = function()
       require("telescope").load_extension("file_browser")
     end,
-
   },
 }
