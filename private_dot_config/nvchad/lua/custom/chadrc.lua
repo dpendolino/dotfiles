@@ -17,6 +17,9 @@ M.ui = {
 }
  ]]
 
+ -- Mappings
+M.mappings = require "custom.mappings"
+
 -- helper function copied from alpha config
 local function button(sc, txt, keybind)
   local sc_ = sc:gsub("%s", ""):gsub("SPC", "<leader>")
