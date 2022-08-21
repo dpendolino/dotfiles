@@ -6,8 +6,8 @@ local M = {}
 -- example of changing theme:
 
 M.ui = {
-   theme = "chadracula",
-   theme_toggle = {"chadracula", "gruvchad"}
+  theme = "chadracula",
+  theme_toggle = { "chadracula", "gruvchad" },
 }
 
 --[[ M.options = {
@@ -17,8 +17,8 @@ M.ui = {
 }
  ]]
 
- -- Mappings
-M.mappings = require "custom.mappings"
+-- Mappings
+M.mappings = require("custom.mappings")
 
 -- helper function copied from alpha config
 local function button(sc, txt, keybind)
@@ -50,7 +50,7 @@ local function button(sc, txt, keybind)
 end
 
 -- Install plugins
-local userPlugins = require "custom.plugins" -- path to table
+local userPlugins = require("custom.plugins") -- path to table
 M.plugins = {
   user = userPlugins,
   status = {
@@ -108,6 +108,43 @@ M.plugins = {
         { name = "rg" },
         { name = "path" },
         { name = "nvim_lsp_document_symbol" },
+      },
+    },
+    ["neovim/nvim-lspconfig"] = {
+      config = function()
+        require("plugins.configs.lspconfig")
+        require("custom.plugins.lspconfig")
+      end,
+    },
+    ["williamboman/mason.nvim"] = {
+      ensure_installed = {
+        -- lua stuff
+        "lua-language-server",
+        "stylua",
+        -- web dev
+        "css-lsp",
+        "html-lsp",
+        "typescript-language-server",
+        "deno",
+        "emmet-ls",
+        "json-lsp",
+        -- shell
+        "shfmt",
+        "shellcheck",
+        -- python3
+        "pyright",
+        -- misc
+        "clangd",
+        "rust-analyzer",
+        "gopls",
+        "bash-language-server",
+        "yaml-language-server",
+        "terraform-ls",
+        "tflint",
+        "dockerfile-language-server",
+        "ansible-language-server",
+        "solargraph",
+        "marksman",
       },
     },
   },
