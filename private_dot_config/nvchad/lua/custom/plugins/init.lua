@@ -310,4 +310,10 @@ return {
       require("custom.plugins.lspconfig")
     end,
   },
+  ["max397574/better-escape.nvim"] = {
+    event = "InsertEnter",
+    config = function()
+      require("better_escape").setup()
+    end,
+  },
 }
