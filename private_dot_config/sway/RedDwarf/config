@@ -50,7 +50,7 @@ set $locker swaylock-blur
 
 exec swayidle \
   timeout 900 '$locker' \
-  timeout 1200 'systemctl suspend' \
+  timeout 1200 'systemctl suspend-then-hibernate' \
 
 # autostart
 exec  fusuma -c ~/.config/fusuma/config.yml -d
