@@ -48,9 +48,17 @@ set $locker swaylock-blur
 #   timeout 900 'systemctl suspend' \
 #   after-resume 'swaymsg "output * dpms on"'
 
-exec swayidle \
-  timeout 900 '$locker' \
-  timeout 1200 'systemctl suspend-then-hibernate' \
+# timeout 900 '$locker' \
+# exec swayidle \
+#   timeout 1200 'systemctl suspend-then-hibernate'
+
+# https://www.reddit.com/r/swaywm/comments/n344ey/swaylock_alternatives/
+exec swayidle timeout 300 'swaymsg output \* dpms off' \
+	resume 'swaymsg output \* dpms on' \
+	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
+	lock '/home/dpendolino/bin/swaylock-wrapper -sample 20% -modulate 100,50 -blur 1 -sample 500%'
+
+bindsym XF86Sleep exec systemctl suspend
 
 # autostart
 exec  fusuma -c ~/.config/fusuma/config.yml -d
