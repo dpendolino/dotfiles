@@ -64,17 +64,20 @@ bindsym XF86Sleep exec systemctl suspend
 exec  fusuma -c ~/.config/fusuma/config.yml -d
 # exec steam-runtime
 exec discord
-exec obsidian
-exec google-chrome-beta
-exec signal-desktop
+exec obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland
+exec google-chrome-beta --enable-features=UseOzonePlatform --ozone-platform=wayland
+exec signal-desktop --enable-features=UseOzonePlatform --ozone-platform=wayland
 workspace 1
 exec kitty
 
 # window assigments
 assign [class="Signal"] 2
+assign [app_id="signal"] 2
 assign [class="google-chrome-beta"] 3
 assign [class="Google-chrome-beta"] 3
+assign [app_id="google-chrome-beta"] 3
 assign [class="obsidian"] 4
+assign [app_id="Electron"] 4
 assign [class="discord"] 5
 assign [class="Steam"] 7
 
