@@ -1,9 +1,5 @@
 #! /bin/bash
 
-# PS4='+ $(date "+%s.%N")\011 '
-# exec 3>&2 2>/tmp/bashstart.$$.log
-# set -x
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -69,10 +65,8 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias texToOdt='mk4ht oolatex'
 alias pgrep='pgrep -l'
 alias termsize='echo $COLUMNS x $LINES'
-alias t='todo.sh'
 alias dmesg='dmesg -T'
 alias rm='rm -I'
 
@@ -100,8 +94,6 @@ fi
 warn() { printf "$* at line %s file %s: $msg\n" "$(caller)" 1>&2 ; }
 die() { printf "$* at line %s file %s: $msg\n" "$(caller)" 1>&2 ; exit -1; }
 
-export PATH=$PATH:/home/dpendolino/bin:/home/dpendolino/Dropbox/bin:/usr/local/games/trine:/usr/local/games:/home/dpendolino/Dropbox/todo/.todo.actions.d:/home/dpendolino/android-sdk-linux_86/platform-tools
-
 if [ -f /usr/bin/ruby ];then
     export PATH=$PATH:$(ruby -r rubygems -e "puts Gem.user_dir")/bin
 fi
@@ -112,22 +104,10 @@ export VISUAL=vim
 if [ -f /usr/bin/archey3 ];then
     timeout 1 archey3
 fi
-export $(gnome-keyring-daemon --daemonize --start)
-
-# eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
-
-# gnome-keyring for ssh
-SSH_AUTH_SOCK=`ss -xl | grep -o '/run/user/1000/keyring/ssh'`
-[ -z "$SSH_AUTH_SOCK" ] || export SSH_AUTH_SOCK
 
 if [ -d $HOME/.bash-completion.d/ ];then
     for i in $HOME/.bash-completion.d/*;do source $i;done
 fi
-
-
-#ccache
-export USE_CCACHE=1
-export PATH="/usr/lib/ccache/bin/:$PATH"
 
 #http://superuser.com/questions/249293/rename-tmux-window-name-to-prompt-command-ps1-or-remote-ssh-hostname
 settitle() {
@@ -144,8 +124,8 @@ mosh() {
   settitle "bash"
 }
 
-. /usr/share/fzf/key-bindings.bash
-. /usr/share/fzf/completion.bash
+#. /usr/share/fzf/key-bindings.bash
+#. /usr/share/fzf/completion.bash
 
 # Set terminal title to $PWD
 PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
@@ -181,68 +161,30 @@ if [ -f /usr/bin/kubectl ];then
     source <(kubectl completion bash)
 fi
 
-# set +x
-# exec 2>&3 3>&-
-
-gc() {
-    REPO_URL="git@github.com:$1/$2"
-    if [ "${1,,}" == "counterhack" ] || [ "${1,,}" == "chc" ] || [ "${1,,}" == "ch" ]; then
-        pushd $HOME/CHC/git
-        REPO_URL="git@github.com:CounterHack/$2"
-    else
-        pushd $HOME/git
-    fi
-    if [ ! -d "$2" ]; then
-        echo "Cloning git@github.com:$1/$2"
-        git clone "$REPO_URL"
-    else
-        echo "Repo folder already exists!"
-    fi
-
-    if [ "$3" == 'no' ]; then
-        popd
-    else
-        cd "$2"
-    fi
-
-}
-
-# set default browser
-export BROWSER='google-chrome-stable'
-
 # add node_modules to path
 export PATH=$HOME/node_modules/.bin:$PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# Global Packer cache
-export PACKER_CACHE_DIR=/mnt/HeartOfGold/packer_cache
-
 eval $(thefuck --alias)
 
 # source FASD
 source <(fasd --init auto)
-_fasd_bash_hook_cmd_complete v m j o
+# _fasd_bash_hook_cmd_complete v m j o
 
 # Tab complete ssh
 complete -o default -W "`grep -iE "\bhost\b" ~/.ssh/config | awk '{print $2 \" \" $3 \" \" $4 \" \" $5}'`" ssh scp sftp
 
 # add user base to python path
-export PYTHONPATH=$(python -c "import site, os; print(os.path.join(site.USER_BASE, 'lib', 'python', 'site-packages'))"):$PYTHONPATH
+export PYTHONPATH=$(python3 -c "import site, os; print(os.path.join(site.USER_BASE, 'lib', 'python', 'site-packages'))"):$PYTHONPATH
 
 # add .local/bin to path
 export PATH=~/.local/bin:$PATH
 
 # rust
-. <(rustup completions bash cargo)
-. <(rustup completions bash rustup)
+#. <(rustup completions bash cargo)
+#. <(rustup completions bash rustup)
 export PATH=$HOME/.cargo/bin:$PATH
-
-{{ if eq .chezmoi.os "darwin" -}}
-# macOS .bashrc contents
-{{ else if eq .chezmoi.os "linux" -}}
-# Linux .bashrc contents
-{{ end -}}
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"

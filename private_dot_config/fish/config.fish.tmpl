@@ -5,10 +5,9 @@
 fish_add_path /usr/local/bin
 fish_add_path --path /opt/homebrew/bin
 fish_add_path /opt/homebrew/lib/ruby/gems/3.0.0/bin
+fish_add_path $HOME/bin
 
 source ("/opt/homebrew/bin/starship" init fish --print-full-init | psub)
-
-set -x AWS_PROFILE 'autoawsume-springhealth'
 
 # Use GCC
 set -x CC /opt/homebrew/bin/gcc-11
@@ -19,9 +18,13 @@ alias python='python3'
 # alias vim to nvim
 alias vim='nvim'
 
-# netskope
-set -x REQUESTS_CA_BUNDLE '/Library/Application Support/Netskope/STAgent/download/nscacert.pem'
-set -x AWS_CA_BUNDLE "/opt/homebrew/etc/ca-certificates/cert.pem"
+# asdf
+source (brew --prefix asdf)/libexec/asdf.fish
+
+# AWS
+set -x AWS_ASSUME_ROLE_TTL 1h
+set -x AWS_DEFAULT_REGION us-east-1
+set -x AWS_REGION $AWS_DEFAULT_REGION
 
 {{ else if eq .chezmoi.os "linux" -}}
 
@@ -93,3 +96,17 @@ set fish_greeting
 
 # You must call it on initialization or listening to directory switching won't work
 load_nvm &>/dev/null
+
+# load k8s configs
+set -x KUBECONFIG $(find ~/.kube/ \
+    -mindepth 1 \
+    -maxdepth 1 \
+    -type f \
+    ! -name minikube \
+    | sort \
+    | tr '\n' ':' || "")
+
+# bind completion to ->
+bind -k right forward-char
+
+set -x HOMEBREW_CASK_OPTS "--appdir=$HOME/Applications"

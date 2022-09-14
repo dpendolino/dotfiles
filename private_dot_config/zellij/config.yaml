@@ -660,3 +660,6 @@ tabs:
           - direction: Vertical
           - direction: Vertical
       - direction: Horizontal
+ui:
+  pane_frames:
+    rounded_corners: true

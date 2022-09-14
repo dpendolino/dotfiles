@@ -1,93 +1,21 @@
-# Don't print a new line at the start of the prompt
-add_newline = false
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
 
-# format = "$all"
-# Which is equivalent to
-format = """
-$username\
-$hostname\
-$shlvl\
-$kubernetes\
-$directory\
-$git_branch\
-$git_commit\
-$git_state\
-$git_status\
-$hg_branch\
-$docker_context\
-$package\
-$cmake\
-$dart\
-$dotnet\
-$elixir\
-$elm\
-$erlang\
-$golang\
-$helm\
-$java\
-$julia\
-$nim\
-$nodejs\
-$ocaml\
-$perl\
-$php\
-$purescript\
-$python\
-$ruby\
-$rust\
-$swift\
-$terraform\
-$zig\
-$nix_shell\
-$conda\
-$memory_usage\
-$openstack\
-$env_var\
-$crystal\
-$cmd_duration\
-$custom\
-$line_break\
-$lua\
-$jobs\
-$battery\
-$time\
-$status\
-$character"""
-
-# Use custom format
-# format = """
-# [┌───────────────────>](bold green)
-# [│](bold green)$directory$username@$hostname
-# [└─>](bold green) """
+# Inserts a blank line between shell prompts
+add_newline = true
 
 # Replace the "❯" symbol in the prompt with "➜"
-#[character]      # The name of the module we are configuring is "character"
-#success_symbol = "[➜](bold green)"     # The "symbol" segment is being set to "➜"
-#error_symbol = "[✗](bold red) "
-#vicmd_symbol = "[V](bold blue) "
-
+[character] # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
 
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
 
-[battery]
-full_symbol = "🔋"
-charging_symbol = "⚡️"
-discharging_symbol = "💀"
+# Move the directory to the second line
+format = "$all$custom"
 
-[[battery.display]]
-threshold = 10
-style = "bold red"
-
-[directory]
-truncation_length = 8
-use_logical_path = true
-truncate_to_repo	= false
-style = "bold cyan"
-
-# starship.toml
-[custom.rtw]
-command = """ rtw status --format "✓ {ongoing} {human_duration}" """
-when = "test -f ~/.rtw.json"
-shell = ["bash", "--noprofile", "--norc"]
+[custom.aws_role]
+command = """ echo [$CUSTOM_AWS_ROLE] """
+when = """ test -n "$CUSTOM_AWS_ROLE" """
+shell = ["bash", "--noprofile",   "--norc"]

@@ -1,0 +1,129 @@
+#!/usr/bin/env bash
+
+## Config
+accounts="payer:455137758441 mono-production:264606497040 microservices-production:403959985054 microservices-staging:511137358233 sandbox:315470131097 de:796234278274 de-databricks:362378411339 cloudtrail:478313800153 networking:908389915171 turk:603836389069 login:570122222048 it:555665836090 security:855723644670 ops-production:872291601842 ops-staging:054412028596 payments-production:617619454641 payments-staging:715041229838 ipn-walmart-staging:356617028760 ipn-walmart-production:332312054702 ipn-demo-production:780140473728 ipn-demo-staging:646773401426 ipn-platform-staging:069978100522 ipn-platform-production:632400780308 ipn-ibotta-classic-staging:584663930487 ipn-ibotta-classic-production:476483743347 octoshop-platform-staging:954274374756 octoshop-platform-production:876202823579 ipn-dollar-general-staging:453647775770 ipn-dollar-general-production:960222970773"
+role_types="DevOps DevOpsAdmin PlatformEngineer PaymentsEngineer"
+
+shared_profiles="# Atlantis -- see https://ibotta.atlassian.net/l/c/aYfiJDdZ
+[profile atlantis-infra]
+source_profile=devopsadmin-ops-production
+role_arn=arn:aws:iam::455137758441:role/atlantis-infra
+region=us-east-1
+[profile atlantis-payments]
+source_profile=devopsadmin-ops-production
+role_arn=arn:aws:iam::872291601842:role/atlantis/hub/atlantis-payments
+region=us-east-1
+[profile atlantis-microservices]
+source_profile=devopsadmin-ops-production
+role_arn=arn:aws:iam::872291601842:role/atlantis/hub/atlantis-microservices
+region=us-east-1
+[profile atlantis-ipn]
+source_profile=devopsadmin-ops-production
+role_arn=arn:aws:iam::872291601842:role/atlantis/hub/atlantis-ipn
+region=us-east-1
+# STS
+[profile sts-staging]
+source_profile=devopsadmin-microservices-staging
+role_arn=arn:aws:iam::511137358233:role/terraform/service-admin/di/sts-cli-admin
+[profile sts-prod]
+source_profile=devopsadmin-microservices-production
+role_arn=arn:aws:iam::403959985054:role/terraform/service-admin/di/sts-cli-admin
+# MSG
+[profile mgs-prod]
+source_profile=devopsadmin-microservices-production
+role_arn=arn:aws:iam::403959985054:role/terraform/service-admin/di/master-generator-service-admin
+"
+
+## Functions
+function render-shell-template-file() {
+	# Interpret template as a bash heredoc, implicitly expanding variables
+	command=$(echo -e "cat <<COMMANDTEMPLATE
+$(<"${1}")
+COMMANDTEMPLATE
+    ")
+
+	eval "${command}"
+}
+
+function render-shell-template() {
+	render-shell-template-file <(echo "${@}")
+}
+
+function usage() {
+	echo "./$(basename $0) [args]"
+	echo
+	echo "Available arguments:"
+	echo "  -h -- Shows help"
+	echo "  -d -- Debug mode. Prints config to stdout instead of writing to '~/.aws/config'"
+	echo
+	echo "Custom AWS Profiles:"
+	echo "  Custom profiles can be added to a file named '~/.aws/config-gen-postfix'. If this file exists it will"
+	echo "  be appended automatically to the end of the configuration."
+}
+
+## Options
+debug=false
+optstring=":hd"
+while getopts ${optstring} arg; do
+	case ${arg} in
+	h)
+		usage
+		exit
+		;;
+	d)
+		# debug prints to standard out instead of ~/.aws/config
+		debug=true
+		;;
+	:)
+		echo "Must supply an argument to -$OPTARG." >&2
+		exit 1
+		;;
+	?)
+		echo "Invalid option: -${OPTARG}." >&2
+		exit 2
+		;;
+	esac
+done
+
+## Do it!
+
+# redirect to the config file
+if [[ ${debug} != true ]]; then
+	exec >~/.aws/config
+fi
+
+profile_template="[profile \${role_type}-\${account_name}]
+source_profile=saml
+region=us-east-1
+role_arn=arn:aws:iam::\${account_num}:role/\${role_type}
+\$(echo)
+"
+
+### Preamble
+echo "[profile saml]
+role_session_name=${USER}
+region=us-east-1
+aws_account_id=570122222048
+duration_seconds=3600
+"
+
+### Generation
+for role_type in ${role_types}; do
+	echo -e "\n# ${role_type}"
+	for pair in ${accounts}; do
+		# shellcheck disable=SC2034
+		account_name="${pair%%:*}"
+		# shellcheck disable=SC2034
+		account_num="${pair#*:}"
+		render-shell-template "${profile_template}"
+	done
+done
+
+### Shared, non-generated profiles
+echo "${shared_profiles}"
+
+### Include custom user profiles
+if [[ -f ~/.aws/config-gen-postfix ]]; then
+	echo "# custom user profiles from '~/.aws/config-gen-postfix'"
+	cat ~/.aws/config-gen-postfix
+fi

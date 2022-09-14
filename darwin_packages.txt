@@ -1,72 +1,97 @@
-age: Simple, modern, secure file encryption
-ansible: Automate deployment, configuration, and upgrading
-awscli: Official Amazon AWS command-line interface
-awsume: Utility for easily assuming AWS IAM roles from the command-line
-bat: Clone of cat(1) with syntax highlighting and Git integration
-chezmoi: Manage your dotfiles across multiple diverse machines, securely
-coreutils: GNU File, Shell, and Text utilities
-dive: Tool for exploring each layer in a docker image
-docker-ls: Tools for browsing and manipulating docker registries
-emscripten: LLVM bytecode to JavaScript compiler
-exa: Modern replacement for 'ls'
-fasd: CLI tool for quick access to files and directories
-fd: Simple, fast and user-friendly alternative to find
-fish: User-friendly command-line shell for UNIX-like operating systems
-fzf: Command-line fuzzy finder written in Go
-gawk: GNU awk utility
-gcc: GNU compiler collection
-gh: GitHub command-line tool
-gnu-time: GNU implementation of time utility
-go: Open source programming language to build simple/reliable/efficient software
-gopls: Language server for the Go language
-grep: GNU grep, egrep and fgrep
-hexedit: View and edit files in hexadecimal or ASCII
-htop: Improved top (interactive process viewer)
-imagemagick: Tools and libraries to manipulate images in many formats
-ipython: Interactive computing in Python
-jq: Lightweight and flexible command-line JSON processor
-libgcrypt: Cryptographic library based on the code from GnuPG
-libksba: X.509 and CMS library
-libproxy: Library that provides automatic proxy configuration management
-libscrypt: Library for scrypt
-libu2f-host: Host-side of the Universal 2nd Factor (U2F) protocol
-luajit: Just-In-Time Compiler (JIT) for the Lua programming language
-luarocks: Package manager for the Lua programming language
-minikube: Run a Kubernetes cluster locally
-moreutils: Collection of tools that nobody wrote when UNIX was young
-neovim: Ambitious Vim-fork focused on extensibility and agility
-neovim-qt: Neovim GUI, in Qt5
-netcat: Utility for managing network connections
-nghttp2: HTTP/2 C Library
-ninja: Small build system for use with gyp or CMake
-nmap: Port scanning utility for large networks
-nvm: Manage multiple Node.js versions
-openssh: OpenBSD freely-licensed SSH connectivity tools
-postgresql: Object-relational database system
-pre-commit: Framework for managing multi-language pre-commit hooks
-pv: Monitor data's progress through a pipe
-qt: Cross-platform application and UI framework
-redis: Persistent key-value database, with built-in net interface
-ripgrep: Search tool like grep and The Silver Searcher
-rsync: Utility that provides fast incremental file transfer
-rust: Safe, concurrent, practical language
-rust-analyzer: Experimental Rust compiler front-end for IDEs
-rustup-init: Rust toolchain installer
-shellcheck: Static analysis and lint tool, for (ba)sh scripts
-ssllabs-scan: This tool is a command-line client for the SSL Labs APIs
-starship: Cross-shell prompt for astronauts
-subversion: Version control system designed to be a better CVS
-terminal-notifier: Send macOS User Notifications from the command-line
-terraform: Tool to build, change, and version infrastructure
-terraform-ls: Terraform Language Server
-tflint: Linter for Terraform files
-thefuck: Programmatically correct mistyped console commands
-tmux: Terminal multiplexer
-tree: Display directories as trees (with optional color/HTML output)
-tree-sitter: Parser generator tool and incremental parsing library
-universal-ctags: Maintained ctags implementation
-up: Tool for writing command-line pipes with instant live preview
-wget: Internet file retriever
-yarn: JavaScript package manager
-yq: Process YAML documents from the CLI
-zlib: General-purpose lossless data-compression library
+
+age
+apr
+apr-util
+asdf
+autoconf
+automake
+awscli
+bat
+bdw-gc
+brotli
+ca-certificates
+chezmoi
+cmake
+coreutils
+curl
+fasd
+fd
+fish
+fzf
+gcc@11
+gdbm
+gettext
+gh
+gmp
+gnupg
+gnutls
+go
+guile
+htop
+isl
+lastpass-cli
+libassuan
+libevent
+libgcrypt
+libgpg-error
+libidn2
+libksba
+libmpc
+libnghttp2
+libssh2
+libtasn1
+libtermkey
+libtool
+libunistring
+libusb
+libuv
+libyaml
+lua
+luajit
+luarocks
+luv
+lz4
+m4
+mpdecimal
+mpfr
+msgpack
+ncurses
+neovim
+netcat
+nettle
+npth
+nvm
+openldap
+openssl@1.1
+p11-kit
+pcre2
+pinentry
+pkg-config
+popt
+python@3.10
+readline
+ripgrep
+rsync
+rtmpdump
+saml2aws
+six
+sqlite
+starship
+subversion
+thefuck
+tmux
+tree-sitter
+unbound
+unibilium
+unixodbc
+utf8proc
+xxhash
+xz
+zellij
+zstd
+font-fira-code-nerd-font
+font-fira-mono-for-powerline
+font-fira-mono-nerd-font
+gpg-suite-no-mail
+maccy
+rectangle
