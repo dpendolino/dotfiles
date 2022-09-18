@@ -59,6 +59,22 @@ return {
       require("stabilize").setup()
     end,
   },
+  ["hrsh7th/nvim-cmp"] = {
+    override_options = {
+      sources = {
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "nvim_lua" },
+        { name = "emoji" },
+        { name = "treesitter" },
+        { name = "calc" },
+        { name = "rg" },
+        { name = "path" },
+        { name = "nvim_lsp_document_symbol" },
+      },
+    },
+  },
   ["lukas-reineke/cmp-rg"] = {
     after = { "nvim-cmp" },
     requires = { "nvim-cmp" },
@@ -283,25 +299,36 @@ return {
     end,
   },
   ["williamboman/mason.nvim"] = {
-    ensure_installed = {
-      -- lua stuff
-      "lua-language-server",
-      "stylua",
-
-      -- web dev
-      "css-lsp",
-      "html-lsp",
-      "typescript-language-server",
-      "deno",
-      "emmet-ls",
-      "json-lsp",
-
-      -- shell
-      "shfmt",
-      "shellcheck",
-
-      -- python3
-      "pyright",
+    override_options = {
+      ensure_installed = {
+        -- lua stuff
+        "lua-language-server",
+        "stylua",
+        -- web dev
+        "css-lsp",
+        "html-lsp",
+        "typescript-language-server",
+        "deno",
+        "emmet-ls",
+        "json-lsp",
+        -- shell
+        "shfmt",
+        "shellcheck",
+        -- python3
+        "pyright",
+        -- misc
+        "clangd",
+        "rust-analyzer",
+        "gopls",
+        "bash-language-server",
+        "yaml-language-server",
+        "terraform-ls",
+        "tflint",
+        "dockerfile-language-server",
+        "ansible-language-server",
+        "solargraph",
+        "marksman",
+      },
     },
   },
   ["neovim/nvim-lspconfig"] = {
@@ -315,5 +342,16 @@ return {
     config = function()
       require("better_escape").setup()
     end,
+  },
+  ["nvim-treesitter/nvim-treesitter"] = {
+    override_options = {
+      ensure_installed = {
+        "html",
+        "css",
+        "python",
+        "go",
+        "yaml",
+      },
+    },
   },
 }

@@ -28,7 +28,7 @@ local sources = {
   b.diagnostics.yamllint,
 
   -- Vale
-  b.diagnostics.vale.with({filetypes = { "md", "markdown", "tex", "asciidoc" }}),
+  b.diagnostics.vale.with({ filetypes = { "md", "markdown", "tex", "asciidoc" } }),
 }
 
 local M = {}
@@ -76,7 +76,7 @@ M.setup = function()
             scope = "cursor",
           }
           vim.diagnostic.open_float(nil, opts)
-        end
+        end,
       })
     end,
   })
