@@ -28,7 +28,10 @@ local sources = {
   b.diagnostics.yamllint,
 
   -- Vale
-  b.diagnostics.vale.with({filetypes = { "md", "markdown", "tex", "asciidoc" }}),
+  b.diagnostics.vale.with({ filetypes = { "md", "markdown", "tex", "asciidoc" } }),
+
+  -- Terraform
+  b.formatting.terraform_fmt,
 }
 
 local M = {}
@@ -76,7 +79,7 @@ M.setup = function()
             scope = "cursor",
           }
           vim.diagnostic.open_float(nil, opts)
-        end
+        end,
       })
     end,
   })

@@ -68,7 +68,7 @@ M.plugins = {
     },
   },
   override = {
-    ["folke/which-key.nvim"] = { disable = false },
+    -- ["folke/which-key.nvim"] = { disable = false },
     ["nvim-treesitter/nvim-treesitter"] = {
       ensure_installed = {
         "html",
@@ -76,6 +76,7 @@ M.plugins = {
         "python",
         "go",
         "yaml",
+        "hcl"
       },
     },
     ["goolord/alpha-nvim"] = {

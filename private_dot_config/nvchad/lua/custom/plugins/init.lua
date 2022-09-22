@@ -16,11 +16,30 @@ return {
 			cmd = "Glow"
 		end,
 	},
-	["b3nj5m1n/kommentary"] = {}, -- Simple plugins can be specified as strings
+	["b3nj5m1n/kommentary"] = {
+		config = function()
+			require("kommentary.config").configure_language("tf", {
+				single_line_comment_string = "#",
+				multi_line_comment_strings = "auto",
+				hook_function = function()
+					require("ts_context_commentstring.internal").update_commentstring()
+				end,
+			})
+		end,
+	}, -- Simple plugins can be specified as strings
 	["ekickx/clipboard-image.nvim"] = {}, -- paste images into neovim
 	["rhysd/git-messenger.vim"] = {},
 	["svermeulen/vimpeccable"] = {}, -- convenient lua functions
-	["JoosepAlviste/nvim-ts-context-commentstring"] = {},
+	["JoosepAlviste/nvim-ts-context-commentstring"] = {
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				context_commentstring = {
+					enable = true,
+					enable_autocmd = false,
+				},
+			})
+		end,
+	},
 	["ekalinin/Dockerfile.vim"] = {}, -- Vim syntax file for Docker's Dockerfile and snippets for snipMate.
 	["junegunn/vim-peekaboo"] = {},
 	["nacro90/numb.nvim"] = {}, -- peek go to line
@@ -281,6 +300,56 @@ return {
 		event = "InsertEnter",
 		config = function()
 			require("better_escape").setup()
+		end,
+	},
+	["nathom/filetype.nvim"] = {
+		config = function()
+			-- In init.lua or filetype.nvim's config file
+			require("filetype").setup({
+				overrides = {
+					extensions = {
+						-- Set the filetype of *.pn files to potion
+						pn = "potion",
+					},
+					literal = {
+						-- Set the filetype of files named "MyBackupFile" to lua
+						MyBackupFile = "lua",
+					},
+					complex = {
+						-- Set the filetype of any full filename matching the regex to gitconfig
+						[".*git/config"] = "gitconfig", -- Included in the plugin
+					},
+
+					-- The same as the ones above except the keys map to functions
+					function_extensions = {
+						["cpp"] = function()
+							vim.bo.filetype = "cpp"
+							-- Remove annoying indent jumping
+							vim.bo.cinoptions = vim.bo.cinoptions .. "L0"
+						end,
+						["pdf"] = function()
+							vim.bo.filetype = "pdf"
+							-- Open in PDF viewer (Skim.app) automatically
+							vim.fn.jobstart("open -a skim " .. '"' .. vim.fn.expand("%") .. '"')
+						end,
+					},
+					function_literal = {
+						Brewfile = function()
+							vim.cmd("syntax off")
+						end,
+					},
+					function_complex = {
+						["*.math_notes/%w+"] = function()
+							vim.cmd("iabbrev $ $$")
+						end,
+					},
+
+					shebang = {
+						-- Set the filetype of files with a dash shebang to sh
+						dash = "sh",
+					},
+				},
+			})
 		end,
 	},
 }

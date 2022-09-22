@@ -23,6 +23,7 @@
   gpgsign = true
 [alias]
   root = !pwd
+  edit = !$EDITOR $(git status --porcelain | awk '{print $2}')
 [pull]
   rebase = false
 [github]
