@@ -9,6 +9,7 @@ M.setup = function()
         -- Set the filetype of *.pn files to potion
         pn = "potion",
         har = "json",
+        tf = "terraform",
       },
       literal = {
         -- Set the filetype of files named "MyBackupFile" to lua

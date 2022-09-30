@@ -29,23 +29,14 @@ local sources = {
 
   -- Vale
   b.diagnostics.vale.with({ filetypes = { "md", "markdown", "tex", "asciidoc" } }),
+
+  -- Terraform
+  b.formatting.terraform_fmt,
 }
 
 local M = {}
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-local lsp_formatting = function(bufnr)
-  vim.lsp.buf.format({
-    filter = function(clients)
-      -- filter out clients that you don't want to use
-      return vim.tbl_filter(function(client)
-        return client.name ~= "tsserver"
-      end, clients)
-    end,
-    bufnr = bufnr,
-  })
-end
 
 M.setup = function()
   null_ls.setup({
@@ -60,7 +51,7 @@ M.setup = function()
           group = augroup,
           buffer = bufnr,
           callback = function()
-            lsp_formatting(bufnr)
+            vim.lsp.buf.format({ bufnr = bufnr })
           end,
         })
       end

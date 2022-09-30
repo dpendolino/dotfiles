@@ -16,7 +16,7 @@ return {
       cmd = "Glow"
     end,
   },
-  ["b3nj5m1n/kommentary"] = {}, -- Simple plugins can be specified as strings
+  -- ["b3nj5m1n/kommentary"] = {}, -- Simple plugins can be specified as strings
   ["ekickx/clipboard-image.nvim"] = {}, -- paste images into neovim
   ["rhysd/git-messenger.vim"] = {},
   ["svermeulen/vimpeccable"] = {}, -- convenient lua functions
@@ -116,52 +116,6 @@ return {
     end,
   },
   ["tpope/vim-fugitive"] = {}, -- git ops
-  ["nvim-neorg/neorg"] = {
-    config = function()
-      require("neorg").setup({
-        load = {
-          ["core.defaults"] = {},
-          ["core.gtd.base"] = {
-            config = { -- Note that this table is optional and doesn't need to be provided
-              -- Configuration here
-              workspace = "home",
-            },
-          },
-          ["core.norg.journal"] = {
-            config = { -- Note that this table is optional and doesn't need to be provided
-              -- Configuration here
-            },
-          },
-          ["core.norg.dirman"] = {
-            config = {
-              workspaces = {
-                work = "/home/dpendolino/notes/work",
-                home = "/home/dpendolino/notes/home",
-              },
-              autochdir = true, -- Automatically change the directory to the current workspace's root every time
-              index = "index.norg", -- The name of the main (root) .norg file
-            },
-          },
-          ["core.norg.concealer"] = {
-            config = { -- Note that this table is optional and doesn't need to be provided
-              -- Configuration here
-            },
-          },
-          ["core.norg.qol.toc"] = {
-            config = { -- Note that this table is optional and doesn't need to be provided
-              -- Configuration here
-            },
-          },
-          ["core.norg.completion"] = {
-            config = { -- Note that this table is optional and doesn't need to be provided
-              -- Configuration here
-            },
-          },
-        },
-      })
-    end,
-    requires = "nvim-lua/plenary.nvim",
-  },
   ["chip/telescope-software-licenses.nvim"] = { -- easily insert FOSS licenses
     requires = {
       "nvim-telescope/telescope.nvim",
@@ -283,11 +237,6 @@ return {
   }, -- go support
   ["earthly/earthly.vim"] = {}, -- syntax highlighting for earthly cicd
   ["nvim-treesitter/nvim-treesitter-context"] = {},
-  ["miversen33/netman.nvim"] = {
-    config = function()
-      require("netman")
-    end,
-  },
   ["nvim-telescope/telescope-file-browser.nvim"] = {
     requires = {
       "nvim-telescope/telescope.nvim",
@@ -351,6 +300,13 @@ return {
         "python",
         "go",
         "yaml",
+      },
+    },
+  },
+  ["kyazdani42/nvim-tree.lua"] = {
+    override_options = {
+      config = {
+        open_on_setup = true,
       },
     },
   },
