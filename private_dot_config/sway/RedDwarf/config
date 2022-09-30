@@ -53,15 +53,21 @@ set $locker swaylock-blur
 #   timeout 1200 'systemctl suspend-then-hibernate'
 
 # https://www.reddit.com/r/swaywm/comments/n344ey/swaylock_alternatives/
+# exec swayidle timeout 300 'swaymsg output \* dpms off' \
+# 	resume 'swaymsg output \* dpms on' \
+# 	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
+# 	lock '/home/dpendolino/bin/swaylock-wrapper -sample 20% -modulate 100,50 -blur 1 -sample 500%'
+
 exec swayidle timeout 300 'swaymsg output \* dpms off' \
 	resume 'swaymsg output \* dpms on' \
-	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
-	lock '/home/dpendolino/bin/swaylock-wrapper -sample 20% -modulate 100,50 -blur 1 -sample 500%'
+ 	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
+  lock 'swaylock-blur'
 
 bindsym XF86Sleep exec systemctl suspend
 
 # autostart
 exec  fusuma -c ~/.config/fusuma/config.yml -d
+exec dex -ae sway
 # exec steam-runtime
 exec discord
 exec obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland
