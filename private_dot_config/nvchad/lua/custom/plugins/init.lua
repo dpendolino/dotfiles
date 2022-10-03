@@ -295,16 +295,30 @@ return {
 	["nvim-treesitter/nvim-treesitter"] = {
 		override_options = {
 			ensure_installed = {
-				"html",
 				"css",
-				"python",
 				"go",
-				"yaml",
 				"hcl",
-				"ruby",
+				"html",
 				"json",
+				"python",
+				"ruby",
+				"yaml",
+				"bash",
+				"fish",
+				"java",
+				"markdown",
+				"rust",
+				"toml",
+				"typescript",
 			},
 		},
 	},
-	["farmergreg/vim-lastplace"] = {},
+	["farmergreg/vim-lastplace"] = {}, -- restore cursor position with smarts
+	["elihunter173/dirbuf.nvim"] = {
+		config = function()
+			require("nvim-tree").setup({
+				update_to_buf_dir = { enable = false },
+			})
+		end,
+	},
 }
