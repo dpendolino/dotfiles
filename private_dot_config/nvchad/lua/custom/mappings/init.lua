@@ -12,43 +12,43 @@ local M = {}
 
 M.general = {
 
-	n = {
-		["<C-n>"] = { "<cmd> Telescope <CR>", "Open Telescope" },
-		["<leader>cc"] = { "<cmd> Telescope <CR>", "Open Telescope" },
-		["<leader>o"] = { "<cmd> MarkdownPreview <CR>", "Render Markdown in Browser" }, -- TODO: set mapping on markdown files only
-		["gx"] = { '<cmd> execute "!open " . shellescape(expand("<cfile>"), 1)<CR>', "Open file under cursor" },
-		["<leader>up"] = { "<cmd> PackerUpdate <CR>", "Run PackerUpdate" },
-		["<leader>us"] = { "<cmd> PackerSync <CR>", "Run PackerSync" },
-		["<leader>uc"] = { "<cmd> PackerCompile <CR>", "Run PackerCompile" },
-		["<leader>`"] = { "<cmd> lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
-		["<leader><leader>"] = { "<cmd> lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
-	},
+  n = {
+    ["<C-n>"] = { "<cmd> Telescope <CR>", "Open Telescope" },
+    ["<leader>cc"] = { "<cmd> Telescope <CR>", "Open Telescope" },
+    ["<leader>o"] = { "<cmd> MarkdownPreview <CR>", "Render Markdown in Browser" }, -- TODO: set mapping on markdown files only
+    ["gx"] = { '<cmd> execute "!open " . shellescape(expand("<cfile>"), 1)<CR>', "Open file under cursor" },
+    ["<leader>up"] = { "<cmd> PackerUpdate <CR>", "Run PackerUpdate" },
+    ["<leader>us"] = { "<cmd> PackerSync <CR>", "Run PackerSync" },
+    ["<leader>uc"] = { "<cmd> PackerCompile <CR>", "Run PackerCompile" },
+    ["<leader>`"] = { "<cmd> lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
+    ["<leader><leader>"] = { "<cmd> lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
+  },
 
-	i = {
-		-- more keys!
-	},
+  i = {
+    -- more keys!
+  },
 
-	t = { ["<ESC>"] = { 'termcodes "<C-\\><C-N>"', "escape terminal mode" } },
+  t = { ["<ESC>"] = { 'termcodes "<C-\\><C-N>"', "escape terminal mode" } },
 }
 
 M.git = {
-	n = {
-		["<leader>gbf"] = { "<cmd> Git blame <CR>", "Git blame entire file" },
-		["<leader>gbl"] = { "<cmd> Gitsigns blame_line <CR>", "Git blame line" },
-		["<leader>gd"] = { "<cmd> Gitsigns diffthis <CR>", "Gitsigns diffthis" },
-	},
+  n = {
+    ["<leader>gbf"] = { "<cmd> Git blame <CR>", "Git blame entire file" },
+    ["<leader>gbl"] = { "<cmd> Gitsigns blame_line <CR>", "Git blame line" },
+    ["<leader>gd"] = { "<cmd> Gitsigns diffthis <CR>", "Gitsigns diffthis" },
+  },
 }
 
 M.lsp = {
-	n = {
-		["<leader>lf"] = { "<cmd> lua vim.lsp.buf.format() <CR>", "Format Buffer" },
-	},
+  n = {
+    ["<leader>lf"] = { "<cmd> lua vim.lsp.buf.format() <CR>", "Format Buffer" },
+  },
 }
 
 M.hop = {
-	n = {
-		["<leader>hp"] = { "<cmd> HopPattern <CR>", "HopPattern" },
-	},
+  n = {
+    ["<leader>hp"] = { "<cmd> HopPattern <CR>", "HopPattern" },
+  },
 }
 
 return M

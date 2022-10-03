@@ -1,5 +1,5 @@
 if status is-interactive
-  set -x ZELLIJ_AUTO_ATTACH true
+  #set -x ZELLIJ_AUTO_ATTACH false
 
-  eval (zellij setup --generate-auto-start fish | string collect)
+  #eval (zellij setup --generate-auto-start fish | string collect)
 end
