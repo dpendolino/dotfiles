@@ -222,7 +222,7 @@ return {
     config = 'require("trevj").setup()', -- optional call for configurating non-default filetypes etc
 
     -- uncomment if you want to lazy load
-    -- module = 'trevj',
+    module = "trevj",
 
     -- an example for configuring a keybind, can also be done by filetype
     setup = function()
@@ -295,19 +295,24 @@ return {
   ["nvim-treesitter/nvim-treesitter"] = {
     override_options = {
       ensure_installed = {
-        "html",
+        "bash",
         "css",
-        "python",
+        "fish",
         "go",
+        "hcl",
+        "html",
+        "java",
+        "json",
+        "markdown",
+        "python",
+        "ruby",
+        "rust",
+        "toml",
+        "typescript",
         "yaml",
       },
     },
   },
-  ["kyazdani42/nvim-tree.lua"] = {
-    override_options = {
-      config = {
-        open_on_setup = true,
-      },
-    },
-  },
+  ["farmergreg/vim-lastplace"] = {}, -- restore cursor position with smarts
+  ["elihunter173/dirbuf.nvim"] = {},
 }
