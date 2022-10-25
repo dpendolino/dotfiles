@@ -38,7 +38,7 @@ bindsym $mod+Shift+t exec nautilus $(swaycwd)
 bindsym $mod+Shift+q kill
 
 # start rofi
-bindsym $mod+d exec rofi -show drun
+bindsym $mod+d exec wofi --show drun
 
 # start buku_run
 bindsym $mod+b exec buku_run
