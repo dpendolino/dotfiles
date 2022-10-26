@@ -12,6 +12,9 @@
   reddwarfborgpassphrase = {{ (bitwarden "item" "RedDwarf Borg Passphrase").login.password | quote }}
   gitsignkey = "E1E86874BF7C1E0398A8507414F0F811CEFBA1D9"
   {{- end }}
+  {{- if eq .chezmoi.hostname "prometheus" }}
+  gitsignkey = "E1E86874BF7C1E0398A8507414F0F811CEFBA1D9"
+  {{- end }}
 encryption = "age"
 [age]
   identity = "{{- .chezmoi.homeDir }}/key.txt"
