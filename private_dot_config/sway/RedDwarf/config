@@ -61,8 +61,8 @@ set $locker swaylock-blur
 
 exec swayidle timeout 300 'swaymsg output \* dpms off' \
 	resume 'swaymsg output \* dpms on' \
- 	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
-  lock 'swaylock-blur'
+  lock 'swaylock-blur' \
+  after-resume 'swaylock-blur'
 
 bindsym XF86Sleep exec systemctl suspend
 
