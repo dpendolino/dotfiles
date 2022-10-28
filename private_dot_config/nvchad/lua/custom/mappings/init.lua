@@ -28,7 +28,8 @@ M.general = {
     -- more keys!
   },
 
-  t = { ["<ESC>"] = { 'termcodes "<C-\\><C-N>"', "escape terminal mode" } },
+  -- t = { ["<ESC>"] = { 'termcodes "<C-\\><C-N>"', "escape terminal mode" } },
+  t = { ["<ESC>"] = { "<C-\\><C-n>", "escape terminal mode" } },
 }
 
 M.git = {
