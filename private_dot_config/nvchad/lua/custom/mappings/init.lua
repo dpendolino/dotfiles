@@ -52,6 +52,12 @@ M.hop = {
   },
 }
 
+M.telescope = {
+  n = {
+    ["<leader>tp"] = { "<cmd> Telescope projects <CR>", "Telescope projects" },
+  },
+}
+
 return M
 
 --[[ map("n", "<leader>dct", '<cmd>lua require"dap".continue()<CR>')
