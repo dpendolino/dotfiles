@@ -314,11 +314,76 @@ return {
     },
   },
   ["farmergreg/vim-lastplace"] = {}, -- restore cursor position with smarts
-  ["elihunter173/dirbuf.nvim"] = {
+  ["elihunter173/dirbuf.nvim"] = {},
+  ["phelipetls/jsonpath.nvim"] = {},
+  ["hkupty/iron.nvim"] = {
     config = function()
-      require("nvim-tree").setup({
-        update_to_buf_dir = { enable = false },
+      require("iron.core").setup({
+        config = {
+          -- Whether a repl should be discarded or not
+          scratch_repl = true,
+          -- Your repl definitions come here
+          repl_definition = {
+            sh = {
+              command = { "fish" },
+            },
+          },
+          -- How the repl window will be displayed
+          -- See below for more information
+          repl_open_cmd = require("iron.view").right("50%"),
+        },
+        -- Iron doesn't set keymaps by default anymore.
+        -- You can set them here or manually add keymaps to the functions in iron.core
+        keymaps = {
+          send_motion = "<space>sc",
+          visual_send = "<space>sc",
+          send_file = "<space>sf",
+          send_line = "<space>sl",
+          send_mark = "<space>sm",
+          mark_motion = "<space>mc",
+          mark_visual = "<space>mc",
+          remove_mark = "<space>md",
+          cr = "<space>s<cr>",
+          interrupt = "<space>s<space>",
+          exit = "<space>sq",
+          clear = "<space>cl",
+        },
+        -- If the highlight is on, you can change how it looks
+        -- For the available options, check nvim_set_hl
+        highlight = {
+          italic = true,
+        },
       })
     end,
+  },
+  ["gorbit99/codewindow.nvim"] = {
+    config = function()
+      local codewindow = require("codewindow")
+      codewindow.setup()
+      codewindow.apply_default_keybinds()
+    end,
+  },
+  ["stevearc/overseer.nvim"] = {
+    config = function()
+      require("overseer").setup()
+    end,
+  },
+  ["edluffy/hologram.nvim"] = {
+    config = function()
+      require("hologram").setup({
+        auto_display = true, -- WIP automatic markdown image display, may be prone to breaking
+      })
+    end,
+  },
+  ["ahmedkhalf/project.nvim"] = {
+    config = function()
+      require("project_nvim").setup({
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+        require("telescope").load_extension("projects"),
+      })
+    end,
+    after = "telescope.nvim",
   },
 }
