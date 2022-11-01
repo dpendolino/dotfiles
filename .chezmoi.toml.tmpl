@@ -12,6 +12,9 @@
   reddwarfborgpassphrase = {{ (bitwarden "item" "RedDwarf Borg Passphrase").login.password | quote }}
   gitsignkey = "E1E86874BF7C1E0398A8507414F0F811CEFBA1D9"
   {{- end }}
+  {{- if eq .chezmoi.hostname "prometheus" }}
+  gitsignkey = "E1E86874BF7C1E0398A8507414F0F811CEFBA1D9"
+  {{- end }}
   {{- if eq .chezmoi.hostname "MACBOOKPRO-GX2KLQW3FG" }}
   gitsignkey = "4E8FE62AD9FBF2D8B0C1061C8E81724987683836"
   {{- end }}

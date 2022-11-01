@@ -1,6 +1,7 @@
 bar {
       font pango:DejaVu Sans Mono, FontAwesome 12
       position bottom
+      swaybar_command waybar
       status_command i3status-rs ~/.config/i3status-rust/reddwarf/config.toml
       height 24
       #tray_output none
@@ -60,12 +61,13 @@ set $locker swaylock-blur
 
 exec swayidle timeout 300 'swaymsg output \* dpms off' \
 	resume 'swaymsg output \* dpms on' \
- 	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
-  lock 'swaylock-blur'
+  lock 'swaylock-blur' \
+  after-resume 'swaylock-blur'
 
 bindsym XF86Sleep exec systemctl suspend
 
 # autostart
+exec nm-applet --indicator
 exec  fusuma -c ~/.config/fusuma/config.yml -d
 exec dex -ae sway
 # exec steam-runtime
