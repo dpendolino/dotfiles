@@ -594,8 +594,8 @@ plugins:
 # Choose the theme that is specified in the themes section.
 # For some examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
 # Default: default
-#theme: default
-theme: dracula
+# theme: default
+# theme: dracula
 
 # Choose the mode that zellij uses when starting up.
 # Default: normal
@@ -638,20 +638,20 @@ mouse_mode: true
 
 # Path to the default editor to use to edit pane scrollbuffer
 # scrollback_editor: /usr/bin/nano
-themes:
-  dracula:
-    fg: [248, 248, 242]
-    bg: [40, 42, 54]
-    black: [0, 0, 0]
-    gray: [68, 71, 90]
-    red: [255, 85, 85]
-    green: [80, 250, 123]
-    yellow: [241, 250, 140]
-    blue: [98, 114, 164]
-    magenta: [255, 121, 198]
-    cyan: [139, 233, 253]
-    white: [255, 255, 255]
-    orange: [255, 184, 108]
+# themes:
+#   dracula:
+#     fg: [248, 248, 242]
+#     bg: [40, 42, 54]
+#     black: [0, 0, 0]
+#     gray: [68, 71, 90]
+#     red: [255, 85, 85]
+#     green: [80, 250, 123]
+#     yellow: [241, 250, 140]
+#     blue: [98, 114, 164]
+#     magenta: [255, 121, 198]
+#     cyan: [139, 233, 253]
+#     white: [255, 255, 255]
+#     orange: [255, 184, 108]
 tabs:
   - direction: Vertical
     parts:
