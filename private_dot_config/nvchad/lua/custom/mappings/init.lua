@@ -37,6 +37,9 @@ M.git = {
     ["<leader>gbf"] = { "<cmd> Git blame <CR>", "Git blame entire file" },
     ["<leader>gbl"] = { "<cmd> Gitsigns blame_line <CR>", "Git blame line" },
     ["<leader>gd"] = { "<cmd> Gitsigns diffthis <CR>", "Gitsigns diffthis" },
+    ["<leader>gp"] = { "<cmd> Git push <CR>", "Git push" },
+    ["<leader>gaf"] = { "<cmd> Git add % <CR>", "Git add current file" },
+    ["<leader>gl"] = { "<cmd> LazyGitCurrentFile <CR>", "LazyGitCurrentFile" },
   },
 }
 
