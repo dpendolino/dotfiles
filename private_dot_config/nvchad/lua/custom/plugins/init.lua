@@ -369,9 +369,10 @@ return {
     end,
   },
   ["edluffy/hologram.nvim"] = {
+    module = "hologram",
     config = function()
       require("hologram").setup({
-        auto_display = true, -- WIP automatic markdown image display, may be prone to breaking
+        auto_display = false, -- WIP automatic markdown image display, may be prone to breaking
       })
     end,
   },
@@ -398,6 +399,26 @@ return {
           { "Foo", "Bar" },
           { "tic", "tac", "toe" },
         },
+      })
+    end,
+  },
+  ["folke/todo-comments.nvim"] = {
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup({
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      })
+    end,
+  },
+  ["folke/trouble.nvim"] = {
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup({
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
       })
     end,
   },
