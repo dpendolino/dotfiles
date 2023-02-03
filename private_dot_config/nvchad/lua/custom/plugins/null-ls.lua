@@ -32,6 +32,9 @@ local sources = {
 
   -- Terraform
   b.formatting.terraform_fmt,
+
+  -- Packer/HCL
+  b.formatting.packer,
 }
 
 local M = {}
