@@ -29,6 +29,8 @@ set -x AWS_ASSUME_ROLE_TTL 1h
 set -x AWS_DEFAULT_REGION us-east-1
 set -x AWS_REGION $AWS_DEFAULT_REGION
 
+steampipe completion fish | source
+
 {{ else if eq .chezmoi.os "linux" -}}
 
 bass source /etc/profile
