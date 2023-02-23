@@ -68,6 +68,7 @@ bindsym XF86Sleep exec systemctl suspend
 
 # autostart
 exec nm-applet --indicator
+exec blueman-applet
 exec  fusuma -c ~/.config/fusuma/config.yml -d
 exec dex -ae sway
 # exec steam-runtime
@@ -77,6 +78,7 @@ exec google-chrome-beta --enable-features=UseOzonePlatform --ozone-platform=wayl
 exec signal-desktop --enable-features=UseOzonePlatform --ozone-platform=wayland
 workspace 1
 exec kitty
+exec /usr/share/swayfx-git/scripts/inactive-windows-transparency.py
 
 # window assigments
 assign [class="Signal"] 2
@@ -85,6 +87,7 @@ assign [class="google-chrome-beta"] 3
 assign [class="Google-chrome-beta"] 3
 assign [app_id="google-chrome-beta"] 3
 assign [class="obsidian"] 4
+assign [app_id="obsidian"] 4
 assign [app_id="Electron"] 4
 assign [class="discord"] 5
 assign [class="Steam"] 7
@@ -148,3 +151,18 @@ focus_follows_mouse no
 set $laptop 'eDP-1'
 bindswitch --reload lid:on output $laptop disable
 bindswitch --reload lid:off output $laptop enable
+
+## SwayFX
+corner_radius 10
+smart_corner_radius on
+# Application saturation: for_window [CRITERIA HERE] saturation <set|plus|minus> <val 0.0 <-> 2.0>
+# Window shadows: ONLY ON SWAYFX-GIT, NOT YET RELEASED
+shadows on
+shadows_on_csd on
+shadow_blur_radius 50
+shadow_color #0000007F
+# Dim unfocused windows:
+default_dim_inactive 0.5
+for_window [app_id="kitty"] dim_inactive 0.5
+dim_inactive_colors.unfocused #000000FF
+dim_inactive_colors.urgent #900000FF
