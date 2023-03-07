@@ -49,11 +49,6 @@ return {
   ["folke/which-key.nvim"] = {
     disable = false,
   },
-  ["nathom/filetype.nvim"] = {
-    config = function()
-      require("custom.plugins.filetype").setup()
-    end,
-  }, -- A fast and lua alternative to filetype.vim. It is ~175x faster than filetype.vim
   ["luukvbaal/stabilize.nvim"] = {
     config = function()
       require("stabilize").setup()

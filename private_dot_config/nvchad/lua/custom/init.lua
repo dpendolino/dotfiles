@@ -42,7 +42,8 @@ map("n", "<leader>df", '<cmd>lua require"telescope".extensions.dap.frames{}<CR>'
 -- NOTE: the 4th argument in the map function is be a table i.e options but its most likely un-needed so dont worry about it
 
 -- Stop sourcing filetype.vim
-vim.g.did_load_filetypes = 1
+vim.g.do_filetype_lua = true
+vim.g.did_load_filetypes = false
 
 --groups of letters with dashes as words
 vim.opt.iskeyword:append({ "-", "+", "=" })
