@@ -6,12 +6,14 @@
   signingkey = {{ .gitsignkey }}
 [core]
   editor = nvim
+  pager = delta
 [merge]
   tool = nvimdiff
   conflictstyle = diff3
 [diff]
   tool = nvimdiff
   conflictstyle = diff3
+  colorMoved = default
 [difftool "nvimdiff"]
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
   prompt = true
@@ -28,7 +30,12 @@
 [pull]
   rebase = false
 [github]
-  user = {{ .chezmoi.group }}
+  user = {{ .github_handle }}
 [url "git@github.com:"]
   pushInsteadOf = https://github.com/
   pushInsteadOf = git://github.com/
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+[interactive]
+    diffFilter = delta --color-only

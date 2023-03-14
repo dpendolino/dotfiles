@@ -8,6 +8,7 @@
 [data]
   email = {{ $email | quote }}
   name = "Daniel Pendolino"
+  github_handle = "dpendolino-ibotta"
   {{- if eq .chezmoi.hostname "RedDwarf" }}
   reddwarfborgpassphrase = {{ (bitwarden "item" "RedDwarf Borg Passphrase").login.password | quote }}
   gitsignkey = "E1E86874BF7C1E0398A8507414F0F811CEFBA1D9"
