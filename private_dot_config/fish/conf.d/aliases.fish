@@ -1,3 +1,6 @@
 alias icat="kitty +kitten icat"
 alias vim="nvim"
 alias cdg="cd (git root)"
+alias s2al="saml2aws login --skip-prompt --session-duration=43200"
+alias s2ae="saml2aws exec --exec-profile"
+alias s2a="saml2aws"
