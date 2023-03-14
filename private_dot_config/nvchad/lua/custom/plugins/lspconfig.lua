@@ -33,7 +33,7 @@ local servers = {
   "terraformls",
   "tflint",
   "eslint",
-  "sumneko_lua",
+  "lua_ls",
   "dockerls",
   "ansiblels",
   "solargraph",
@@ -42,7 +42,7 @@ local servers = {
 
 for _, lsp in ipairs(servers) do
   local filetypes = nil
-  if lsp == "sumneko_lua" then
+  if lsp == "lua_ls" then
     settings = {
       Lua = {
         diagnostics = {
