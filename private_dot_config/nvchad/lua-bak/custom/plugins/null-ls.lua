@@ -27,13 +27,13 @@ local sources = {
   -- Yaml
   b.diagnostics.yamllint,
 
-  -- Vale
+  -- vale
   b.diagnostics.vale.with({ filetypes = { "md", "markdown", "tex", "asciidoc" } }),
 
-  -- Terraform
+  -- terraform
   b.formatting.terraform_fmt,
 
-  -- Packer/HCL
+  -- packer/hcl
   b.formatting.packer,
 }
 

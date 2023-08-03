@@ -1,8 +1,9 @@
 -- custom/plugins/init.lua
 
 return {
-
-  ["elkowar/yuck.vim"] = { ft = "yuck" },
+  ["elkowar/yuck.vim"] = {
+    ft = "yuck",
+  },
   ["NvChad/nvterm"] = {
     config = function()
       pcall("require", "plugins.configs.nvterm")
@@ -16,7 +17,6 @@ return {
       cmd = "Glow"
     end,
   },
-  -- ["b3nj5m1n/kommentary"] = {}, -- Simple plugins can be specified as strings
   ["ekickx/clipboard-image.nvim"] = {}, -- paste images into neovim
   ["rhysd/git-messenger.vim"] = {},
   ["svermeulen/vimpeccable"] = {}, -- convenient lua functions
@@ -363,14 +363,6 @@ return {
       require("overseer").setup()
     end,
   },
-  ["edluffy/hologram.nvim"] = {
-    module = "hologram",
-    config = function()
-      require("hologram").setup({
-        auto_display = false, -- WIP automatic markdown image display, may be prone to breaking
-      })
-    end,
-  },
   ["ahmedkhalf/project.nvim"] = {
     config = function()
       require("project_nvim").setup({
@@ -414,6 +406,41 @@ return {
         -- your configuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
+      })
+    end,
+  },
+  ["giusgad/pets.nvim"] = {
+    requires = {
+      "giusgad/hologram.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("pets").setup({})
+    end,
+  },
+  ["https://git.sr.ht/~whynothugo/lsp_lines.nvim"] = {
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  },
+  ["SmiteshP/nvim-navbuddy"] = {
+    requires = {
+      "neovim/nvim-lspconfig",
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+    },
+  },
+  ["codota/tabnine-nvim"] = {
+    run = "./dl_binaries.sh",
+    config = function()
+      require("tabnine").setup({
+        disable_auto_comment = true,
+        accept_keymap = "<Tab>",
+        dismiss_keymap = "<C-]>",
+        debounce_ms = 800,
+        suggestion_color = { gui = "#808080", cterm = 244 },
+        exclude_filetypes = { "TelescopePrompt" },
+        log_file_path = nil, -- absolute path to Tabnine log file
       })
     end,
   },

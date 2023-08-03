@@ -1,26 +1,41 @@
--- Just an example, supposed to be placed in /lua/custom/
-
+---@type ChadrcConfig
 local M = {}
 
--- make sure you maintain the structure of `core/default_config.lua` here,
--- example of changing theme:
+-- Path to overriding theme and highlights files
+local highlights = require "custom.highlights"
 
 M.ui = {
   theme = "chadracula",
   theme_toggle = { "chadracula", "gruvchad" },
+
+  hl_override = highlights.override,
+  hl_add = highlights.add,
+
+  nvdash = {
+    load_on_startup = true,
+    header = {
+      [[                                    ██████                                    ]],
+      [[                                ████▒▒▒▒▒▒████                                ]],
+      [[                              ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                              ]],
+      [[                            ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                            ]],
+      [[                          ██▒▒▒▒▒▒▒▒    ▒▒▒▒▒▒▒▒                              ]],
+      [[                          ██▒▒▒▒▒▒  ▒▒▓▓▒▒▒▒▒▒  ▓▓▓▓                          ]],
+      [[                          ██▒▒▒▒▒▒  ▒▒▓▓▒▒▒▒▒▒  ▒▒▓▓                          ]],
+      [[                        ██▒▒▒▒▒▒▒▒▒▒    ▒▒▒▒▒▒▒▒    ██                        ]],
+      [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
+      [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
+      [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
+      [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
+      [[                        ██▒▒██▒▒▒▒▒▒██▒▒▒▒▒▒▒▒██▒▒▒▒██                        ]],
+      [[                        ████  ██▒▒██  ██▒▒▒▒██  ██▒▒██                        ]],
+      [[                        ██      ██      ████      ████                        ]],
+    },
+  },
 }
 
---[[ M.options = {
-   user = function()
-      vim.opt.number = true
-   end,
-}
- ]]
+M.plugins = "custom.plugins"
 
--- Mappings
-M.mappings = require("custom.mappings")
-
--- Install plugins
-M.plugins = require("custom.plugins") -- path to table
+-- check core.mappings for table structure
+M.mappings = require "custom.mappings"
 
 return M

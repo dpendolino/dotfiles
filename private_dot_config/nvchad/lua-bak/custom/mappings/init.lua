@@ -11,8 +11,8 @@ local M = {}
  ]]
 
 M.general = {
-
   n = {
+    [";"] = { ":", "enter command mode", opts = { nowait = true } },
     ["<C-n>"] = { "<cmd> Telescope <CR>", "Open Telescope" },
     ["<leader>cc"] = { "<cmd> Telescope <CR>", "Open Telescope" },
     ["<leader>o"] = { "<cmd> MarkdownPreview <CR>", "Render Markdown in Browser" }, -- TODO: set mapping on markdown files only
