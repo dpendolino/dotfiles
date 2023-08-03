@@ -41,7 +41,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec wofi --show drun
 
 # start buku_run
-bindsym $mod+b exec buku_run
+# bindsym $mod+b exec buku_run
 
 # change focus
 bindsym $mod+j focus left
@@ -85,7 +85,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -153,14 +153,12 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # startup
-
-# Notification Daemon
 # exec mako -c $HOME/.config/mako/config >/tmp/mako.log 2>&1
+# Notification Daemon
 exec swaync -c $HOME/.config/sway/swaync/config.json -s $HOME/.config/sway/swaync/style.css
 
 # Toggle control center
 bindsym $mod+Shift+n exec swaync-client -t -sw
-
 exec redshift -l 40.5242:-74.3119 -t 5700:3000
 exec /usr/bin/nextcloud --background
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
