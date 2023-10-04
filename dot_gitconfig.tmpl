@@ -29,6 +29,8 @@
   edit = !$EDITOR $(git status --porcelain | awk '{print $2}')
 [pull]
   rebase = false
+[push]
+	autoSetupRemote = true
 [github]
   user = {{ .github_handle }}
 [url "git@github.com:"]
