@@ -511,5 +511,12 @@ return {
     config = function()
       require("telescope").load_extension("emoji")
     end,
-  }
+  },
+  ["github/copilot.vim"] = {},
+  ["AntonVanAssche/md-headers.nvim"] = {
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
+  ["rktjmp/fwatch.nvim"] = {},
 }
