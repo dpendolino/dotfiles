@@ -75,7 +75,8 @@ exec dex -ae sway
 # exec steam-runtime
 exec discord
 exec obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland
-exec google-chrome-beta --enable-features=UseOzonePlatform --ozone-platform=wayland
+# exec google-chrome-beta --enable-features=UseOzonePlatform --ozone-platform=wayland
+exec firefox
 exec signal-desktop --enable-features=UseOzonePlatform --ozone-platform=wayland
 workspace 1
 exec kitty
@@ -85,6 +86,8 @@ exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSO
 # window assigments
 assign [class="Signal"] 2
 assign [app_id="signal"] 2
+assign [app_id="firefox"] 3
+assign [class="firefox"] 3
 assign [class="google-chrome-beta"] 3
 assign [class="Google-chrome-beta"] 3
 assign [app_id="google-chrome-beta"] 3
