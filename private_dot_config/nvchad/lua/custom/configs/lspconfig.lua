@@ -37,6 +37,7 @@ local servers = {
   "ansiblels",
   "solargraph",
   "marksman",
+  "sqlls",
 }
 
 for _, lsp in ipairs(servers) do
