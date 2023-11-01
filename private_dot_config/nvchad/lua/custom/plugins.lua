@@ -1,4 +1,4 @@
-local overrides = require "custom.configs.overrides"
+local overrides = require("custom.configs.overrides")
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -12,13 +12,13 @@ local plugins = {
       {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
-          require "custom.configs.null-ls"
+          require("custom.configs.null-ls")
         end,
       },
     },
     config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
+      require("plugins.configs.lspconfig")
+      require("custom.configs.lspconfig")
     end, -- Override to setup mason-lspconfig
   },
 
@@ -115,7 +115,11 @@ local plugins = {
   {
     "farmergreg/vim-lastplace", -- restore cursor position with smarts
     lazy = false,
-  }
+  },
+  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" }, -- markdown viewer
+  { "rhysd/git-messenger.vim", lazy = false }, -- view git comments in pop-up
+  { "dominikduda/vim_current_word", lazy = false }, -- highlight current word
+  { "tpope/vim-repeat", lazy = false }, -- better . behavior
 
   -- To make a plugin not be loaded
   -- {
