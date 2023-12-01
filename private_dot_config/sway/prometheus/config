@@ -14,7 +14,8 @@ titlebar_padding 10 10
 bar {
       font pango:DejaVu Sans Mono, FontAwesome 16
       position bottom
-      status_command i3status-rs ~/.config/i3status-rust/prometheus/config-bottom.toml
+      swaybar_command waybar
+      # status_command i3status-rs ~/.config/i3status-rust/prometheus/config-bottom.toml
       mode dock
       # tray_output all
       colors {
@@ -27,24 +28,6 @@ bar {
             urgent_workspace #2f343a #900000 #ffffff
       }
 }
-bar {
-      font pango:DejaVu Sans Mono, FontAwesome 16
-      position top
-      status_command i3status-rs ~/.config/i3status-rust/prometheus/config-top.toml
-      mode dock
-      # tray_output all
-      colors {
-            separator #666666
-            background #222222
-            statusline #dddddd
-            focused_workspace #0088CC #0088CC #ffffff
-            active_workspace #333333 #333333 #ffffff
-            inactive_workspace #333333 #333333 #888888
-            urgent_workspace #2f343a #900000 #ffffff
-      }
-}
-
-
 
 # startup
 exec  mako -c $HOME/.config/mako/config >/tmp/mako.log 2>&1
@@ -89,14 +72,20 @@ gaps outer 3
 # output 'Philips Consumer Electronics Company PHL 288P6L 0x0000013D' mode 3840x2160@59.997002Hz scale 1.5 pos 3960 1000
 
 # output 'Philips Consumer Electronics Company PHL 288P6L 0x000000F5' mode 3840x2160@59.997002Hz transform 270 scale 1.5 pos 0 0
-output 'Philips Consumer Electronics Company PHL 288P6L 0x000000F5' mode 3840x2160@59.997002Hz scale 1.5 pos 0 0
+# output 'Philips Consumer Electronics Company PHL 288P6L 0x000000F5' mode 3840x2160@59.997002Hz scale 1.5 pos 0 0
 
 # 2560x1440
-output 'Samsung Electric Company C27JG5x H4ZN600598' pos 1440 1120 adaptive_sync off
-output 'Philips Consumer Electronics Company PHL 288P6L 0x0000013D' mode 3840x2160@59.997002Hz scale 1.5 pos 4000 1120
+# output 'Samsung Electric Company C27JG5x H4ZN600598' pos 1440 1120 adaptive_sync off
+# output 'Philips Consumer Electronics Company PHL 288P6L 0x0000013D' mode 3840x2160@59.997002Hz scale 1.5 pos 4000 1120
 
+output 'LG Electronics LG ULTRAWIDE 206NTKF7P077' mode 5120x1440@143.979Hz scale 1 pos 0 0 adaptive_sync off subpixel rgb
+
+
+# wallpaper
+set $wallpaper /home/dpendolino/.config/sway/dracula-arch-5120x1440.png
+set $vertical_wallpaper background /home/dpendolino/.config/sway/nord-underwater-8k-vertical.png
 # output "*" background /home/dpendolino/.config/i3/nord.png fill
-output "*" background /home/dpendolino/.config/sway/nord-under-water.png fill
+output "*" background $wallpaper fill
 # output "Philips Consumer Electronics Company PHL 288P6L 0x000000F5" background /home/dpendolino/.config/sway/nord-underwater-8k-vertical.png fill
 
 # configure input devices
@@ -127,8 +116,6 @@ focus_follows_mouse yes
 
 default_border pixel 2
 
-set $wallpaper /home/dpendolino/.config/sway/nord-under-water.png
-set $vertical_wallpaper background /home/dpendolino/.config/sway/nord-underwater-8k-vertical.png
 set $lock swaylock -i $wallpaper
 exec swayidle -w \
 	timeout 3600 'swaymsg "output * dpms off"' \
@@ -137,9 +124,9 @@ exec swayidle -w \
 	before-sleep '$lock -f'
 
 # set up workspaces
-set $samsung $(swaymsg -t get_outputs --raw | jq '. | map(select(.make == "Samsung Electric Company")) | .[0].name' -r)
-set $vertical_monitor $(swaymsg -t get_outputs --raw | jq '. | map(select(.transform == "270")) | .[0].name' -r)
-set $horizontal_l_monitor $(swaymsg -t get_outputs --raw | jq '. | map(select(.transform == "normal")) | .[0].name' -r)
+# set $samsung $(swaymsg -t get_outputs --raw | jq '. | map(select(.make == "Samsung Electric Company")) | .[0].name' -r)
+# set $vertical_monitor $(swaymsg -t get_outputs --raw | jq '. | map(select(.transform == "270")) | .[0].name' -r)
+# set $horizontal_l_monitor $(swaymsg -t get_outputs --raw | jq '. | map(select(.transform == "normal")) | .[0].name' -r)
 #exec_always swaymsg [workspace=1] move output $samsung
 #exec_always swaymsg [workspace=2] move output $vertical_monitor
 #exec_always swaymsg [workspace=3] move output $horizontal_l_monitor
