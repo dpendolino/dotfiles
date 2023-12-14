@@ -1,11 +1,17 @@
+{{- $codespaces:= env "CODESPACES" | not | not -}}
+
 {{- $email := "" -}}
-{{- if (hasKey . "email") -}}
+{{- if $codespaces -}}
+{{-   $email = "dpendolino@gmail.com" -}}
+{{- else if (hasKey . "email") -}}
 {{-   $email = .email -}}
 {{- else -}}
 {{-   $email = promptString "email" -}}
 {{- end -}}
 
 [data]
+  codespaces = {{ $codespaces }}
+  sourceDir = {{ .chezmoi.sourceDir | quote }}
   email = {{ $email | quote }}
   name = "Daniel Pendolino"
   {{- if eq .chezmoi.hostname "RedDwarf" }}
