@@ -57,7 +57,6 @@ M.hop = {
 
 M.telescope = {
   n = {
-    ["<leader>tp"] = { "<cmd> Telescope projects <CR>", "Telescope projects" },
   },
 }
 
