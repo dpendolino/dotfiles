@@ -17,8 +17,7 @@ end
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
-local lspconfig = require("lspconfig")
--- local servers = { "html", "cssls", "clangd", "pyright"}
+local lspconfig = require "lspconfig"
 
 local servers = {
   "clangd",
@@ -38,6 +37,7 @@ local servers = {
   "ansiblels",
   "solargraph",
   "marksman",
+  "sqlls",
 }
 
 for _, lsp in ipairs(servers) do
@@ -72,4 +72,4 @@ for _, lsp in ipairs(servers) do
   })
 end
 
-vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format()' ]])
+vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
