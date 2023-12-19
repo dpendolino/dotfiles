@@ -11,71 +11,71 @@ local M = {}
  ]]
 
 M.general = {
-	n = {
-		[";"] = { ":", "enter command mode", opts = { nowait = true } },
-		["<C-n>"] = { "<cmd> Telescope <CR>", "Open Telescope" },
-		["<leader>cc"] = { "<cmd> Telescope <CR>", "Open Telescope" },
-		["<leader>o"] = { "<cmd> MarkdownPreview <CR>", "Render Markdown in Browser" }, -- TODO: set mapping on markdown files only
-		["gx"] = { '<cmd> execute "!open " . shellescape(expand("<cfile>"), 1)<CR>', "Open file under cursor" },
-		["<leader>up"] = { "<cmd> PackerUpdate <CR>", "Run PackerUpdate" },
-		["<leader>us"] = { "<cmd> PackerSync <CR>", "Run PackerSync" },
-		["<leader>uc"] = { "<cmd> PackerCompile <CR>", "Run PackerCompile" },
-		["<leader>`"] = { "<cmd> lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
-		["<leader><leader>"] = { "<cmd> lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
-	},
+  n = {
+    [";"] = { ":", "enter command mode", opts = { nowait = true } },
+    ["<C-n>"] = { "<cmd> Telescope <CR>", "Open Telescope" },
+    ["<leader>cc"] = { "<cmd> Telescope <CR>", "Open Telescope" },
+    ["<leader>o"] = { "<cmd> MarkdownPreview <CR>", "Render Markdown in Browser" }, -- TODO: set mapping on markdown files only
+    ["gx"] = { '<cmd> execute "!open " . shellescape(expand("<cfile>"), 1)<CR>', "Open file under cursor" },
+    ["<leader>up"] = { "<cmd> PackerUpdate <CR>", "Run PackerUpdate" },
+    ["<leader>us"] = { "<cmd> PackerSync <CR>", "Run PackerSync" },
+    ["<leader>uc"] = { "<cmd> PackerCompile <CR>", "Run PackerCompile" },
+    ["<leader>`"] = { "<cmd> lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
+    ["<leader><leader>"] = { "<cmd> lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
+  },
 
-	i = {
-		-- more keys!
-	},
+  i = {
+    -- more keys!
+  },
 
-	-- t = { ["<ESC>"] = { 'termcodes "<C-\\><C-N>"', "escape terminal mode" } },
-	t = { ["<ESC>"] = { "<C-\\><C-n>", "escape terminal mode" } },
+  -- t = { ["<ESC>"] = { 'termcodes "<C-\\><C-N>"', "escape terminal mode" } },
+  t = { ["<ESC>"] = { "<C-\\><C-n>", "escape terminal mode" } },
 }
 
 M.git = {
-	n = {
-		["<leader>gbf"] = { "<cmd> Git blame <CR>", "Git blame entire file" },
-		["<leader>gbl"] = { "<cmd> Gitsigns blame_line <CR>", "Git blame line" },
-		["<leader>gd"] = { "<cmd> Gitsigns diffthis <CR>", "Gitsigns diffthis" },
-		["<leader>gp"] = { "<cmd> Git push <CR>", "Git push" },
-		["<leader>gaf"] = { "<cmd> Git add % <CR>", "Git add current file" },
-		["<leader>gl"] = { "<cmd> LazyGitCurrentFile <CR>", "LazyGitCurrentFile" },
-	},
+  n = {
+    ["<leader>gbf"] = { "<cmd> Git blame <CR>", "Git blame entire file" },
+    ["<leader>gbl"] = { "<cmd> Gitsigns blame_line <CR>", "Git blame line" },
+    ["<leader>gd"] = { "<cmd> Gitsigns diffthis <CR>", "Gitsigns diffthis" },
+    ["<leader>gp"] = { "<cmd> Git push <CR>", "Git push" },
+    ["<leader>gaf"] = { "<cmd> Git add % <CR>", "Git add current file" },
+    ["<leader>gl"] = { "<cmd> LazyGitCurrentFile <CR>", "LazyGitCurrentFile" },
+  },
 }
 
 M.lsp = {
-	n = {
-		["<leader>lf"] = { "<cmd> lua vim.lsp.buf.format() <CR>", "Format Buffer" },
-	},
+  n = {
+    ["<leader>lf"] = { "<cmd> lua vim.lsp.buf.format() <CR>", "Format Buffer" },
+  },
 }
 
 M.hop = {
-	n = {
-		["<leader>hp"] = { "<cmd> HopPattern <CR>", "HopPattern" },
-	},
+  n = {
+    ["<leader>hp"] = { "<cmd> HopPattern <CR>", "HopPattern" },
+  },
 }
 
 M.telescope = {
-	n = {
-		["<leader>tp"] = { "<cmd> Telescope projects <CR>", "Telescope projects" },
-	},
+  n = {
+    ["<leader>tp"] = { "<cmd> Telescope projects <CR>", "Telescope projects" },
+  },
 }
 
 M.yaml = {
-	n = {
-		["<leader>ys"] = {
-			function()
-				local schema = require("yaml-companion").get_buf_schema(0)
-				if schema then
-					vim.notify(string.format("Schema: %s", schema.result[1].name))
-				else
-					vim.notify("Schema not detected!")
-				end
-			end,
-			desc = "Show the detected YAML Schema",
-		},
-		["<leader>yS"] = { "<cmd>Telescope yaml_schema<cr>", desc = "Set YAML Schem" },
-	},
+  n = {
+    ["<leader>ys"] = {
+      function()
+        local schema = require("yaml-companion").get_buf_schema(0)
+        if schema then
+          vim.notify(string.format("Schema: %s", schema.result[1].name))
+        else
+          vim.notify("Schema not detected!")
+        end
+      end,
+      desc = "Show the detected YAML Schema",
+    },
+    ["<leader>yS"] = { "<cmd>Telescope yaml_schema<cr>", desc = "Set YAML Schem" },
+  },
 }
 return M
 

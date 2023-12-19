@@ -10,15 +10,15 @@ local sources = {
 
   -- webdev stuff
   b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
-  b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } }, -- so prettier works only on these filetypes
+  b.formatting.prettier.with({ filetypes = { "html", "markdown", "css" } }), -- so prettier works only on these filetypes
 
   -- Lua
   b.formatting.stylua,
-  b.diagnostics.luacheck.with { extra_args = { "--global vim" } },
+  b.diagnostics.luacheck.with({ extra_args = { "--global vim" } }),
 
   -- Shell
   b.formatting.shfmt,
-  b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
+  b.diagnostics.shellcheck.with({ diagnostics_format = "#{m} [#{c}]" }),
 
   -- Python
   b.formatting.autopep8,
@@ -37,7 +37,7 @@ local sources = {
   b.formatting.clang_format,
 
   -- vale
-  b.diagnostics.vale.with { filetypes = { "md", "markdown", "tex", "asciidoc" } },
+  b.diagnostics.vale.with({ filetypes = { "md", "markdown", "tex", "asciidoc" } }),
 
   -- terraform
   b.formatting.terraform_fmt,
@@ -49,7 +49,7 @@ local sources = {
   b.diagnostics.actionlint,
 }
 
-null_ls.setup {
+null_ls.setup({
   debug = true,
   sources = sources,
-}
+})
