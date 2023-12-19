@@ -44,6 +44,9 @@ local sources = {
 
   -- packer/hcl
   b.formatting.packer,
+
+  -- GH Actions https://github.com/rhysd/actionlint
+  b.diagnostics.actionlint,
 }
 
 null_ls.setup {

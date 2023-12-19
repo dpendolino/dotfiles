@@ -2,18 +2,18 @@ local M = {}
 
 M.treesitter = {
   ensure_installed = {
-    "vim",
-    "lua",
-    "html",
-    "css",
-    "javascript",
-    "typescript",
-    "tsx",
     "c",
+    "css",
+    "go",
+    "html",
+    "javascript",
+    "lua",
     "markdown",
     "markdown_inline",
     "python",
-    "go",
+    "tsx",
+    "typescript",
+    "vim",
   },
   indent = {
     enable = true,
@@ -25,6 +25,7 @@ M.treesitter = {
 
 M.mason = {
   ensure_installed = {
+    "actionlint",
     "bash-language-server",
     "beautysh",
     "clang-format",

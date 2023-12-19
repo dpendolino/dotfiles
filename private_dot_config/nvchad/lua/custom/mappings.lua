@@ -60,6 +60,22 @@ M.telescope = {
   },
 }
 
+M.yaml = {
+  n = {
+    ["<leader>ys"] = {
+      function()
+        local schema = require("yaml-companion").get_buf_schema(0)
+        if schema then
+          vim.notify(string.format("Schema: %s", schema.result[1].name))
+        else
+          vim.notify("Schema not detected!")
+        end
+      end,
+      desc = "Show the detected YAML Schema",
+    },
+    ["<leader>yS"] = { "<cmd>Telescope yaml_schema<cr>", desc = "Set YAML Schem" },
+  },
+}
 return M
 
 --[[ map("n", "<leader>dct", '<cmd>lua require"dap".continue()<CR>')
