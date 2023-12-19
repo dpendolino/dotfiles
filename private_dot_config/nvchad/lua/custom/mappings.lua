@@ -56,8 +56,7 @@ M.hop = {
 }
 
 M.telescope = {
-  n = {
-  },
+  n = {},
 }
 
 M.yaml = {

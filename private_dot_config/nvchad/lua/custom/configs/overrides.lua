@@ -55,7 +55,7 @@ M.mason = {
     "vale",
     "yaml-language-server",
     "yamllint",
-  }
+  },
 }
 
 -- git support in nvimtree
