@@ -6,6 +6,8 @@
 --   command = "tabdo wincmd =",
 -- })
 --
+{{ if eq .chezmoi.os "darwin" -}}
+-- MacOS .bashrc contents
 -- copilot
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_no_mappings = true
@@ -14,3 +16,4 @@ vim.keymap.set('i', '<S-Right>', 'copilot#Accept("<CR>")', {
   replace_keycodes = false
 })
 vim.g.copilot_assume_mapped = true
+{{ end -}}
