@@ -227,6 +227,13 @@ local plugins = {
       })
     end,
   },
+  {
+  "NvChad/nvterm",
+    config = function ()
+      require("nvterm").setup()
+    end,
+    lazy = false
+  },
   {{ if eq .chezmoi.os "darwin" -}}
   -- MacOS .bashrc contents
   { "github/copilot.vim", lazy = false},
