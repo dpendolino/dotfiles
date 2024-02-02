@@ -3,7 +3,9 @@
   # Please adapt and uncomment the following lines:
   name = Daniel Pendolino
   email = {{ .email }}
+  {{ if .gitsignkey -}}
   signingkey = {{ .gitsignkey }}
+  {{- end }}
 [core]
   editor = nvim
 [merge]
