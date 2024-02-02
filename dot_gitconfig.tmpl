@@ -3,7 +3,7 @@
   # Please adapt and uncomment the following lines:
   name = Daniel Pendolino
   email = {{ .email }}
-  {{ if haskey . "gitsignkey" -}}
+  {{ if hasKey . "gitsignkey" -}}
   signingkey = {{ .gitsignkey }}
   {{- end }}
 [core]
