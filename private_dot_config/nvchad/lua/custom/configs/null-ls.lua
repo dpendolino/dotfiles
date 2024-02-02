@@ -47,6 +47,9 @@ local sources = {
 
   -- GH Actions https://github.com/rhysd/actionlint
   b.diagnostics.actionlint,
+
+  -- nix language
+  b.formatting.nixfmt,
 }
 
 null_ls.setup({

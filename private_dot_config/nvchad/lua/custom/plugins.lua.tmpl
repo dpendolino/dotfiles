@@ -241,6 +241,22 @@ local plugins = {
     end,
     lazy = false
   },
+  {
+    "tris203/hawtkeys.nvim",
+    lazy = false,
+    config = true,
+  },
+  {
+    "nvimdev/lspsaga.nvim",
+    config = function()
+      require('lspsaga').setup({})
+    end,
+    event = 'LspAttach',
+    -- dependencies = {
+    --   "nvim-treesitter/nvim-treesitter",
+    --   "nvim-tree/nvim-web-devicons"
+    -- },
+  },
   {{ if eq .chezmoi.os "darwin" -}}
   -- MacOS .bashrc contents
   { "github/copilot.vim", lazy = false},

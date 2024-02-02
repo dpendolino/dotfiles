@@ -38,6 +38,7 @@ local servers = {
   "solargraph",
   "marksman",
   "sqlls",
+  "rnix"
 }
 
 for _, lsp in ipairs(servers) do
