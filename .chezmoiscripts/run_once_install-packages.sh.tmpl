@@ -1,6 +1,6 @@
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/sh
-sudo pacman -Syy && sudo pacman -S ripgrep git neovim fish --noconfirm
+sudo pacman -Syy && sudo pacman -S ripgrep git neovim fish age --noconfirm
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 {{ else if eq .chezmoi.os "darwin" -}}
