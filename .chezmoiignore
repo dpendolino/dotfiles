@@ -14,5 +14,6 @@ ssh/config_darwin
 {{- if ne .chezmoi.hostname "RedDwarf" }}
 .config/fusuma/
 .ssh/config_linux
+~/bin/borg_backup.sh
 {{- end }}
 install.sh
