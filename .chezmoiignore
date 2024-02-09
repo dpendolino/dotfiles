@@ -13,6 +13,6 @@ ssh/config_darwin
 
 {{- if ne .chezmoi.hostname "RedDwarf" }}
 .config/fusuma/
-ssh/config_linux
+.ssh/config_linux
 {{- end }}
 install.sh
