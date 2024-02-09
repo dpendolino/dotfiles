@@ -1,7 +1,8 @@
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/sh
-sudo pacman -Syy && sudo pacman -S ripgrep git neovim fish age bat archey3 starship --noconfirm
+sudo pacman -Syy && sudo pacman -S ripgrep git neovim fish age bat archey3 starship thefuck fasd ruby gnome-keyring --noconfirm
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish -c 'source - --noninteractive --yes'
+fish -c "omf install"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
