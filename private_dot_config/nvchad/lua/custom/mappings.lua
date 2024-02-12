@@ -14,14 +14,11 @@ M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
     ["<C-n>"] = { "<cmd> Telescope <CR>", "Open Telescope" },
-    ["<leader>cc"] = { "<cmd> Telescope <CR>", "Open Telescope" },
     ["<leader>o"] = { "<cmd> MarkdownPreview <CR>", "Render Markdown in Browser" }, -- TODO: set mapping on markdown files only
     ["gx"] = { '<cmd> execute "!open " . shellescape(expand("<cfile>"), 1)<CR>', "Open file under cursor" },
     ["<leader>up"] = { "<cmd> PackerUpdate <CR>", "Run PackerUpdate" },
     ["<leader>us"] = { "<cmd> PackerSync <CR>", "Run PackerSync" },
     ["<leader>uc"] = { "<cmd> PackerCompile <CR>", "Run PackerCompile" },
-    ["<leader>`"] = { "<cmd> lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
-    ["<leader><leader>"] = { "<cmd> lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
   },
 
   i = {
@@ -57,7 +54,17 @@ M.hop = {
 
 M.telescope = {
   n = {
-    ["<leader>tp"] = { "<cmd> Telescope projects <CR>", "Telescope projects" },
+    ["<leader>cc"] = { "<cmd> Telescope <CR>", "Open Telescope" },
+  },
+}
+
+M.terminal = {
+  n = {
+    ["<leader>`"] = { "<cmd> lua require('nvterm.terminal').toggle 'float' <CR>", "Toggle Floating Terminal" },
+    ["<leader><leader>"] = { "<cmd> lua require('nvterm.terminal').toggle 'float' <CR>", "Toggle Floating Terminal" },
+    ["<leader>tf"] = { "<cmd> lua require('nvterm.terminal').toggle 'float' <CR>", "Toggle Floating Terminal" },
+    ["<leader>th"] = { "<cmd> lua require('nvterm.terminal').toggle 'horizontal' <CR>", "Horizontal Terminal" },
+    ["<leader>tv"] = { "<cmd> lua require('nvterm.terminal').toggle 'vertical' <CR>", "Vertical Terminal" },
   },
 }
 
