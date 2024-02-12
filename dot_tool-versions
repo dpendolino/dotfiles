@@ -1,0 +1,11 @@
+helm                         3
+kubectl                      1.27
+golang                       1
+nodejs                       19
+terraform                    1
+terraform-docs               0
+python                       3.10
+jq                           1
+tfsec                        1
+neovim                       stable
+steampipe                    0
