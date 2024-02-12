@@ -5,5 +5,6 @@ if [ -d ~/.config/nvim ] && [ -d ~/.config/nvchad ]; then
 	fi
 fi
 
-# nvim --headless +qa
+ln -s ~/.config/nvchad/lua/custom ~/.config/nvim/lua/custom
+nvim --headless +qa
 nvim --headless "+Lazy! sync" +qa
