@@ -7,6 +7,17 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Append "$1" to $PATH when not already in.
+# This function API is accessible to scripts in /etc/profile.d
+append_path () {
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH="${PATH:+$PATH:}$1"
+    esac
+}
+
 # Load profiles from /etc/profile.d
 if test -d /etc/profile.d/; then
         for profile in /etc/profile.d/*.sh; do
