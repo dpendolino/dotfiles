@@ -234,8 +234,8 @@ export PYTHONPATH=$(python -c "import site, os; print(os.path.join(site.USER_BAS
 export PATH=~/.local/bin:$PATH
 
 # rust
-. <(rustup completions bash cargo)
-. <(rustup completions bash rustup)
+# . <(rustup completions bash cargo)
+# . <(rustup completions bash rustup)
 export PATH=$HOME/.cargo/bin:$PATH
 
 {{ if eq .chezmoi.os "darwin" -}}
