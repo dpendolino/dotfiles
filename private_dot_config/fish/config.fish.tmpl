@@ -19,15 +19,23 @@ alias vim='nvim'
 
 {{ else if eq .chezmoi.os "linux" -}}
 
-bass source /etc/profile
+if type -q bass
+  bass source /etc/profile
+end
 
-starship init fish | source
+if type -q starship
+  starship init fish | source
+end
 
-# Set SSH to use Gnome keyring
-set -gx SSH_AUTH_SOCK (gnome-keyring-daemon --start --components=pkcs11,secrets,ssh-agent --control-directory=/run/user/(id -u)/keyring | grep "^SSH_AUTH_SOCK" | awk -F "=" '{print $2}')
+if type -q gnome-keyring-daemon
+  # Set SSH to use Gnome keyring
+  set -gx SSH_AUTH_SOCK (gnome-keyring-daemon --start --components=pkcs11,secrets,ssh-agent --control-directory=/run/user/(id -u)/keyring | grep "^SSH_AUTH_SOCK" | awk -F "=" '{print $2}')
+end
 
-function fish_greeting
-  archey3
+if type -q archey3
+  function fish_greeting
+    archey3
+  end
 end
 
 # https://gitlab.gnome.org/GNOME/gnome-keyring/-/issues/28
@@ -36,7 +44,6 @@ set -x XDG_RUNTIME_DIR /run/user/(id -u $USER)
 # gem path
 set -x GEM_HOME (ruby -e 'puts Gem.user_dir')
 set -x PATH $PATH "$GEM_HOME/bin"
-fish_add_path /opt/homebrew/lib/ruby/gems/3.0.0/bin
 
 {{- end }}
 
@@ -55,10 +62,14 @@ set -x PATH $PATH $HOME/.local/bin
 set -x PATH $PATH $HOME/bin
 set -x PATH $PATH $HOME/.cargo/bin/
 
-alias sshf="ssh (rg -i 'Host ' $HOME/.ssh/config | awk '{print $2}' | fzf)"
+if type -q fzf
+  alias sshf="ssh (rg -i 'Host ' $HOME/.ssh/config | awk '{print $2}' | fzf)"
+end
 
-alias cat="bat"
-alias ccat="bat"
+if type -q bat
+  alias cat="bat"
+  alias ccat="bat"
+end
 
 # Global Packer cache
 set -x PACKER_CACHE_DIR $HOME/packer_cache
