@@ -6,7 +6,9 @@ fish_add_path /usr/local/bin
 fish_add_path --path /opt/homebrew/bin
 fish_add_path /opt/homebrew/lib/ruby/gems/3.0.0/bin
 
-source ("/opt/homebrew/bin/starship" init fish --print-full-init | psub)
+if type -q starship
+  source ("/opt/homebrew/bin/starship" init fish --print-full-init | psub)
+end
 
 # Use GCC
 set -x CC /opt/homebrew/bin/gcc-11
@@ -42,15 +44,18 @@ end
 set -x XDG_RUNTIME_DIR /run/user/(id -u $USER)
 
 # gem path
-set -x GEM_HOME (ruby -e 'puts Gem.user_dir')
-set -x PATH $PATH "$GEM_HOME/bin"
+if type -q ruby
+  set -x GEM_HOME (ruby -e 'puts Gem.user_dir')
+  set -x PATH $PATH "$GEM_HOME/bin"
+end
 
 {{- end }}
 
 set -x PATH $PATH $HOME/.cargo/bin/
 
-thefuck --alias oops | source
-
+if type -q thefuck
+  thefuck --alias oops | source
+end
 # set the workspace path
 set -x GOPATH $HOME/go
 
