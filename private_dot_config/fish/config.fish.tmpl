@@ -102,4 +102,6 @@ set -x PATH $PATH $HOME/.rvm/bin
 set fish_greeting
 
 # You must call it on initialization or listening to directory switching won't work
-load_nvm &>/dev/null
+if test -e $HOME/.nvm/nvm.sh
+  load_nvm &>/dev/null
+end
