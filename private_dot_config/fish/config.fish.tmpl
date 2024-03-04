@@ -101,7 +101,7 @@ set -x PATH $PATH $HOME/.rvm/bin
 # disable welcome
 set fish_greeting
 
-# You must call it on initialization or listening to directory switching won't work
-if test -e $HOME/.nvm/nvm.sh
-  load_nvm &>/dev/null
-end
+set -x XDG_CONFIG_HOME $HOME/.config
+set -x XDG_CACHE_HOME $HOME/.cache
+set -x XDG_DATA_HOME $HOME/.local/share
+set -x XDG_STATE_HOME $HOME/.local/state
