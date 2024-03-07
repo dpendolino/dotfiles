@@ -64,42 +64,6 @@ exec swayidle timeout 300 'swaymsg output \* dpms off' \
   lock 'swaylock-blur' \
   after-resume 'swaylock-blur'
 
-bindsym XF86Sleep exec systemctl suspend
-
-# autostart
-exec swayrd
-exec nm-applet --indicator
-exec blueman-applet
-exec  fusuma -c ~/.config/fusuma/config.yml -d
-exec dex -ae sway
-# exec steam-runtime
-exec discord
-exec obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland
-# exec google-chrome-beta --enable-features=UseOzonePlatform --ozone-platform=wayland
-exec firefox
-exec signal-desktop --enable-features=UseOzonePlatform --ozone-platform=wayland
-workspace 1
-exec kitty
-exec /usr/share/swayfx-git/scripts/inactive-windows-transparency.py
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-
-# window assigments
-assign [class="Signal"] 2
-assign [app_id="signal"] 2
-assign [app_id="firefox"] 3
-assign [class="firefox"] 3
-assign [class="google-chrome-beta"] 3
-assign [class="Google-chrome-beta"] 3
-assign [app_id="google-chrome-beta"] 3
-assign [class="obsidian"] 4
-assign [app_id="obsidian"] 4
-assign [app_id="Electron"] 4
-assign [class="discord"] 5
-assign [class="Steam"] 7
-
-# browser pop-ups
-for_window [window_role="pop-up"] floating enable
-
 for_window [class="^.*"] border pixel 0
 gaps inner 5
 gaps outer 3
