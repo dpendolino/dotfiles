@@ -31,7 +31,8 @@ end
 
 if type -q gnome-keyring-daemon
   # Set SSH to use Gnome keyring
-  set -gx SSH_AUTH_SOCK (gnome-keyring-daemon --start --components=pkcs11,secrets,ssh-agent --control-directory=/run/user/(id -u)/keyring | grep "^SSH_AUTH_SOCK" | awk -F "=" '{print $2}')
+  # set -gx SSH_AUTH_SOCK (gnome-keyring-daemon --start --components=pkcs11,secrets,ssh-agent --control-directory=/run/user/(id -u)/keyring | grep "^SSH_AUTH_SOCK" | awk -F "=" '{print $2}')
+  set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gcr/ssh
 end
 
 if type -q archey3
