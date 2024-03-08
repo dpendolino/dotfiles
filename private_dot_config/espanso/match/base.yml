@@ -25,6 +25,15 @@ matches:
         params:
           format: "%Y-%m-%d"
 
+  # Print the current time
+  - trigger: ":time"
+    replace: "{{mytime}}"
+    vars:
+      - name: mytime
+        type: date
+        params:
+          format: "%H:%M"
+
   # Print the output of a shell command
   - trigger: ":shell"
     replace: "{{output}}"
@@ -37,3 +46,9 @@ matches:
   # And much more! For more information, visit the docs: https://espanso.org/docs/
   - trigger: ":shrug"
     replace: "¯\\_(ツ)_/¯"
+  - trigger: ":name"
+    replace: "Daniel Pendolino"
+  - trigger: ":email"
+    replace: "dpendolino@gmail.com"
+  - trigger: ":ibotta"
+    replace: "daniel.pendolino@ibotta.com"

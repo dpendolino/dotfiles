@@ -1,22 +1,3 @@
-bar {
-      font pango:DejaVu Sans Mono, FontAwesome 12
-      position bottom
-      swaybar_command waybar
-      status_command i3status-rs ~/.config/i3status-rust/reddwarf/config.toml
-      height 24
-      #tray_output none
-      colors {
-            separator #666666
-            background #222222
-            statusline #dddddd
-            focused_workspace #0088CC #0088CC #ffffff
-            active_workspace #333333 #333333 #ffffff
-            inactive_workspace #333333 #333333 #888888
-            urgent_workspace #2f343a #900000 #ffffff
-      }
-     # mode hide
-}
-
 set $locker swaylock-blur
 
 # exec  swayidle \
@@ -63,42 +44,6 @@ exec swayidle timeout 300 'swaymsg output \* dpms off' \
 	resume 'swaymsg output \* dpms on' \
   lock 'swaylock-blur' \
   after-resume 'swaylock-blur'
-
-bindsym XF86Sleep exec systemctl suspend
-
-# autostart
-exec swayrd
-exec nm-applet --indicator
-exec blueman-applet
-exec  fusuma -c ~/.config/fusuma/config.yml -d
-exec dex -ae sway
-# exec steam-runtime
-exec discord
-exec obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland
-# exec google-chrome-beta --enable-features=UseOzonePlatform --ozone-platform=wayland
-exec firefox
-exec signal-desktop --enable-features=UseOzonePlatform --ozone-platform=wayland
-workspace 1
-exec kitty
-exec /usr/share/swayfx-git/scripts/inactive-windows-transparency.py
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-
-# window assigments
-assign [class="Signal"] 2
-assign [app_id="signal"] 2
-assign [app_id="firefox"] 3
-assign [class="firefox"] 3
-assign [class="google-chrome-beta"] 3
-assign [class="Google-chrome-beta"] 3
-assign [app_id="google-chrome-beta"] 3
-assign [class="obsidian"] 4
-assign [app_id="obsidian"] 4
-assign [app_id="Electron"] 4
-assign [class="discord"] 5
-assign [class="Steam"] 7
-
-# browser pop-ups
-for_window [window_role="pop-up"] floating enable
 
 for_window [class="^.*"] border pixel 0
 gaps inner 5

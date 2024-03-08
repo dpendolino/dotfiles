@@ -1,6 +1,9 @@
 {{ if eq .chezmoi.os "linux" -}}
-#!/bin/sh
-yay -Syy && yay -S ripgrep git --noconfirm
+#!/bin/bash
+sudo pacman -Syy && sudo pacman -S which ripgrep git neovim fish age bat archey3 starship thefuck fasd ruby gnome-keyring rustup --noconfirm
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish -c 'source - --noninteractive --yes'
+fish -c "omf install"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 {{ else if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
 cat ../darwin_packages.txt | awk '{print $1}' | tr -d ':' | xargs brew install

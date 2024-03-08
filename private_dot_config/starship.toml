@@ -91,3 +91,13 @@ style = "bold cyan"
 command = """ rtw status --format "✓ {ongoing} {human_duration}" """
 when = "test -f ~/.rtw.json"
 shell = ["bash", "--noprofile", "--norc"]
+disabled = true
+
+[custom.toolbox]
+description = "The activated toolbox container"
+command = "echo $(. /var/run/.containerenv; echo ${name}: ${image})"
+when = """ [[ -f /run/.containerenv && -f /run/.toolboxenv ]] """
+style = "bold red"
+format = "[\\[$output\\]]($style) "
+disabled = false
+shell = ["bash", "--noprofile", "--norc"]

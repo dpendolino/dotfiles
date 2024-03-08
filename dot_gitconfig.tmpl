@@ -3,7 +3,9 @@
   # Please adapt and uncomment the following lines:
   name = Daniel Pendolino
   email = {{ .email }}
+  {{ if hasKey . "gitsignkey" -}}
   signingkey = {{ .gitsignkey }}
+  {{- end }}
 [core]
   editor = nvim
 [merge]
@@ -31,3 +33,5 @@
 [url "git@github.com:"]
   pushInsteadOf = https://github.com/
   pushInsteadOf = git://github.com/
+[push]
+  autoSetupRemote = true
