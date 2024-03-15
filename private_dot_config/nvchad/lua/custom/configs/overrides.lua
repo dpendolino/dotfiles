@@ -56,6 +56,8 @@ M.mason = {
     "yaml-language-server",
     "yamllint",
   },
+  -- auto-install configured servers (with lspconfig)
+	automatic_installation = true, -- not the same as ensure_installed
 }
 
 -- git support in nvimtree
