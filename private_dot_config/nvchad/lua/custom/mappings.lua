@@ -54,7 +54,7 @@ M.hop = {
 
 M.telescope = {
   n = {
-    ["<leader>cc"] = { "<cmd> Telescope <CR>", "Open Telescope" },
+    ["<leader>cc"] = { "<cmd> Telescope builtin include_extensions=true<CR>", "Open Telescope" },
   },
 }
 
