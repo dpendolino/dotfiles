@@ -305,6 +305,14 @@ local plugins = {
     ft = {"go", 'gomod'},
     build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   },
+  {
+  "giusgad/pets.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "giusgad/hologram.nvim" },
+    config = function()
+      require("pets").setup()
+    end,
+    lazy = false
+  }
   {{ if eq .chezmoi.os "darwin" -}}
   -- MacOS .bashrc contents
   { "github/copilot.vim", lazy = false},
