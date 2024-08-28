@@ -35,9 +35,11 @@ if type -q gnome-keyring-daemon
   set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gcr/ssh
 end
 
-if type -q archey3
-  function fish_greeting
+function fish_greeting
+  if type -q archey3
     archey3
+  else if type -q fastfetch
+    /usr/bin/fastfetch -c /run/host/usr/share/ublue-os/ublue-os.jsonc --color blue
   end
 end
 
