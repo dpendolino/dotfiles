@@ -14,7 +14,7 @@
   sourceDir = {{ .chezmoi.sourceDir | quote }}
   email = {{ $email | quote }}
   name = "Daniel Pendolino"
-  {{- if eq .chezmoi.hostname "RedDwarf" }}
+  {{- if eq .chezmoi.hostname "reddwarf" }}
   reddwarfborgpassphrase = {{ (bitwarden "item" "RedDwarf Borg Passphrase").login.password | quote }}
   gitsignkey = "E1E86874BF7C1E0398A8507414F0F811CEFBA1D9"
   {{- end }}
