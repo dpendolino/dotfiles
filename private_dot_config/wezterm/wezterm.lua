@@ -4,6 +4,9 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+-- Default command
+config.default_prog = { "/usr/bin/fish", "-l" }
+
 config.color_scheme = "Dracula (Official)"
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = true
@@ -21,7 +24,7 @@ config.launch_menu = {
     label = "Bash",
     -- The argument array to spawn.  If omitted the default program
     -- will be used as described in the documentation above
-    args = { "distrobox-host-exec", "bash", "-l" },
+    args = { "bash", "-l" },
 
     -- You can specify an alternative current working directory;
     -- if you don't specify one then a default based on the OSC 7
@@ -35,7 +38,7 @@ config.launch_menu = {
     -- set_environment_variables = { FOO = "bar" },
   },
   {
-    args = { "distrobox-host-exec", "fish", "-l" },
+    args = { "fish", "-l" },
     label = "Fish",
   },
   {
