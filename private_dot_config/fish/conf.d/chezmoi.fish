@@ -1,2 +1,4 @@
 
-eval (chezmoi completion fish)
+if type -q chezmoi
+    eval (chezmoi completion fish)
+end
