@@ -1,4 +1,5 @@
 encryption = "age"
+
 [age]
   identity = "{{- .chezmoi.homeDir }}/key.txt"
   recipients = [
@@ -6,21 +7,9 @@ encryption = "age"
     "age1h2fuyd6tgpfm44tke8h3jl8lxevmmz6elwv2nzdr04x8nxft2sqqn4vdtk", # RedDwarf
     "age1tky7auntxlxkeqcvj6d35w4hw696dq3ma444t3rmppc5ax5uqf2q3q5tx3", # Prometheus
   ]
-{{- $codespaces:= env "CODESPACES" | not | not -}}
-
-{{- $email := "" -}}
-{{- if $codespaces -}}
-{{-   $email = "dpendolino@gmail.com" -}}
-{{- else if (hasKey . "email") -}}
-{{-   $email = .email -}}
-{{- else -}}
-{{-   $email = promptString "email" -}}
-{{- end -}}
 
 [data]
-  codespaces = {{ $codespaces }}
-  sourceDir = {{ .chezmoi.sourceDir | quote }}
-  email = {{ $email | quote }}
+  email = "dpendolino@gmail.com"
   name = "Daniel Pendolino"
   {{- if eq .chezmoi.hostname "reddwarf" }}
   reddwarfborgpassphrase = {{ (bitwarden "item" "RedDwarf Borg Passphrase").login.password | quote }}
@@ -31,4 +20,5 @@ encryption = "age"
   {{- end }}
   {{- if eq .chezmoi.hostname "MACBOOKPRO-GX2KLQW3FG" }}
   gitsignkey = "4E8FE62AD9FBF2D8B0C1061C8E81724987683836"
+  email = "daniel.pendolino@ibotta.com"
   {{- end }}
