@@ -138,7 +138,30 @@ return {
               content = "Please summarize the following code.",
             },
           },
-        }
+        },
+      ["Refactor"] = {
+          strategy = "chat",
+          description = "Refactor code for clarity, maintainability, and best practices",
+          opts = {
+            short_name = "refactor",
+            modes = { "v" },
+          },
+          prompts = {
+            {
+              role = "user",
+              content = [[
+Please refactor the following code with the following goals:
+- Improve readability, maintainability, and modularity.
+- Use idiomatic constructs and best practices for the language.
+- Remove duplication and unnecessary complexity.
+- Use clear, concise naming for variables, functions, and classes.
+- Add comments where they clarify non-obvious logic.
+- Do not change the code's external behavior.
+After refactoring, provide a brief summary of the main changes you made.
+]],
+            },
+          },
+        },
       },
     },
     -- config = function(_, opts)
