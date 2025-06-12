@@ -125,6 +125,20 @@ return {
             },
           },
         },
+        ["Summarize"] = {
+          strategy = "chat",
+          description = "Summarize code",
+          opts = {
+            short_name = "summarize",
+            modes = { "v" },
+          },
+          prompts = {
+            {
+              role = "user",
+              content = "Please summarize the following code.",
+            },
+          },
+        }
       },
     },
     -- config = function(_, opts)
