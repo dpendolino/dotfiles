@@ -62,6 +62,7 @@ return {
   },
   {
     "saghen/blink.cmp",
+    build = "cargo build --release", -- for delimiters
     opts = {
       keymap = {
         preset = "super-tab",
