@@ -1,0 +1,66 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
+  "agents": {
+    "sisyphus": {
+      "model": "opencode/claude-opus-4-6",
+      "variant": "max"
+    },
+    "oracle": {
+      "model": "opencode/claude-opus-4-6",
+      "variant": "max"
+    },
+    "librarian": {
+      "model": "opencode/claude-sonnet-4-6"
+    },
+    "explore": {
+      "model": "opencode/claude-haiku-4-5"
+    },
+    "multimodal-looker": {
+      "model": "opencode/claude-haiku-4-5"
+    },
+    "prometheus": {
+      "model": "opencode/claude-opus-4-6",
+      "variant": "max"
+    },
+    "metis": {
+      "model": "opencode/claude-opus-4-6",
+      "variant": "max"
+    },
+    "momus": {
+      "model": "opencode/claude-opus-4-6",
+      "variant": "max"
+    },
+    "atlas": {
+      "model": "opencode/claude-sonnet-4-6"
+    }
+  },
+  "categories": {
+    "visual-engineering": {
+      "model": "opencode/claude-opus-4-6",
+      "variant": "max"
+    },
+    "ultrabrain": {
+      "model": "opencode/claude-opus-4-6",
+      "variant": "max"
+    },
+    "quick": {
+      "model": "opencode/claude-haiku-4-5"
+    },
+    "unspecified-low": {
+      "model": "opencode/claude-sonnet-4-6"
+    },
+    "unspecified-high": {
+      "model": "opencode/claude-sonnet-4-6"
+    },
+    "writing": {
+      "model": "opencode/claude-sonnet-4-6"
+    }
+  },
+  "_migrations": [
+    "model-version:anthropic/claude-sonnet-4-5->opencode/claude-sonnet-4-6",
+    "model-version:anthropic/claude-sonnet-4-5->opencode/claude-sonnet-4-6",
+    "model-version:anthropic/claude-sonnet-4-5->opencode/claude-sonnet-4-6",
+    "model-version:anthropic/claude-sonnet-4-5->opencode/claude-sonnet-4-6",
+    "model-version:anthropic/claude-sonnet-4-5->opencode/claude-sonnet-4-6"
+  ]
+}
