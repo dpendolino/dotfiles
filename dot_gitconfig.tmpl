@@ -8,12 +8,16 @@
   {{- end }}
 [core]
   editor = nvim
+{{- if eq .chezmoi.os "darwin" }}
+  pager = delta
+{{- end }}
 [merge]
   tool = nvimdiff
   conflictstyle = diff3
 [diff]
   tool = nvimdiff
   conflictstyle = diff3
+  colorMoved = default
 [difftool "nvimdiff"]
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
   prompt = true
@@ -26,12 +30,29 @@
   gpgsign = true
 [alias]
   root = !pwd
+  edit = !$EDITOR $(git status --porcelain | awk '{print $2}')
+  ffogh = !$open https://github.com/$(git rev-parse --show-prefix)
 [pull]
   rebase = false
 [github]
-  user = {{ .chezmoi.group }}
+  {{ if hasKey . "githubuser" -}}
+  user = {{ .githubuser }}
+  {{- end }}
 [url "git@github.com:"]
   pushInsteadOf = https://github.com/
   pushInsteadOf = git://github.com/
 [push]
   autoSetupRemote = true
+{{- if eq .chezmoi.os "darwin" }}
+[delta]
+  navigate = true
+  light = false
+[interactive]
+  diffFilter = delta --color-only
+[credential "https://github.com"]
+  helper =
+  helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+  helper =
+  helper = !gh auth git-credential
+{{- end }}
