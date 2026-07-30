@@ -4,13 +4,12 @@ README.md
 Brewfile
 {{- end }}
 
-{{- if ne .chezmoi.hostname "Daniels-MacBook-Pro.local" }}
-.work # only manage .work on work-laptop
+{{- if ne .chezmoi.os "darwin" }}
+.work # only manage .work on macOS work laptops
 .config/fish/conf.d/iterm2.fish
 .config/fish/conf.d/aptible.fish
 .config/fish/conf.d/openssl.fish
 .config/fish/conf.d/ssh-agent.fish
-.config/fish/conf.d/onepassword.fish
 .iterm2_shell_integration.fish
 ssh/config_darwin
 {{- end }}
