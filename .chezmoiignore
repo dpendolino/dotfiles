@@ -1,5 +1,9 @@
 README.md
 
+{{- if ne .chezmoi.os "darwin" }}
+Brewfile
+{{- end }}
+
 {{- if ne .chezmoi.hostname "Daniels-MacBook-Pro.local" }}
 .work # only manage .work on work-laptop
 .config/fish/conf.d/iterm2.fish
