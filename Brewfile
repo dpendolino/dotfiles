@@ -101,7 +101,7 @@ brew "libgit2"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@1.1"
 # Modern replacement for 'ls'
-brew "exa"
+brew "eza"
 # Perl lib for reading and writing EXIF metadata
 brew "exiftool"
 # CLI tool for quick access to files and directories
@@ -173,7 +173,6 @@ brew "helm"
 # Improved top (interactive process viewer)
 brew "htop"
 # Add GitHub support to git on the command-line
-brew "hub"
 # ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 brew "libheif"
 # Library for reading RAW files from digital photo cameras
@@ -183,7 +182,7 @@ brew "imagemagick"
 # Interactive computing in Python
 brew "ipython"
 # Development kit for the Java programming language
-brew "openjdk"
+brew "openjdk@25"
 # Dex to Java decompiler
 brew "jadx"
 # Lightweight and flexible command-line JSON processor
@@ -193,13 +192,11 @@ brew "k9s"
 # Statically typed programming language for the JVM
 brew "kotlin"
 # Development kit for the Java programming language
-brew "openjdk@21"
 # Intelligent Kotlin support for any editor/IDE using the Language Server Protocol
 brew "kotlin-language-server"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
 # LastPass command-line interface tool
-brew "lastpass-cli"
 # Simple terminal UI for git commands
 brew "lazygit"
 # DNS library written in C
@@ -243,7 +240,6 @@ brew "nnn"
 # Manage multiple Node.js versions
 brew "nvm"
 # Development kit for the Java programming language
-brew "openjdk@11"
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
 # Tool for creating identical machine images for multiple platforms
@@ -289,7 +285,6 @@ brew "saml2aws"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Prints a steam locomotive if you type sl instead of ls
-brew "sl"
 # Command-line interface for https://speedtest.net bandwidth tests
 brew "speedtest-cli"
 # Cross-shell prompt for astronauts
@@ -303,7 +298,6 @@ brew "tcpdump"
 # Terraform Language Server
 brew "terraform-ls"
 # Language Server Protocol for Terraform
-brew "terraform-lsp"
 # Linter for Terraform files
 brew "tflint"
 # Static analysis security scanner for your terraform code
@@ -313,7 +307,6 @@ brew "thefuck"
 # Terminal multiplexer
 brew "tmux"
 # Command-line client for Travis CI
-brew "travis"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Language for application scale JavaScript development
@@ -355,7 +348,6 @@ brew "ibotta/private/waltz", trusted: true
 # Multi-track audio editor and recorder
 cask "audacity"
 # Audio utility
-cask "background-music"
 # Web security testing toolkit
 cask "burp-suite"
 # Terminal-based AI coding assistant
@@ -374,7 +366,6 @@ cask "gpg-suite-no-mail"
 # GPU-based terminal emulator
 cask "kitty"
 # Simple application that will prevent iTunes or Apple Music from launching
-cask "notunes"
 # Collaboration platform for API development
 cask "postman"
 cask "powershell"
