@@ -4,6 +4,13 @@ README.md
 Brewfile
 {{- end }}
 
+# opencode: auto-generated files (managed by opencode itself)
+.config/opencode/node_modules/
+.config/opencode/bun.lock
+.config/opencode/package.json
+.config/opencode/package-lock.json
+.config/opencode/oh-my-opencode.json.bak*
+
 {{- if ne .chezmoi.os "darwin" }}
 .work # only manage .work on macOS work laptops
 .config/fish/conf.d/iterm2.fish
