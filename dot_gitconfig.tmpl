@@ -27,7 +27,9 @@
   recurse = true
 [commit]
   sig = 65BD25EB
+{{- if hasKey . "gitsignkey" }}
   gpgsign = true
+{{- end }}
 [alias]
   root = !pwd
   edit = !$EDITOR $(git status --porcelain | awk '{print $2}')

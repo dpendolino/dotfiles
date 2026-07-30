@@ -10,21 +10,28 @@ encryption = "age"
 
 [data]
   name = "Daniel Pendolino"
+
+  # Identity is role-based, gated by OS so it survives a laptop swap
+  # (any Ibotta Mac = work identity; any Linux host = personal).
+  {{- if eq .chezmoi.os "darwin" }}
+  email = "daniel.pendolino@ibotta.com"
+  githubuser = "dpendolino-ibotta"
+  {{- else if eq .chezmoi.os "linux" }}
+  email = "dpendolino@gmail.com"
+  githubuser = "dpendolino"
+  {{- end }}
+
+  # gitsignkey is per-machine (GPG key regenerated on each host).
+  # On a new machine: generate a key, then add its hostname block here.
   {{- if eq .chezmoi.hostname "reddwarf" }}
   reddwarfborgpassphrase = {{ (bitwarden "item" "RedDwarf Borg Passphrase").login.password | quote }}
   gitsignkey = "E1E86874BF7C1E0398A8507414F0F811CEFBA1D9"
-  email = "dpendolino@gmail.com"
-  githubuser = "dpendolino"
   {{- end }}
   {{- if eq .chezmoi.hostname "prometheus" }}
   gitsignkey = "E1E86874BF7C1E0398A8507414F0F811CEFBA1D9"
-  email = "dpendolino@gmail.com"
-  githubuser = "dpendolino"
   {{- end }}
   {{- if eq .chezmoi.hostname "MACBOOKPRO-GX2KLQW3FG" }}
   gitsignkey = "4E8FE62AD9FBF2D8B0C1061C8E81724987683836"
-  email = "daniel.pendolino@ibotta.com"
-  githubuser = "dpendolino-ibotta"
   {{- end }}
 
 [cd]
