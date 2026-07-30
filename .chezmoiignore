@@ -1,4 +1,5 @@
 README.md
+AGENTS.md
 
 {{- if ne .chezmoi.os "darwin" }}
 Brewfile
@@ -19,6 +20,30 @@ Brewfile
 .config/fish/conf.d/ssh-agent.fish
 .iterm2_shell_integration.fish
 ssh/config_darwin
+{{- end }}
+
+{{- if eq .chezmoi.os "darwin" }}
+# Linux-only configs / scripts — never deploy on macOS
+.config/i3status-rust/
+.config/sway/
+.config/waybar/
+.config/polybar/
+.config/copyq/
+.config/espanso/
+.config/autostart/
+distrobox.ini
+linux_packages.txt
+bin/dim-screen.sh
+bin/fix_bluetooth_mouse_lag.sh
+bin/force-xwayland
+bin/i3exit
+bin/joplin-ext-editor.sh
+bin/rofi-lpass
+bin/scan-for-pi.sh
+bin/wcwd
+# ssh config symlinks to a nonexistent config_darwin and holds internal hosts;
+# manage ~/.ssh/config manually on macOS (see migration runbook)
+.ssh/config
 {{- end }}
 
 {{- if ne .chezmoi.hostname "RedDwarf" }}
