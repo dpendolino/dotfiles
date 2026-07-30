@@ -16,14 +16,14 @@ return {
     -- auto-close if/for/etc;
     "RRethy/nvim-treesitter-endwise",
     ft = { "rb", "lua", "vim", "sh" },
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require("nvim-treesitter.configs").setup({
-        endwise = {
-          enable = true,
-        },
-      })
-    end,
+    -- config = function()
+    --   ---@diagnostic disable-next-line: missing-fields
+    --   require("nvim-treesitter.configs").setup({
+    --     endwise = {
+    --       enable = true,
+    --     },
+    --   })
+    -- end,
   },
   -- add more treesitter parsers
   {
