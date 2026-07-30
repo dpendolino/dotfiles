@@ -10,7 +10,9 @@ set -g default-terminal "xterm-256color"
 
 # set up powerline
 #/usr/bin/powerline-config tmux setup
+{{ if eq .chezmoi.os "linux" -}}
 source /usr/lib/python3.10/site-packages/powerline/bindings/tmux/powerline.conf
+{{ end -}}
 
 # Double control-a to switch between current and last window.
 bind-key C-a last-window

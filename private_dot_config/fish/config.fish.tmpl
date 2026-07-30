@@ -19,6 +19,48 @@ alias python='python3'
 # alias vim to nvim
 alias vim='nvim'
 
+# version manager
+if type -q mise
+  mise activate fish | source
+end
+
+fish_add_path $HOME/bin
+fish_add_path /opt/homebrew/opt/libpq/bin
+
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+
+# AWS
+set -x AWS_ASSUME_ROLE_TTL 1h
+set -x AWS_DEFAULT_REGION us-east-1
+set -x AWS_REGION $AWS_DEFAULT_REGION
+
+# Databricks
+set -x DATABRICKS_CONFIG_PROFILE engineering
+
+if type -q steampipe
+  steampipe completion fish | source
+end
+
+# nvm (load_nvm defined in functions/)
+if functions -q load_nvm
+  load_nvm &>/dev/null
+end
+
+# assemble KUBECONFIG from ~/.kube/* (skip minikube)
+set -x KUBECONFIG $(find ~/.kube/ -mindepth 1 -maxdepth 1 -type f ! -name minikube | sort | tr '\n' ':' || "")
+
+# bind -> to accept completion
+bind -k right forward-char
+
+set -x HOMEBREW_CASK_OPTS "--appdir=$HOME/Applications"
+
+alias assume="source (brew --prefix)/bin/assume.fish"
+
+if type -q gh
+  set -gx HOMEBREW_GITHUB_API_TOKEN (gh auth token)
+end
+set -gx JIRA_EMAIL daniel.pendolino@ibotta.com
+
 {{ else if eq .chezmoi.os "linux" -}}
 
 if type -q bass

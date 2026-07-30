@@ -4,19 +4,12 @@
 # exec 3>&2 2>/tmp/bashstart.$$.log
 # set -x
 
+{{ if eq .chezmoi.os "darwin" -}}
+export SHELL=/bin/bash
+
+{{ end -}}
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-
-# Append "$1" to $PATH when not already in.
-# This function API is accessible to scripts in /etc/profile.d
-append_path () {
-    case ":$PATH:" in
-        *:"$1":*)
-            ;;
-        *)
-            PATH="${PATH:+$PATH:}$1"
-    esac
-}
 
 # Load profiles from /etc/profile.d
 if test -d /etc/profile.d/; then
@@ -80,10 +73,8 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias texToOdt='mk4ht oolatex'
 alias pgrep='pgrep -l'
 alias termsize='echo $COLUMNS x $LINES'
-alias t='todo.sh'
 alias dmesg='dmesg -T'
 alias rm='rm -I'
 
@@ -111,8 +102,6 @@ fi
 warn() { printf "$* at line %s file %s: $msg\n" "$(caller)" 1>&2 ; }
 die() { printf "$* at line %s file %s: $msg\n" "$(caller)" 1>&2 ; exit -1; }
 
-export PATH=$PATH:/home/dpendolino/bin:/home/dpendolino/Dropbox/bin:/usr/local/games/trine:/usr/local/games:/home/dpendolino/Dropbox/todo/.todo.actions.d:/home/dpendolino/android-sdk-linux_86/platform-tools
-
 if [ -f /usr/bin/ruby ];then
     export PATH=$PATH:$(ruby -r rubygems -e "puts Gem.user_dir")/bin
 fi
@@ -123,22 +112,10 @@ export VISUAL=vim
 if [ -f /usr/bin/archey3 ];then
     timeout 1 archey3
 fi
-export $(gnome-keyring-daemon --daemonize --start)
-
-# eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
-
-# gnome-keyring for ssh
-SSH_AUTH_SOCK=`ss -xl | grep -o '/run/user/1000/keyring/ssh'`
-[ -z "$SSH_AUTH_SOCK" ] || export SSH_AUTH_SOCK
 
 if [ -d $HOME/.bash-completion.d/ ];then
     for i in $HOME/.bash-completion.d/*;do source $i;done
 fi
-
-
-#ccache
-export USE_CCACHE=1
-export PATH="/usr/lib/ccache/bin/:$PATH"
 
 #http://superuser.com/questions/249293/rename-tmux-window-name-to-prompt-command-ps1-or-remote-ssh-hostname
 settitle() {
@@ -155,8 +132,13 @@ mosh() {
   settitle "bash"
 }
 
+{{ if eq .chezmoi.os "linux" -}}
 . /usr/share/fzf/key-bindings.bash
 . /usr/share/fzf/completion.bash
+{{ else -}}
+#. /usr/share/fzf/key-bindings.bash
+#. /usr/share/fzf/completion.bash
+{{ end -}}
 
 # Set terminal title to $PWD
 PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
@@ -192,42 +174,10 @@ if [ -f /usr/bin/kubectl ];then
     source <(kubectl completion bash)
 fi
 
-# set +x
-# exec 2>&3 3>&-
-
-gc() {
-    REPO_URL="git@github.com:$1/$2"
-    if [ "${1,,}" == "counterhack" ] || [ "${1,,}" == "chc" ] || [ "${1,,}" == "ch" ]; then
-        pushd $HOME/CHC/git
-        REPO_URL="git@github.com:CounterHack/$2"
-    else
-        pushd $HOME/git
-    fi
-    if [ ! -d "$2" ]; then
-        echo "Cloning git@github.com:$1/$2"
-        git clone "$REPO_URL"
-    else
-        echo "Repo folder already exists!"
-    fi
-
-    if [ "$3" == 'no' ]; then
-        popd
-    else
-        cd "$2"
-    fi
-
-}
-
-# set default browser
-export BROWSER='google-chrome-stable'
-
 # add node_modules to path
 export PATH=$HOME/node_modules/.bin:$PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# Global Packer cache
-export PACKER_CACHE_DIR=/mnt/HeartOfGold/packer_cache
 
 eval $(thefuck --alias)
 
@@ -239,21 +189,156 @@ _fasd_bash_hook_cmd_complete v m j o
 complete -o default -W "`grep -iE "\bhost\b" ~/.ssh/config | awk '{print $2 \" \" $3 \" \" $4 \" \" $5}'`" ssh scp sftp
 
 # add user base to python path
-export PYTHONPATH=$(python -c "import site, os; print(os.path.join(site.USER_BASE, 'lib', 'python', 'site-packages'))"):$PYTHONPATH
+export PYTHONPATH=$(python3 -c "import site, os; print(os.path.join(site.USER_BASE, 'lib', 'python', 'site-packages'))"):$PYTHONPATH
 
 # add .local/bin to path
 export PATH=~/.local/bin:$PATH
 
 # rust
-# . <(rustup completions bash cargo)
-# . <(rustup completions bash rustup)
+#. <(rustup completions bash cargo)
+#. <(rustup completions bash rustup)
 export PATH=$HOME/.cargo/bin:$PATH
 
 {{ if eq .chezmoi.os "darwin" -}}
-# macOS .bashrc contents
-{{ else if eq .chezmoi.os "linux" -}}
-# Linux .bashrc contents
-{{ end -}}
+# asdf
+if [ -f $HOME/.asdf/asdf.sh ]; then
+  . $HOME/.asdf/asdf.sh
+  . $HOME/.asdf/completions/asdf.bash
+fi
+. $(brew --prefix asdf)/libexec/asdf.sh
+. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
 
+. ~/.bash_profile
+
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+
+{{ end -}}
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+netshoot () {
+	kubectl --context ${1} run tmp-shell --rm -i --tty --image nicolaka/netshoot -- /bin/bash
+}
+
+# private util functions helpful for k8s work
+function count-k8s-services() {
+  (cd ${HOME}/build/github/ibex/
+  # for cluster1 in $(find clusters/ -mindepth 4 -type d -exec basename '{}' \;); do
+  for cluster1 in $(./ibex -c list-clusters -j 2>/dev/null | jq -r '.'); do
+  echo "${cluster1}: $(kubectl --context ${cluster1} get rollout -A -oname \
+   | grep -v paved-road | wc -l)"; done
+  )
+}
+
+function list-k8s-clusters() {
+  (cd ${HOME}/build/github/ibex/
+  ./ibex -a list-clusters # -j 2>/dev/null | jq -r '.'
+  )
+}
+
+function acct() {
+  local filter
+  filter="$(command -v fzf)"
+  if [[ ${filter} != "" ]]; then
+    if [[ $# != 0 ]]; then
+      filter="${filter} --filter \"$@\""
+    fi
+  else
+    filter="cat"
+    if [[ $# != 0 ]]; then
+      filter="grep \"$@\""
+    fi
+  fi
+  grep "granted_sso_account_id.*= .*" ~/.aws/config -B3 |
+    awk '{
+      ORS=""
+      if($0 ~ /^\[profile/) {
+        split($2, prof, ":")
+        print prof[1]
+        print " "
+      }
+      if($0 ~ /granted_sso_account_id/) {
+        print $3
+        print"\n"
+      }
+    }' |
+    sort -u |
+    column -t |
+    eval "${filter}"
+}
+
+function map-cluster-to-env() {
+  ( cd ${HOME}/build/github/ibex/
+  ./ibex -c ${1} -a cluster-info -j 2>/dev/null | jq -r '.env'
+  )
+}
+function map-cluster-to-path() {
+  ( cd ${HOME}/build/github/ibex/
+  ./ibex -c ${1} -a cluster-info -j 2>/dev/null | jq -r '.config_dir'
+  )
+}
+function map-cluster-to-profile() {
+  ( cd ${HOME}/build/github/ibex/
+  ./ibex -c ${1} -a cluster-info -j 2>/dev/null | jq -r '.aws_profile' | sed 's/Admin$//g'
+  )
+}
+function map-cluster-to-account-id() {
+  (cd ${HOME}/build/github/ibex/
+  ./ibex -c ${1} -a cluster-info -j 2>/dev/null | jq -r '.account_number'
+  )
+}
+function map-cluster-to-cidr() {
+  case ${1} in
+    apollo) echo "10.192.0.0/17" ;;
+    c10) echo "10.192.225.0/17" ;;
+    *)
+      (cd ${HOME}/build/github/ibex/
+      ./ibex -c ${1} -a cluster-info -j 2>/dev/null | jq -r '.vpc_cidr'
+      # find ~/build/github/ibex/clusters/**/**/**/${1}/config.yaml -exec grep cidr: '{}' \; | awk '{print $2}' | sort -u ;
+      )
+  esac
+}
+function map-host-to-profile() {
+  eval "map-cluster-to-profile $(map-host-to-cluster ${1})"
+}
+function map-host-to-cluster() {
+  local ip1=${1}
+  local item1 cidr1 name1
+  if [[ ${ip1} =~ ^ip- ]]; then
+    # first convert ip-1-2-3-4.ec2.internal to IP
+    ip1="$(echo ${ip1%%.*} | sed -e 's/ip-//' -e 's/-/./g')"
+  fi
+  # Validate IP address format
+  if [[ ! ${ip1} =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+    echo "Invalid IP address format"
+    return 1
+  fi
+
+  # first, handle special case where 2 clusters have the same vpc_cidr
+  if [[ ${ip1} =~ ^10.192. ]]; then
+    if [[ ${1} =~ (.234.|.235.|236.|-234-|-235|-236-) ]]; then
+      echo "c10"
+      return
+    else
+      echo "apollo"
+      return
+    fi
+  else
+    for item1 in $(./ibex -a list-clusters -j 2>/dev/null \
+     | jq -r '.[] | .name + ":" + .vpc_cidr'); do
+      name1="$(echo ${item1} | cut -d: -f1)"
+      cidr1="$(echo ${item1} | cut -d: -f2)"
+
+      if nmap -sL -n ${cidr1} | grep -q ${ip1} ; then
+        echo ${name1}
+        return
+      fi
+    done
+    echo "Error: Unable to match IP to cluster"
+    exit 1
+  fi
+}
+
+{{ if eq .chezmoi.os "darwin" -}}
+export GITHUB_APP_PRIVATE_KEY_PATH="$HOME/.ssh/github-app/sox-scripts-app.pem"
+{{ end -}}

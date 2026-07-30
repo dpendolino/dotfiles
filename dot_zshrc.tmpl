@@ -1,10 +1,14 @@
 # Created by newuser for 5.4.2
 
 # Load Antigen
+{{ if eq .chezmoi.os "darwin" -}}
+source /opt/homebrew/share/antigen/antigen.zsh
+{{ else -}}
 source /usr/share/zsh/share/antigen.zsh
 
 # Load Antigen configurations
 antigen init .antigenrc
+{{ end -}}
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
