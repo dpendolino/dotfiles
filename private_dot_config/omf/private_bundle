@@ -1,7 +1,6 @@
 package bang-bang
 package bass
 package brew
-package fasd
 package foreign-env
 package https://github.com/dracula/fish
 package https://github.com/jethrokuan/fzf

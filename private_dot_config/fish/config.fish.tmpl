@@ -41,16 +41,18 @@ if type -q steampipe
   steampipe completion fish | source
 end
 
-# nvm (load_nvm defined in functions/)
-if functions -q load_nvm
+# nvm (load_nvm defined in functions/) — skip unless nvm is actually installed.
+# Short-circuit on nvm.sh first so load_nvm is never autoloaded (its --on-variable
+# PWD handler would otherwise fire on every cd and error when nvm is absent).
+if test -s ~/.nvm/nvm.sh; and functions -q load_nvm
   load_nvm &>/dev/null
 end
 
-# assemble KUBECONFIG from ~/.kube/* (skip minikube)
-set -x KUBECONFIG $(find ~/.kube/ -mindepth 1 -maxdepth 1 -type f ! -name minikube | sort | tr '\n' ':' || "")
+# assemble KUBECONFIG from ~/.kube/* (skip minikube); guard until ~/.kube exists
+test -d ~/.kube; and set -x KUBECONFIG $(find ~/.kube/ -mindepth 1 -maxdepth 1 -type f ! -name minikube | sort | tr '\n' ':' || "")
 
-# bind -> to accept completion
-bind -k right forward-char
+# bind -> to accept completion (fish 4.x dropped `bind -k`; key names are direct now)
+bind right forward-char
 
 set -x HOMEBREW_CASK_OPTS "--appdir=$HOME/Applications"
 
