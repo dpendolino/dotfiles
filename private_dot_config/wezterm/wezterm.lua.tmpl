@@ -4,8 +4,8 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- Default command
-config.default_prog = { "/usr/bin/fish", "-l" }
+-- Default command (fish path is OS-gated: Homebrew on macOS, /usr/bin on Linux)
+config.default_prog = { "{{ if eq .chezmoi.os "darwin" }}/opt/homebrew/bin/fish{{ else }}/usr/bin/fish{{ end }}", "-l" }
 
 config.color_scheme = "Dracula (Official)"
 config.tab_bar_at_bottom = true
