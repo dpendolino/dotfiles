@@ -97,8 +97,6 @@ brew "docker-credential-helper"
 brew "docutils"
 # C library of Git core methods that is re-entrant and linkable
 brew "libgit2"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@1.1"
 # Modern replacement for 'ls'
 brew "eza"
 # Perl lib for reading and writing EXIF metadata
