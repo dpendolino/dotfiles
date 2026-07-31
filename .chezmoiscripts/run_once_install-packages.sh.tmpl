@@ -6,7 +6,10 @@ fish -c "omf install"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 {{ else if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
-# Install everything declared in ~/Brewfile (taps, formulae, casks).
-# Regenerate the Brewfile from a live machine with:  brew bundle dump --file="$HOME/Brewfile" --force
-brew bundle --file="$HOME/Brewfile"
+# Install everything declared in the chezmoi-managed Brewfile (taps, formulae, casks).
+# Read from the chezmoi source dir, NOT ~/Brewfile: chezmoi may run this run_once
+# script before it materializes the root-level Brewfile into $HOME, so $HOME/Brewfile
+# is not guaranteed to exist yet (that race caused brew's "No Brewfile found").
+# Regenerate from a live machine with:  brew bundle dump --file="$HOME/.local/share/chezmoi/Brewfile" --force
+brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile"
 {{ end -}}
