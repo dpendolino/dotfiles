@@ -12,6 +12,19 @@ Brewfile
 .config/opencode/package-lock.json
 .config/opencode/oh-my-opencode.json.bak*
 
+# Claude Code: ignore every top-level entry under ~/.claude except tracked
+# config. Whitelist — runtime cruft (logs, transcripts, history, caches,
+# sessions, telemetry, plugins, daemon keys, backups) never gets re-added.
+.claude/*
+!.claude/settings.json
+!.claude/CLAUDE.md
+!.claude/statusline-command.sh
+!.claude/commands
+!.claude/hooks
+!.claude/scripts
+# ~/.claude.json holds runtime state + secrets
+.claude.json
+
 {{- if ne .chezmoi.os "darwin" }}
 .work # only manage .work on macOS work laptops
 .config/fish/conf.d/iterm2.fish
