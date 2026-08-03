@@ -82,6 +82,8 @@ brew "delve"
 brew "detect-secrets"
 # Diff that understands syntax
 brew "difftastic"
+# Auto-approve safe shell commands for AI coding assistants
+brew "ldayton/dippy/dippy"
 # Tool for exploring each layer in a docker image
 brew "dive"
 # Pack, ship and run any application as a lightweight container
