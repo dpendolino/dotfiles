@@ -11,12 +11,11 @@ tap "ldayton/dippy"
 tap "oven-sh/bun"
 tap "sst/tap", "https://github.com/anomalyco/homebrew-tap.git"
 tap "turbot/tap"
+tap "wyne/tap"
 # Run your GitHub Actions locally
 brew "act"
 # Simple, modern, secure file encryption
 brew "age"
-# Plugin manager for zsh, inspired by oh-my-zsh and vundle
-brew "antigen"
 # TIFF library and utilities
 brew "libtiff"
 # Color management engine supporting ICC profiles
@@ -25,8 +24,6 @@ brew "little-cms2"
 brew "jpeg-xl"
 # Codec library for encoding and decoding AV1 video streams
 brew "aom"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
 # Companion library to apr, the Apache Portable Runtime library
 brew "apr-util"
 # Get stuff done with container-native workflows for Kubernetes
@@ -71,6 +68,8 @@ brew "chezmoi"
 brew "lima"
 # Container runtimes on MacOS (and Linux) with minimal setup
 brew "colima"
+# Create and run Linux containers using lightweight virtual machines
+brew "container"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Command-line csv viewer
@@ -97,12 +96,16 @@ brew "docker-credential-helper"
 brew "docutils"
 # C library of Git core methods that is re-entrant and linkable
 brew "libgit2"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@4"
 # Modern replacement for 'ls'
 brew "eza"
 # Perl lib for reading and writing EXIF metadata
 brew "exiftool"
-# CLI tool for quick access to files and directories
-brew "fasd"
+# Command-line productivity booster, offers quick access to files and directories, inspired by autojump, z and v.
+brew "wyne/tap/fasd"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Play, record, convert, and stream select audio and video codecs
@@ -115,6 +118,8 @@ brew "fish"
 brew "fzf"
 # GNU awk utility
 brew "gawk"
+# GNU compiler collection
+brew "gcc"
 # GNU compiler collection
 brew "gcc@11"
 # Disk usage analyzer with console interface written in Go
@@ -153,6 +158,8 @@ brew "go"
 brew "googleworkspace-cli"
 # Ping, but with a graph
 brew "gping"
+# Easiest way to access your cloud
+brew "granted"
 # GNU grep, egrep and fgrep
 brew "grep"
 # Image manipulation
@@ -224,10 +231,10 @@ brew "mise"
 brew "mysql-client"
 # NCurses Disk Usage
 brew "ncdu"
-# Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
 # No Nonsense Neovim Client in Rust
 brew "neovide"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 # Utility for managing network connections
 brew "netcat"
 # Port scanning utility for large networks
@@ -237,18 +244,16 @@ brew "nnn"
 # Manage multiple Node.js versions
 brew "nvm"
 # Development kit for the Java programming language
+# Create, run, and share large language models (LLMs)
+brew "ollama"
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
-# Tool for creating identical machine images for multiple platforms
-brew "packer"
 # Shell command parallelization utility
 brew "parallel"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
 # CLI for Playwright: record/generate code, inspect selectors, take screenshots
 brew "playwright-cli"
-# Command-line shell and scripting language
-brew "powershell", link: false
 # Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
@@ -281,9 +286,6 @@ brew "s4cmd"
 brew "saml2aws"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
-# Prints a steam locomotive if you type sl instead of ls
-# Command-line interface for https://speedtest.net bandwidth tests
-brew "speedtest-cli"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Version control system designed to be a better CVS
@@ -294,9 +296,6 @@ brew "syft"
 brew "tcpdump"
 # Terraform Language Server
 brew "terraform-ls"
-# Language Server Protocol for Terraform
-# Linter for Terraform files
-brew "tflint"
 # Static analysis security scanner for your terraform code
 brew "tfsec"
 # Programmatically correct mistyped console commands
@@ -326,8 +325,6 @@ brew "wget"
 brew "yamllint"
 # JavaScript package manager
 brew "yarn"
-# YubiKey personalization library and tool
-brew "ykpers"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
 # Pluggable terminal workspace, with terminal multiplexer as the base feature
@@ -349,7 +346,6 @@ cask "audacity"
 cask "burp-suite"
 # Terminal-based AI coding assistant
 cask "claude-code"
-cask "container"
 # Brings the power of Copilot coding agent directly to your terminal
 cask "copilot-cli"
 # Track and budget money
@@ -365,7 +361,6 @@ cask "kitty"
 # Simple application that will prevent iTunes or Apple Music from launching
 # Collaboration platform for API development
 cask "postman"
-cask "powershell"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
 # Plugin for AWS CLI to start and end sessions that connect to managed instances
@@ -380,8 +375,6 @@ cask "vlc"
 cask "wezterm"
 # Network protocol analyzer
 cask "wireshark-app"
-go "cmd/go"
-go "cmd/gofmt"
 cargo "cargo-update"
 cargo "csvlens"
 cargo "dotacat"
