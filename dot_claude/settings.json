@@ -1,0 +1,326 @@
+{
+  "env": {
+    "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(less:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(pwd:*)",
+      "Bash(wc:*)",
+      "Bash(diff:*)",
+      "Bash(file:*)",
+      "Bash(stat:*)",
+      "Bash(du:*)",
+      "Bash(df:*)",
+      "Bash(whoami:*)",
+      "Bash(hostname:*)",
+      "Bash(date:*)",
+      "Bash(which:*)",
+      "Bash(type:*)",
+      "Bash(echo:*)",
+      "Bash(tree:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git remote -v)",
+      "Bash(git stash list:*)",
+      "Bash(python --version)",
+      "Bash(python3 --version)",
+      "Bash(pip list:*)",
+      "Bash(pip show:*)",
+      "Bash(pytest --collect-only:*)",
+      "Bash(node --version)",
+      "Bash(npm --version)",
+      "Bash(npm list:*)",
+      "Bash(terraform --version)",
+      "Bash(terraform fmt -check:*)",
+      "Bash(docker --version)",
+      "Bash(aws --version)",
+      "Bash(gh --version)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:docs.github.com)",
+      "WebFetch(domain:claude.com)",
+      "WebFetch(domain:docs.claude.com)",
+      "WebFetch(domain:code.claude.com)",
+      "WebFetch(domain:platform.claude.com)",
+      "WebFetch(domain:docs.python.org)",
+      "WebFetch(domain:registry.terraform.io)",
+      "WebFetch(domain:developer.hashicorp.com)",
+      "WebFetch(domain:docs.aws.amazon.com)",
+      "WebFetch(domain:docs.docker.com)",
+      "WebFetch(domain:modelcontextprotocol.io)",
+      "mcp__aws-mcp__get_aws_documentation",
+      "mcp__aws-mcp__list_aws_documentation",
+      "mcp__aws-mcp__search_aws_documentation"
+    ],
+    "deny": [
+      "mcp__aws-mcp__run_script",
+      "mcp__aws-mcp__get_presigned_url",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.config/gh/**)",
+      "Read(~/.kube/**)",
+      "Read(~/.docker/config.json)",
+      "Read(~/.netrc)",
+      "Read(~/.bash_history)",
+      "Read(~/.zsh_history)",
+      "Read(~/**/.env*)",
+      "Read(~/**/*.pem)",
+      "Read(~/**/*.key)",
+      "Read(~/**/*.p12)",
+      "Read(~/**/*.pfx)",
+      "Read(~/**/*.crt)",
+      "Read(~/**/*.cer)",
+      "Bash(env)",
+      "Bash(env *)",
+      "Bash(printenv)",
+      "Bash(printenv *)",
+      "Bash(sudo *)",
+      "Bash(rm -rf /)",
+      "Bash(rm -rf ~)",
+      "Bash(rm -rf $HOME*)",
+      "Bash(gh secret*)",
+      "Bash(gh ssh-key*)",
+      "Bash(gh variable*)",
+      "Bash(gh repo delete*)",
+      "Bash(gh repo edit*)",
+      "Bash(gh ruleset*)",
+      "Bash(gh gist*)",
+      "Bash(git push --force*)",
+      "Bash(git push -f *)",
+      "Bash(git push* origin main*)",
+      "Bash(git push* origin master*)",
+      "Bash(git branch -D*)",
+      "Bash(git reset --hard*)",
+      "Bash(aws iam *)",
+      "Bash(aws s3 rm*)",
+      "Bash(aws s3api delete*)",
+      "Bash(aws ec2 terminate*)",
+      "Bash(aws ec2 stop*)",
+      "Bash(aws secretsmanager *)",
+      "Bash(aws kms *)",
+      "Bash(aws sts assume-role*)",
+      "Bash(assume *)",
+      "Bash(kubectl delete *)",
+      "Bash(kubectl apply*)",
+      "Bash(kubectl exec *)",
+      "Bash(kubectl edit *)",
+      "Bash(terraform* apply*)",
+      "Bash(terraform* destroy*)",
+      "Bash(terraform state* rm)"
+    ],
+    "ask": [
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(ssh *)",
+      "Bash(scp *)",
+      "Bash(rsync *)",
+      "Bash(rm:*)",
+      "Bash(mv:*)",
+      "Bash(cp:*)",
+      "Bash(touch:*)",
+      "Bash(mkdir:*)",
+      "Bash(rmdir:*)",
+      "Bash(chmod:*)",
+      "Bash(chown:*)",
+      "Bash(ln:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git fetch:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(git checkout:*)",
+      "Bash(git reset:*)",
+      "Bash(git stash:*)",
+      "Bash(git tag:*)",
+      "Bash(pip install:*)",
+      "Bash(pip uninstall:*)",
+      "Bash(npm install:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm publish:*)",
+      "Bash(pytest:*)",
+      "Bash(gh api:*)",
+      "Bash(gh auth:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh pr close:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh issue close:*)",
+      "Bash(aws s3 sync:*)",
+      "Bash(aws s3 mv:*)",
+      "Bash(aws ec2 start-instances:*)",
+      "Bash(aws ec2 reboot-instances:*)",
+      "Bash(terraform* state*)",
+      "Bash(terraform* import*)",
+      "Bash(terraform* taint*)",
+      "Bash(terraform* untaint*)",
+      "Bash(docker run:*)",
+      "Bash(docker exec:*)",
+      "Bash(docker build:*)",
+      "Bash(docker stop:*)",
+      "Bash(docker rm:*)",
+      "Bash(docker rmi:*)",
+      "Bash(kubectl *)",
+      "mcp__aws-mcp__call_aws"
+    ],
+    "disableBypassPermissionsMode": "disable"
+  },
+  "model": "opus[1m]",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "dippy"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__aws-mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/daniel.pendolino/.claude/hooks/aws-role-guard.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=$(jq -r '.tool_input.file_path'); [[ \"$f\" == *.md ]] && grip \"$f\" --browser & 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); sid=$(echo \"$input\" | jq -r '.session_id // \"unknown\"' 2>/dev/null || echo \"unknown\"); note=\"/Users/daniel.pendolino/Library/CloudStorage/GoogleDrive-daniel.pendolino@ibotta.com/My Drive/Notes/Claude Code Sessions.md\"; grep -qF \"$sid\" \"$note\" 2>/dev/null || printf '| `%s` | %s — %s | |\\n' \"$sid\" \"$(date +%Y-%m-%d)\" \"$(basename \"$PWD\")\" >> \"$note\""
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "sh /Users/daniel.pendolino/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "google-workspace@ibotta": true,
+    "atlassian-api@ibotta": true,
+    "cli-skills@ibotta": true,
+    "pagerduty-api@ibotta": true,
+    "tfdr@ibotta": true,
+    "zoom@ibotta": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "serverless@ibotta": true,
+    "databricks-claude-plugin@ibotta": true,
+    "caveman@caveman": true,
+    "superpowers@claude-plugins-official": true,
+    "jtt@ibotta": true,
+    "choreograph@ibotta": true,
+    "waltz@ibotta": false
+  },
+  "extraKnownMarketplaces": {
+    "ibotta": {
+      "source": {
+        "source": "github",
+        "repo": "ibotta/claude-plugins"
+      },
+      "autoUpdate": true
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    }
+  },
+  "sandbox": {
+    "enabled": true,
+    "failIfUnavailable": true,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false,
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "api.github.com",
+        "gist.github.com"
+      ]
+    },
+    "filesystem": {
+      "allowWrite": [
+        "~/git/ibotta/**",
+        "~/.gnupg/**"
+      ],
+      "denyWrite": [
+        "~/.aws/**",
+        "~/.ssh/**",
+        "~/.kube/**",
+        "~/.netrc",
+        "~/.docker/config.json"
+      ],
+      "denyRead": [
+        "~/.ssh/**",
+        "~/.kube/**",
+        "~/.netrc",
+        "~/.docker/config.json"
+      ],
+      "allowRead": [
+        "~/.gnupg/**",
+        "~/.config/gh/**",
+        "~/.steampipe/**"
+      ]
+    },
+    "enableWeakerNetworkIsolation": false,
+    "excludedCommands": [
+      "gh pr view*",
+      "gh pr list*",
+      "gh pr create*",
+      "gh pr comment*",
+      "gh issue view*",
+      "gh issue list*",
+      "gh repo view*",
+      "gh repo list*",
+      "gh run view*",
+      "gh run list*",
+      "gh search*",
+      "aws sts get-caller-identity",
+      "aws s3 ls*",
+      "aws s3 cp*",
+      "aws ec2 describe*",
+      "terraform init*",
+      "terraform plan*",
+      "terraform validate*",
+      "terraform fmt*",
+      "docker ps*",
+      "docker images*",
+      "docker logs*",
+      "docker inspect*"
+    ]
+  },
+  "effortLevel": "medium",
+  "tui": "fullscreen",
+  "disableAutoMode": "disable",
+  "theme": "dark-daltonized",
+  "editorMode": "vim",
+  "skipAutoPermissionPrompt": true
+}
