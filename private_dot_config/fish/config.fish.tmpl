@@ -56,6 +56,12 @@ bind right forward-char
 
 set -x HOMEBREW_CASK_OPTS "--appdir=$HOME/Applications"
 
+# Casks that update themselves re-root their own bundle via a privileged helper, so a
+# subsequent `brew upgrade --cask --greedy` dies on `chown ... Operation not permitted`.
+# Exclude them; they keep themselves current anyway. See vault note
+# Homebrew-Cask-App-Management-TCC.md
+set -x HOMEBREW_UPGRADE_GREEDY_CASKS "firefox"
+
 alias assume="source (brew --prefix)/bin/assume.fish"
 
 if type -q gh
@@ -113,6 +119,7 @@ set -x PATH $PATH /usr/local/go/bin $GOPATH/bin
 set -x PATH $PATH $HOME/.local/bin
 set -x PATH $PATH $HOME/bin
 set -x PATH $PATH $HOME/.cargo/bin/
+set -x PATH $PATH $(brew --prefix rustup)/bin
 
 if type -q fzf
   alias sshf="ssh (rg -i 'Host ' $HOME/.ssh/config | awk '{print $2}' | fzf)"

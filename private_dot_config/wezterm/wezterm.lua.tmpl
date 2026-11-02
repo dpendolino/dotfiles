@@ -8,34 +8,35 @@ local config = wezterm.config_builder()
 config.default_prog = { "{{ if eq .chezmoi.os "darwin" }}/opt/homebrew/bin/fish{{ else }}/usr/bin/fish{{ end }}", "-l" }
 
 config.color_scheme = "Dracula (Official)"
+config.enable_tab_bar = true
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = true
 config.window_decorations = "TITLE|RESIZE"
+config.tab_max_width = 128
+config.scrollback_lines = 10000
+config.audible_bell = "Disabled"
 
-config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font("JetBrainsMonoNL Nerd Font", { weight = "Bold", italic = true })
+config.font_size = 16
+config.harfbuzz_features = { "zero", "ss01", "cv05" }
+config.freetype_load_flags = "NO_HINTING"
+
+-- don't include tmux pane borders in mouse selection (add │ to default list)
+-- don't include normal pipe (|)
+config.selection_word_boundary = " \t\n{}[]()\"'`|│"
+
+-- Customize hyperlinks:
+--   https://wezfurlong.org/wezterm/hyperlinks.html#implicit-hyperlinks
+-- Use the defaults as a base
+config.hyperlink_rules = wezterm.default_hyperlink_rules()
 
 config.launch_menu = {
   {
     args = { "htop" },
   },
   {
-    -- Optional label to show in the launcher. If omitted, a label
-    -- is derived from the `args`
     label = "Bash",
-    -- The argument array to spawn.  If omitted the default program
-    -- will be used as described in the documentation above
     args = { "bash", "-l" },
-
-    -- You can specify an alternative current working directory;
-    -- if you don't specify one then a default based on the OSC 7
-    -- escape sequence will be used (see the Shell Integration
-    -- docs), falling back to the home directory.
-    -- cwd = "/some/path"
-
-    -- You can override environment variables just for this command
-    -- by setting this here.  It has the same semantics as the main
-    -- set_environment_variables configuration option described above
-    -- set_environment_variables = { FOO = "bar" },
   },
   {
     args = { "fish", "-l" },
