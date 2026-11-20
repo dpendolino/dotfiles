@@ -1,0 +1,100 @@
+{
+  "lastChangelogVersion": "1.5.2",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-5",
+  "defaultThinkingLevel": "medium",
+  "modelStrategy": {
+    "01-brainstorm": "claude-opus-4-7",
+    "02-plan": "claude-opus-4-7",
+    "03-work": "claude-opus-4-7",
+    "04-review": "claude-sonnet-4-6",
+    "05-learn": "claude-haiku-4-5",
+    "default": "claude-sonnet-4-6"
+  },
+  "thinkingStrategy": {
+    "01-brainstorm": "high",
+    "02-plan": "high",
+    "03-work": "medium",
+    "04-review": "high",
+    "05-learn": "medium",
+    "default": "high"
+  },
+  "theme": "terminal",
+  "enabledModels": [
+    "anthropic/claude-sonnet-5",
+    "anthropic/claude-opus-5"
+  ],
+  "warnings": {
+    "anthropicExtraUsage": false
+  },
+  "followUpMode": "all",
+  "steeringMode": "all",
+  "markdown": {
+    "codeBlockIndent": ""
+  },
+  "outputPad": 0,
+  "showCacheMissNotices": true,
+  "defaultTools": [
+    "+codemode"
+  ],
+  "npmCommand": [
+    "mise",
+    "exec",
+    "pnpm@12",
+    "--",
+    "pnpm"
+  ],
+  "packages": [
+    {
+      "source": "git:github.com/prateekmedia/pi-hooks@5590a3bacbbdd055fb49d2ca031abe2c9f3e6c25",
+      "extensions": [
+        "lsp/*.ts"
+      ]
+    },
+    {
+      "source": "git:github.com/jeanchristophe13v/pi-rewind@d0afeeee3597e95cdde7e260a7448b780577af1d",
+      "extensions": [
+        "+rewind.ts"
+      ]
+    },
+    "npm:@dreki-gg/pi-context7@0.2.0",
+    {
+      "source": "npm:@plannotator/pi-extension@0.28.67",
+      "extensions": [
+        "-"
+      ]
+    },
+    "npm:pi-image-tools@1.4.0",
+    "npm:pi-mcp-adapter@7.0.1",
+    "npm:pi-subagents@0.89.0",
+    "npm:pi-tool-display@0.5.0",
+    "git:github.com/DietrichGebert/ponytail@7801d061243d7b753bad0e0b3c057cd250b11755",
+    "git:github.com/ayghri/i-have-adhd@1ecea1993b7fce257ffbd686c070948b5e07eda6",
+{{- if eq .chezmoi.os "darwin" }}
+    {
+      "source": "git:github.com/Ibotta/pi-extensions@5b1911f7a3092c239c6aa467e420b2ab8f96f7ff",
+      "extensions": [
+        "!extras/**",
+        "+extras/pi-statusline/index.ts",
+        "+extras/pi-context/index.ts",
+        "+extras/pi-facts/index.ts",
+        "+extras/pi-pr/index.ts",
+        "+extras/redline/index.ts",
+        "+extras/pi-ask/index.ts",
+        "+extras/multipi/index.ts"
+      ]
+    },
+    "../../git/ibotta/enablement-platform/skills/internal/workday-reviews",
+{{- end }}
+    "./local/pi-output-styles-mod"
+  ],
+  "hideThinkingBlock": false,
+  "collapseChangelog": false,
+  "quietStartup": false,
+  "extensions": [
+    "-builtin:mcp"
+  ],
+  "skills": [
+    "-~/.agents/skills/create-pr/SKILL.md"
+  ]
+}

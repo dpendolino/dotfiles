@@ -25,6 +25,26 @@ Brewfile
 # ~/.claude.json holds runtime state + secrets
 .claude.json
 
+# pi: whitelist. Everything else under ~/.pi is secrets (auth.json, mcp*.json,
+# models-store.json), installed packages (npm/, git/, local/, node_modules),
+# runtime state (sessions/, cache/, missions/, *.bak*) or Ibotta-specific
+# (AGENTS.md, skills/hub-client).
+.pi/*
+!.pi/agent
+.pi/agent/*
+!.pi/agent/settings.json
+!.pi/agent/keybindings.json
+!.pi/agent/web-search-settings.json
+!.pi/agent/themes
+!.pi/agent/extensions
+.pi/agent/extensions/*
+!.pi/agent/extensions/pi-tool-display
+!.pi/agent/extensions/statusline
+.pi/agent/extensions/statusline/*
+!.pi/agent/extensions/statusline/config.json
+!.pi/agent/skills
+.pi/agent/skills/hub-client
+
 {{- if ne .chezmoi.os "darwin" }}
 .work # only manage .work on macOS work laptops
 .config/fish/conf.d/iterm2.fish
