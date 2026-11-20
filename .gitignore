@@ -1,1 +1,4 @@
 tags
+
+# pi-rewind snapshots created when running pi inside this repo
+.pi/
