@@ -58,6 +58,58 @@
       "WebFetch(domain:docs.aws.amazon.com)",
       "WebFetch(domain:docs.docker.com)",
       "WebFetch(domain:modelcontextprotocol.io)",
+      "WebFetch(domain:ibotta.atlassian.net)",
+      "WebFetch(domain:ibotta.slack.com)",
+      "WebFetch(domain:ibotta.okta.com)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh repo list:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh search:*)",
+      "Bash(gh release view:*)",
+      "Bash(gh release list:*)",
+      "Bash(gh workflow list:*)",
+      "Bash(gh workflow view:*)",
+      "Bash(jtt get:*)",
+      "mcp__claude_ai_Atlassian__atlassianUserInfo",
+      "mcp__claude_ai_Atlassian__fetch",
+      "mcp__claude_ai_Atlassian__getAccessibleAtlassianResources",
+      "mcp__claude_ai_Atlassian__getCompassComponent",
+      "mcp__claude_ai_Atlassian__getCompassComponents",
+      "mcp__claude_ai_Atlassian__getCompassCustomFieldDefinitions",
+      "mcp__claude_ai_Atlassian__getConfluenceCommentChildren",
+      "mcp__claude_ai_Atlassian__getConfluencePage",
+      "mcp__claude_ai_Atlassian__getConfluencePageDescendants",
+      "mcp__claude_ai_Atlassian__getConfluencePageFooterComments",
+      "mcp__claude_ai_Atlassian__getConfluencePageInlineComments",
+      "mcp__claude_ai_Atlassian__getConfluenceSpaces",
+      "mcp__claude_ai_Atlassian__getIssueLinkTypes",
+      "mcp__claude_ai_Atlassian__getJiraIssue",
+      "mcp__claude_ai_Atlassian__getJiraIssueRemoteIssueLinks",
+      "mcp__claude_ai_Atlassian__getJiraIssueTypeMetaWithFields",
+      "mcp__claude_ai_Atlassian__getJiraProjectIssueTypesMetadata",
+      "mcp__claude_ai_Atlassian__getPagesInConfluenceSpace",
+      "mcp__claude_ai_Atlassian__getTeamworkGraphContext",
+      "mcp__claude_ai_Atlassian__getTeamworkGraphObject",
+      "mcp__claude_ai_Atlassian__getTransitionsForJiraIssue",
+      "mcp__claude_ai_Atlassian__getVisibleJiraProjects",
+      "mcp__claude_ai_Atlassian__lookupJiraAccountId",
+      "mcp__claude_ai_Atlassian__search",
+      "mcp__claude_ai_Atlassian__searchConfluenceUsingCql",
+      "mcp__claude_ai_Atlassian__searchJiraIssuesUsingJql",
+      "mcp__claude_ai_Slack__slack_read_canvas",
+      "mcp__claude_ai_Slack__slack_read_channel",
+      "mcp__claude_ai_Slack__slack_read_thread",
+      "mcp__claude_ai_Slack__slack_read_user_profile",
+      "mcp__claude_ai_Slack__slack_search_channels",
+      "mcp__claude_ai_Slack__slack_search_public",
+      "mcp__claude_ai_Slack__slack_search_users",
       "mcp__aws-mcp__get_aws_documentation",
       "mcp__aws-mcp__list_aws_documentation",
       "mcp__aws-mcp__search_aws_documentation"
@@ -213,7 +265,19 @@
         "hooks": [
           {
             "type": "command",
-            "command": "input=$(cat); sid=$(echo \"$input\" | jq -r '.session_id // \"unknown\"' 2>/dev/null || echo \"unknown\"); note=\"/Users/daniel.pendolino/Library/CloudStorage/GoogleDrive-daniel.pendolino@ibotta.com/My Drive/Notes/Claude Code Sessions.md\"; grep -qF \"$sid\" \"$note\" 2>/dev/null || printf '| `%s` | %s — %s | |\\n' \"$sid\" \"$(date +%Y-%m-%d)\" \"$(basename \"$PWD\")\" >> \"$note\""
+            "command": "input=$(cat); export SID=$(echo \"$input\" | jq -r '.session_id // \"unknown\"' 2>/dev/null || echo \"unknown\"); export NOTE=\"/Users/daniel.pendolino/Library/CloudStorage/GoogleDrive-daniel.pendolino@ibotta.com/My Drive/Notes/Claude Code Sessions.md\"; python3 -c 'import os,sys,datetime;n=os.environ[\"NOTE\"];sid=os.environ[\"SID\"];s=open(n).read();sys.exit(0) if sid in s else 0;row=\"| `%s` | %s — %s | `%s` | |\"%(sid,datetime.date.today().isoformat(),os.path.basename(os.getcwd()),os.getcwd().replace(os.path.expanduser(\"~\"),\"~\",1));i=s.find(\"\\n## Archive\");k=(s.rindex(\"| `\",0,i) if i>0 else s.rindex(\"| `\"));e=s.index(\"\\n\",k);open(n,\"w\").write(s[:e+1]+row+\"\\n\"+s[e+1:])'"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "^(startup|resume|clear|compact|fork)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/daniel.pendolino/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
           }
         ]
       }
@@ -237,7 +301,11 @@
     "superpowers@claude-plugins-official": true,
     "jtt@ibotta": true,
     "choreograph@ibotta": true,
-    "waltz@ibotta": false
+    "waltz@ibotta": false,
+    "ibotta-org-scan@ibotta": true,
+    "redline@ibotta": true,
+    "mattpocock-skills@mattpocock": true,
+    "monitor-owner-lookup@ibotta-dev": true
   },
   "extraKnownMarketplaces": {
     "ibotta": {
@@ -252,18 +320,33 @@
         "source": "github",
         "repo": "JuliusBrussee/caveman"
       }
+    },
+    "mattpocock": {
+      "source": {
+        "source": "github",
+        "repo": "mattpocock/skills"
+      }
+    },
+    "ibotta-dev": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/daniel.pendolino/.claude/dev-marketplaces/ibotta-dev"
+      }
     }
   },
   "sandbox": {
-    "enabled": true,
-    "failIfUnavailable": true,
+    "enabled": false,
+    "failIfUnavailable": false,
     "autoAllowBashIfSandboxed": true,
-    "allowUnsandboxedCommands": false,
+    "allowUnsandboxedCommands": true,
     "network": {
       "allowedDomains": [
         "github.com",
         "api.github.com",
-        "gist.github.com"
+        "gist.github.com",
+        "ibotta.atlassian.net",
+        "ibotta.slack.com",
+        "ibotta.okta.com"
       ]
     },
     "filesystem": {
@@ -317,7 +400,7 @@
       "docker inspect*"
     ]
   },
-  "effortLevel": "medium",
+  "effortLevel": "high",
   "tui": "fullscreen",
   "disableAutoMode": "disable",
   "theme": "dark-daltonized",

@@ -1,16 +1,5 @@
 # Created by newuser for 5.4.2
 
-# Load Antigen
-{{ if eq .chezmoi.os "darwin" -}}
-source /opt/homebrew/share/antigen/antigen.zsh
-{{ else -}}
-source /usr/share/zsh/share/antigen.zsh
-
-# Load Antigen configurations
-antigen init .antigenrc
-{{ end -}}
-
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # https://github.com/zsh-users/zsh-autosuggestions
@@ -20,3 +9,7 @@ export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
 
 # antigen bundle zsh-users/zsh-syntax-highlighting
+
+# mise (dev tool / runtime version manager) - https://mise.jdx.dev
+eval "$(mise activate zsh)"
+export JIRA_BASE_URL="https://ibotta.atlassian.net"

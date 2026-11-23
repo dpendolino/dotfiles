@@ -94,8 +94,8 @@
 
 ### Never Do
 
-- **No pushing to GitHub.** Never run `git push`, `gh pr create`, or any command that sends data to a remote. Only commit locally when explicitly asked.
-- **No leaking credentials.** Never write secrets, API keys, tokens, passwords, or certificates into any file — including code, configs, logs, comments, or commit messages.
+- **No pushing to GitHub** without explicit per-action confirmation. Never run `git push`, `gh pr create`, `gh pr comment`, or any command that sends data to a remote on your own initiative — ask first, name the remote and branch, and wait for a yes. This applies to skills too: if a skill's workflow ends in a push, PR, or posted review comment, stop at that step and ask. Only commit locally when explicitly asked.
+- **No leaking credentials.** Never write secrets, API keys, tokens, passwords, or certificates into any file — including code, configs, logs, comments, or commit messages. Exception: dedicated security tooling writing findings to a path outside any git repository (e.g. `~/security-reports/`).
 - **No committing sensitive files.** Never stage or commit `.env`, `*.pem`, `*.key`, `credentials.json`, `kubeconfig`, or any file likely containing secrets.
 - **No executing destructive commands.** Never run `rm -rf`, `git push --force`, `terraform destroy`, `kubectl delete namespace`, or anything irreversible without explicit user confirmation.
 - **No modifying git config.** Never change `user.name`, `user.email`, or any git configuration.
@@ -110,6 +110,46 @@
 - **Verify before reporting done.** Run linters, type checks, or tests on changed files before claiming completion.
 - **Preserve existing behavior.** When fixing bugs, change the minimum necessary. Never refactor while fixing.
 - **Flag security concerns.** If you see hardcoded secrets, overly permissive IAM/RBAC, or missing input validation in existing code, raise it immediately.
+
+---
+
+## Skill Selection
+
+These rules take precedence over any plugin's own skill-priority instructions, including `superpowers:using-superpowers`.
+
+### Announce every skill invocation
+
+Before following a skill, state one line: `Using <skill> to <purpose>.` This applies to every skill, contested or not, auto-selected or explicitly requested.
+
+### Confirm contested selections
+
+Five domains have competing skills from different sources. When a task falls in one of them and you selected the skill yourself, do not proceed. State your recommendation with reasoning, name the alternative you rejected and why, then stop and wait for an answer.
+
+| Domain | Competing skills |
+|---|---|
+| Debugging | `superpowers:systematic-debugging` vs `mattpocock-skills:diagnosing-bugs` |
+| TDD | `superpowers:test-driven-development` vs `mattpocock-skills:tdd` |
+| Code review (working diff, no PR) | `superpowers:requesting-code-review` vs `mattpocock-skills:code-review` vs built-in `/code-review` |
+| Plan / spec | `superpowers:brainstorming` + `writing-plans` vs `mattpocock-skills:to-spec` + `grilling` |
+| Skill authoring | `superpowers:writing-skills` vs `mattpocock-skills:writing-great-skills` |
+
+Carry no default. Do not let a prior session's choice become one.
+
+An explicitly requested skill is never contested — the request already decided it.
+
+### Carve-outs — never contested
+
+- Review of an actual GitHub PR: `redline:review`.
+- Jira ticket authoring: `jtt` (Ibotta panel format).
+- Subagent dispatch: `cavecrew` and `superpowers:subagent-driven-development` serve different purposes and may both apply.
+
+### Log contested decisions
+
+Append one line to `~/.claude/skill-decisions.md` after each contested pick:
+
+    YYYY-MM-DD | domain | chose: X | over: Y | user: confirmed|overrode | note
+
+At 12 entries, stop and review the log to convert these into permanent rulings.
 
 ---
 

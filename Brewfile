@@ -82,6 +82,8 @@ brew "delve"
 brew "detect-secrets"
 # Diff that understands syntax
 brew "difftastic"
+# Auto-approve safe shell commands for AI coding assistants
+brew "ldayton/dippy/dippy"
 # Tool for exploring each layer in a docker image
 brew "dive"
 # Pack, ship and run any application as a lightweight container
@@ -260,6 +262,8 @@ brew "pre-commit"
 brew "prettier"
 # Show ps output as a tree
 brew "pstree"
+# CLI companion with 200+ commands across 33+ Datadog products
+brew "datadog-labs/pack/pup"
 # Monitor data's progress through a pipe
 brew "pv"
 # Python version management
