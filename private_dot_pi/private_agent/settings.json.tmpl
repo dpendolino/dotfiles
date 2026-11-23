@@ -1,8 +1,9 @@
 {
-  "lastChangelogVersion": "1.5.2",
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-5",
+  "lastChangelogVersion": "1.6.0",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "hy4-flash-free",
   "defaultThinkingLevel": "medium",
+  "shellCommandPrefix": "export PATH=\"$HOME/.local/share/mise/shims:$PATH\"",
   "modelStrategy": {
     "01-brainstorm": "claude-opus-4-7",
     "02-plan": "claude-opus-4-7",
@@ -20,10 +21,6 @@
     "default": "high"
   },
   "theme": "terminal",
-  "enabledModels": [
-    "anthropic/claude-sonnet-5",
-    "anthropic/claude-opus-5"
-  ],
   "warnings": {
     "anthropicExtraUsage": false
   },
@@ -34,6 +31,16 @@
   },
   "outputPad": 0,
   "showCacheMissNotices": true,
+  "tuiMode": "fullscreen",
+  "fullscreenScrollbar": "always",
+  "fullscreenExitOutput": "resume-hint",
+  "images": {
+    "autoResize": true
+  },
+  "terminal": {
+    "imageWidthCells": 80
+  },
+  "httpIdleTimeoutMs": 60000,
   "defaultTools": [
     "+codemode"
   ],
@@ -45,12 +52,6 @@
     "pnpm"
   ],
   "packages": [
-    {
-      "source": "git:github.com/prateekmedia/pi-hooks@5590a3bacbbdd055fb49d2ca031abe2c9f3e6c25",
-      "extensions": [
-        "lsp/*.ts"
-      ]
-    },
     {
       "source": "git:github.com/jeanchristophe13v/pi-rewind@d0afeeee3597e95cdde7e260a7448b780577af1d",
       "extensions": [
@@ -64,10 +65,13 @@
         "-"
       ]
     },
-    "npm:pi-image-tools@1.4.0",
+    "git:github.com/elementalvoid/pi-image-tools@56f372fc133b7cd907981c26873022f1e2355f99",
     "npm:pi-mcp-adapter@7.0.1",
     "npm:pi-subagents@0.89.0",
     "npm:pi-tool-display@0.5.0",
+    "npm:pi-lens@4.4.6",
+    "npm:@ogulcancelik/pi-herdr@0.4.1",
+    "npm:@qraxiss/pi-gemini-auth",
     "git:github.com/DietrichGebert/ponytail@7801d061243d7b753bad0e0b3c057cd250b11755",
     "git:github.com/ayghri/i-have-adhd@1ecea1993b7fce257ffbd686c070948b5e07eda6",
 {{- if eq .chezmoi.os "darwin" }}
@@ -92,9 +96,19 @@
   "collapseChangelog": false,
   "quietStartup": false,
   "extensions": [
-    "-builtin:mcp"
+    "-builtin:mcp",
+    "{{ .chezmoi.homeDir }}/.local/share/opencode-console/cli/pi-extension.js"
   ],
   "skills": [
     "-~/.agents/skills/create-pr/SKILL.md"
-  ]
+  ],
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:@dreki-gg/pi-context7@0.2.0\",\"scope\":\"user\"}": "0.2.0",
+    "{\"source\":\"git:github.com/elementalvoid/pi-image-tools@56f372fc133b7cd907981c26873022f1e2355f99\",\"scope\":\"user\"}": "1.4.0",
+    "{\"source\":\"npm:pi-mcp-adapter@7.0.1\",\"scope\":\"user\"}": "7.0.1",
+    "{\"source\":\"npm:pi-subagents@0.89.0\",\"scope\":\"user\"}": "0.89.0",
+    "{\"source\":\"npm:pi-tool-display@0.5.0\",\"scope\":\"user\"}": "0.5.0",
+    "{\"source\":\"npm:pi-lens@4.4.6\",\"scope\":\"user\"}": "4.4.6",
+    "{\"source\":\"npm:@qraxiss/pi-gemini-auth\",\"scope\":\"user\"}": "0.5.1"
+  }
 }

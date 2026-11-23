@@ -44,6 +44,7 @@ Brewfile
 !.pi/agent/extensions/statusline/config.json
 !.pi/agent/skills
 .pi/agent/skills/hub-client
+!.pi/agent/skills/pi-extension-update
 
 {{- if ne .chezmoi.os "darwin" }}
 .work # only manage .work on macOS work laptops
